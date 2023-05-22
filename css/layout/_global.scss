@@ -1,0 +1,27 @@
+html {
+    box-sizing: border-box;
+}
+body{
+    background-color: var(--mainColor);
+    font-family: 'Roboto Flex', sans-serif;
+}
+
+.wrapper{
+    width: 100%;
+    padding-right: 55px;
+    padding-left: 55px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.is--block{
+    background-color: #303032;
+    border-radius: var(--mainRadius);
+}
+
+// .genres{
+
+//     span{
+
+//     }
+// }

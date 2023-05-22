@@ -1,0 +1,18 @@
+.popularBlock{
+    display: flex;
+    flex-direction: column;
+    gap: var(--mainGap);
+    padding: var(--paddingBlock);
+    width: 100%;
+
+    h2{
+        margin: 0;
+    }
+}
+
+.popularBlock--slider{
+    display: flex;
+    justify-content: center;
+    gap: var(--mainGap);
+    width: 100%;
+}
