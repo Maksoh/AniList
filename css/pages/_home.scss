@@ -4,15 +4,29 @@
     gap: var(--mainGap);
     padding: var(--paddingBlock);
     width: 100%;
+    margin-bottom: 30px;
 
     h2{
         margin: 0;
+        font-size: 25px;
+        color: var(--white);
     }
 }
-
+.popularBlock h2::after{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 15px;
+    background-color: var(--mainColor);
+    margin-top: 6px;
+    margin-left: 10px;
+}
 .popularBlock--slider{
     display: flex;
     justify-content: center;
     gap: var(--mainGap);
     width: 100%;
+    p{
+        margin-bottom: 0;
+    }
 }

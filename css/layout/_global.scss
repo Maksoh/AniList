@@ -2,26 +2,45 @@ html {
     box-sizing: border-box;
 }
 body{
+
     background-color: var(--mainColor);
     font-family: 'Roboto Flex', sans-serif;
 }
 
 .wrapper{
     width: 100%;
-    padding-right: 55px;
-    padding-left: 55px;
+    padding-right: 150px;
+    padding-left: 150px;
     margin-right: auto;
     margin-left: auto;
 }
 
 .is--block{
-    background-color: #303032;
+    background-color: var(--blackColor);
     border-radius: var(--mainRadius);
+    overflow: hidden;
+    position: relative;
 }
 
-// .genres{
+h1, h2, h3, h4{
+    text-transform: uppercase;
+}
+h2{
+    margin: 0;
+    font-size: 25px;
+    color: var(--white);
+}
+.genres *{
+    background-color:lightpink;
+    font-size: 15px;
+    border-radius: 10px;
+    padding: 2px 8px;
+    margin-right: 5px;
+}
 
-//     span{
+.titleOf{
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--white);;
 
-//     }
-// }
+}

@@ -1,5 +1,5 @@
 header{
-    height: 100%;
+    height: 850px;
     width: 100%;
     margin-top: 10px;
 }
@@ -13,38 +13,47 @@ header{
     width: 100%;
 }
 .headerBlock--top{
-    display: grid;
-    grid-template-rows: 1fr;
-    gap: var(--mainGap);
+    display: flex;
+    flex-direction: column;
     padding: var(--paddingBlock);
+}
 
-    h3{
-        margin: 0;
-    }
+.headerBlock--top h2::after{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 15px;
+    background-color: var(--mainColor);
+    margin-top: 6px;
+    margin-left: 10px;
 }
 
 .headerBlock--top__element{
     display: flex;
     gap: var(--mainGap);
     height: 100%;
+    border-bottom: 1px solid gray;
+    padding-bottom: 15px;
+    padding-top: 15px;
+}
+.headerBlock--top__element:last-child{
+    border-bottom: 0;
 }
 .headerBlock--top__elmentImg{
-    width: 95px;
+    width: 105px;
     img{
         border-radius: var(--imgRadius);
         width: 100%;
         position: relative;
+        object-fit: contain;
     }
 }
 
 .headerBlock--top__elmentTxt{
     h4{
         margin: 0;
-        margin-top: 5px;
+        font-size: 18px;
         color: #a4ced0;
-    }
-    p{
-        color: var(--titleColor);
     }
 
 }

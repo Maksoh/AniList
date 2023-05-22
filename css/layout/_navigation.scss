@@ -1,13 +1,14 @@
 nav {
-    background-color: #303032;
+    background-color: var(--blackColor);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
+    padding: 10px 30px;
+    border-radius: 0 0 10px 10px;
 }
 
 .nav--logo img {
-    height: 40px;
+    height: 30px;
     width: 100%;
 }
 
