@@ -17,3 +17,19 @@ var swiper = new Swiper(".popularBlock--slider", {
     freeMode: true,
 
 });
+
+
+const search=document.getElementById('searchInput');
+
+search.addEventListener('focus',(event)=>{
+
+document.getElementById('search-wrapper').style.border="1px solid var(--mainColor)";
+
+});
+
+
+search.addEventListener('focusout',(event)=>{
+
+document.getElementById('search-wrapper').style.border="1px solid rgba(0, 0, 0, 0.276)";
+
+});
