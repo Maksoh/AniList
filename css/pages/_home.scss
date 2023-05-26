@@ -26,6 +26,13 @@
     justify-content: center;
     gap: var(--mainGap);
     width: 100%;
+    img{
+        width: 100%;
+        min-height: 400px;
+        position: relative;
+        object-fit: cover;
+
+    }
     p{
         margin-bottom: 0;
     }

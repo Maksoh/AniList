@@ -18,11 +18,10 @@
               <img src="img/logo.png" alt="Logo">
             </div>
             <ul class="nav--links">
-              <li><a href="#" id="style-2" data-replace="HOME">HOME</a></li>
+              <li><a href="index.html" id="style-2" data-replace="HOME">HOME</a></li>
               <li><a href="search.html">SEARCH</a></li>
-              <li><a href="#">FORUM</a></li>
+              <li><a href="#" alt="forum">FORUM</a></li>
               <li><a href="#">MyLIST</a></li>
-              <li><a href="#">PROFIL</a></li>
             </ul>
         </nav>
 
@@ -30,7 +29,7 @@
             <div class="headerBlock">
                 <div class="headerBloc--news swiper is--block">
 <!-- Slider home -->
-                    <div class="swiper-wrapper">
+                    <div class="swiper-wrapper" >
                         <div class="swiper-slide slider--container">
                             <img src="img/slider.png" alt="" title="Naame of Anime">
                             <div class="slider--txt">
@@ -65,72 +64,76 @@
                       <div class="swiper-pagination"></div>
                     
                 </div>
+
 <!-- TOP 100 -->
-                <div class="headerBlock--top is--block">
+                <div class="headerBlock--top is--block" id="allTimePopular">
                     <h2>TOP 100</h2>
 
-                    <div class="headerBlock--top__element">
+                    <!-- <div class="headerBlock--top__element" id="">
                         <div class="headerBlock--top__elmentImg">
                             <img src="img/test.jpg" alt="">
                         </div>
                         <div class="headerBlock--top__elmentTxt">
-                            <h4>#1</h4>
+                            <h4 >#1</h4>
                             <p class="titleOf">Name of Anime/Manga</p>
                             <div class="genres"><span>action</span><span>comedy</span></div>
                         </div>
-                    </div>
-                    <div class="headerBlock--top__element">
-                        <div class="headerBlock--top__elmentImg">
-                            <img src="img/test.jpg" alt="">
-                        </div>
-                        <div class="headerBlock--top__elmentTxt">
-                            <h4>#1</h4>
-                            <p class="titleOf">Name of Anime/Manga</p>
-                            <div class="genres"><span>action</span><span>comedy</span></div>
-                        </div>
-                    </div>
-                    <div class="headerBlock--top__element">
-                        <div class="headerBlock--top__elmentImg">
-                            <img src="img/test.jpg" alt="">
-                        </div>
-                        <div class="headerBlock--top__elmentTxt">
-                            <h4>#1</h4>
-                            <p class="titleOf">Name of Anime/Manga</p>
-                            <div class="genres"><span>action</span><span>comedy</span></div>
-                        </div>
-                    </div>
-                   
-                    <div class="headerBlock--top__element">
-                        <div class="headerBlock--top__elmentImg">
-                            <img src="img/test.jpg" alt="">
-                        </div>
-                        <div class="headerBlock--top__elmentTxt">
-                            <h4>#1</h4>
-                            <p class="titleOf">Name of Anime/Manga</p>
-                            <div class="genres"><span>action</span><span>comedy</span></div>
-                        </div>
-                    </div>
-                    <div class="headerBlock--top__element">
-                        <div class="headerBlock--top__elmentImg">
-                            <img src="img/test.jpg" alt="">
-                        </div>
-                        <div class="headerBlock--top__elmentTxt">
-                            <h4>#1</h4>
-                            <p class="titleOf">Name of Anime/Manga</p>
-                            <div class="genres"><span>action</span><span>comedy</span></div>
-                        </div>
-                    </div>
+                    </div> -->
+
 
                 </div>
             </div>
         </header>
-<!-- POPULAR ??? -->
+        <!-- POPULAR MANGA -->
+                <section class="popularBlock is--block">
+                    <h2>Popular Manga</h2>
+                    <div class="popularBlock--slider swiper">
+        
+                        <div class="swiper-wrapper" id="manga">
+                            <!-- <div class="popularBlock--slider__card swiper-slide">
+                                <img src="img/test.jpg" alt="">
+                                <p class="titleOf">Name of</p>
+                            </div>
+                            <div class="popularBlock--slider__card swiper-slide">
+                                <img src="img/test.jpg" alt="">
+                                <p class="titleOf">Name of</p>
+                            </div>
+                            <div class="popularBlock--slider__card swiper-slide">
+                                <img src="img/test.jpg" alt="">
+                                <p class="titleOf">Name of</p>
+                            </div>
+                            <div class="popularBlock--slider__card swiper-slide">
+                                <img src="img/test.jpg" alt="">
+                                <p class="titleOf">Name of</p>
+                            </div>
+                            <div class="popularBlock--slider__card swiper-slide">
+                                <img src="img/test.jpg" alt="">
+                                <p class="titleOf">Name of</p>
+                            </div>
+                            <div class="popularBlock--slider__card swiper-slide">
+                                <img src="img/test.jpg" alt="">
+                                <p class="titleOf">Name of</p>
+                            </div>
+                            <div class="popularBlock--slider__card swiper-slide">
+                                <img src="img/test.jpg" alt="">
+                                <p class="titleOf">Name of</p>
+                            </div>
+                            <div class="popularBlock--slider__card swiper-slide">
+                                <img src="img/test.jpg" alt="">
+                                <p class="titleOf">Name of</p>
+                            </div> -->
+                        </div>
+        
+                    </div>
+                </section>
+
+<!-- POPULAR ANIME -->
         <section class="popularBlock is--block">
             <h2>Popular Anime</h2>
             <div class="popularBlock--slider swiper">
 
-                <div class="swiper-wrapper">
-                    <div class="popularBlock--slider__card swiper-slide">
+                <div class="swiper-wrapper" id="anime">
+                    <!-- <div class="popularBlock--slider__card swiper-slide">
                         <img src="img/test.jpg" alt="">
                         <p class="titleOf">Name of</p>
                     </div>
@@ -161,50 +164,7 @@
                     <div class="popularBlock--slider__card swiper-slide">
                         <img src="img/test.jpg" alt="">
                         <p class="titleOf">Name of</p>
-                    </div>
-                </div>
-
-                
-            </div>
-        </section>
-<!-- POPULAR ??? -->
-        <section class="popularBlock is--block">
-            <h2>Popular Manga</h2>
-            <div class="popularBlock--slider swiper">
-
-                <div class="swiper-wrapper">
-                    <div class="popularBlock--slider__card swiper-slide">
-                        <img src="img/test.jpg" alt="">
-                        <p class="titleOf">Name of</p>
-                    </div>
-                    <div class="popularBlock--slider__card swiper-slide">
-                        <img src="img/test.jpg" alt="">
-                        <p class="titleOf">Name of</p>
-                    </div>
-                    <div class="popularBlock--slider__card swiper-slide">
-                        <img src="img/test.jpg" alt="">
-                        <p class="titleOf">Name of</p>
-                    </div>
-                    <div class="popularBlock--slider__card swiper-slide">
-                        <img src="img/test.jpg" alt="">
-                        <p class="titleOf">Name of</p>
-                    </div>
-                    <div class="popularBlock--slider__card swiper-slide">
-                        <img src="img/test.jpg" alt="">
-                        <p class="titleOf">Name of</p>
-                    </div>
-                    <div class="popularBlock--slider__card swiper-slide">
-                        <img src="img/test.jpg" alt="">
-                        <p class="titleOf">Name of</p>
-                    </div>
-                    <div class="popularBlock--slider__card swiper-slide">
-                        <img src="img/test.jpg" alt="">
-                        <p class="titleOf">Name of</p>
-                    </div>
-                    <div class="popularBlock--slider__card swiper-slide">
-                        <img src="img/test.jpg" alt="">
-                        <p class="titleOf">Name of</p>
-                    </div>
+                    </div> -->
                 </div>
 
                 
@@ -215,8 +175,8 @@
             <h2>Upcoming next season</h2>
             <div class="popularBlock--slider swiper">
 
-                <div class="swiper-wrapper">
-                    <div class="popularBlock--slider__card swiper-slide">
+                <div class="swiper-wrapper" id="upcoming">
+                    <!-- <div class="popularBlock--slider__card swiper-slide">
                         <img src="img/test.jpg" alt="">
                         <p class="titleOf">Name of</p>
                     </div>
@@ -247,55 +207,13 @@
                     <div class="popularBlock--slider__card swiper-slide">
                         <img src="img/test.jpg" alt="">
                         <p class="titleOf">Name of</p>
-                    </div>
+                    </div> -->
                 </div>
 
                 
             </div>
         </section>
-<!-- POPULAR ??? -->
-        <section class="popularBlock is--block">
-            <h2>All time popular </h2>
-            <div class="popularBlock--slider swiper">
 
-                <div class="swiper-wrapper">
-                    <div class="popularBlock--slider__card swiper-slide">
-                        <img src="img/test.jpg" alt="">
-                        <p class="titleOf">Name of</p>
-                    </div>
-                    <div class="popularBlock--slider__card swiper-slide">
-                        <img src="img/test.jpg" alt="">
-                        <p class="titleOf">Name of</p>
-                    </div>
-                    <div class="popularBlock--slider__card swiper-slide">
-                        <img src="img/test.jpg" alt="">
-                        <p class="titleOf">Name of</p>
-                    </div>
-                    <div class="popularBlock--slider__card swiper-slide">
-                        <img src="img/test.jpg" alt="">
-                        <p class="titleOf">Name of</p>
-                    </div>
-                    <div class="popularBlock--slider__card swiper-slide">
-                        <img src="img/test.jpg" alt="">
-                        <p class="titleOf">Name of</p>
-                    </div>
-                    <div class="popularBlock--slider__card swiper-slide">
-                        <img src="img/test.jpg" alt="">
-                        <p class="titleOf">Name of</p>
-                    </div>
-                    <div class="popularBlock--slider__card swiper-slide">
-                        <img src="img/test.jpg" alt="">
-                        <p class="titleOf">Name of</p>
-                    </div>
-                    <div class="popularBlock--slider__card swiper-slide">
-                        <img src="img/test.jpg" alt="">
-                        <p class="titleOf">Name of</p>
-                    </div>
-                </div>
-
-                
-            </div>
-        </section>
 <!-- FOOTER -->
 
         <footer>

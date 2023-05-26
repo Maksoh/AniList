@@ -1,7 +1,8 @@
 header{
-    height: 850px;
+    height: 100%;
     width: 100%;
     margin-top: 10px;
+    margin-bottom: var(--mainGap);
 }
 
 .headerBlock{
@@ -32,6 +33,7 @@ header{
     display: flex;
     gap: var(--mainGap);
     height: 100%;
+    width: 100%;
     border-bottom: 1px solid gray;
     padding-bottom: 15px;
     padding-top: 15px;
@@ -41,15 +43,23 @@ header{
 }
 .headerBlock--top__elmentImg{
     width: 105px;
+    height: 100%;
+    position: relative;
+    object-fit: cover;
     img{
         border-radius: var(--imgRadius);
         width: 100%;
+        height: 100%;
         position: relative;
-        object-fit: contain;
+        object-fit: cover;
     }
 }
 
 .headerBlock--top__elmentTxt{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
     h4{
         margin: 0;
         font-size: 18px;
