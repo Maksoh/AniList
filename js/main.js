@@ -20,6 +20,25 @@ var swiper = new Swiper(".popularBlock--slider", {
 
 });
 
+// NAV SCROLL 
+var navigation = document.querySelector('.navigation');
+var lastScrollPosition = window.pageYOffset;
+
+window.addEventListener('scroll', function() {
+  var currentScrollPosition = window.pageYOffset;
+
+  if (currentScrollPosition > lastScrollPosition && currentScrollPosition > 115) {
+    // L'utilisateur fait défiler vers le haut
+    navigation.classList.remove('scrolled-down');
+    navigation.classList.add('scrolled-up');
+  } else if (currentScrollPosition < lastScrollPosition) {
+    // L'utilisateur fait défiler vers le bas
+    navigation.classList.remove('scrolled-up');
+    navigation.classList.add('scrolled-down');
+  }
+
+  lastScrollPosition = currentScrollPosition;
+});
 
 
 // SEARCH FOCUS 
@@ -290,6 +309,7 @@ var swiper = new Swiper(".popularBlock--slider", {
 // }
 
 
+
 var queryAllTimePopular = `
   query ($page: Int) {
     Page(page: $page, perPage: 5) {
@@ -307,6 +327,14 @@ var queryAllTimePopular = `
         rankings{
           rank
         }
+        averageScore
+        format
+        status
+        episodes
+        duration
+        startDate{
+          year
+        }
       }
     }
   }
@@ -314,7 +342,7 @@ var queryAllTimePopular = `
 
 var queryManga = `
   query ($page: Int) {
-    Page(page: $page, perPage: 12) {
+    Page(page: $page, perPage: 18) {
       media(type: MANGA, sort: POPULARITY_DESC,) {
         id
         title {
@@ -325,6 +353,8 @@ var queryManga = `
         coverImage {
           extraLarge
         }
+        chapters
+        volumes
       }
     }
   }
@@ -332,7 +362,7 @@ var queryManga = `
 
 var queryAnime = `
   query ($page: Int) {
-    Page(page: $page, perPage: 12) {
+    Page(page: $page, perPage: 18) {
       media(type: ANIME, sort: POPULARITY_DESC) {
         id
         title {
@@ -350,7 +380,7 @@ var queryAnime = `
 
 var queryUpcomingAnime = `
   query ($page: Int) {
-    Page(page: $page, perPage: 12) {
+    Page(page: $page, perPage: 18) {
       media(type: ANIME, sort: POPULARITY_DESC, seasonYear: 2023, season: WINTER) {
         id
         title {
@@ -390,7 +420,7 @@ fetch(url, options)
     });
   })
   .then(function (mangaData) {
-    handleData(mangaData, 'manga');
+    handleData(mangaData, 'popularmanga');
 
     // Fetch anime data
     options.body = JSON.stringify({
@@ -405,7 +435,7 @@ fetch(url, options)
         });
       })
       .then(function (animeData) {
-        handleData(animeData, 'anime');
+        handleData(animeData, 'popularanime');
 
         // Fetch upcoming anime data
         options.body = JSON.stringify({
@@ -445,6 +475,7 @@ fetch(url, options)
     console.error(error);
   });
 
+// SWIPER FUNCTION 
 function handleData(data, containerId) {
   console.log(data);
   var mediaTitles = data.data.Page.media; // Obtenez les titres des médias à partir des données de réponse
@@ -457,8 +488,8 @@ function handleData(data, containerId) {
 
   for (var i = 0; i < mediaTitles.length; i++) {
     var mediaTitle = mediaTitles[i].title.english; // Obtenez le titre romaji du média correspondant
-    if (mediaTitle.length > 23) {
-      mediaTitle = mediaTitle.substring(0, 20) + '...'; // Limite la longueur du titre à 28 caractères
+    if (mediaTitle.length > 25) {
+      mediaTitle = mediaTitle.substring(0, 24) + '...'; // Limite la longueur du titre à 28 caractères
     }
     var mediaImage = mediaTitles[i].coverImage.extraLarge; // Obtenez l'URL de l'image du média
 
@@ -483,6 +514,7 @@ function handleData(data, containerId) {
     swiperWrapper.appendChild(swiperSlide);
   }
 }
+
 
 function handleAllTimePopularData(data, containerId) {
   console.log(data);
@@ -522,7 +554,7 @@ function handleAllTimePopularData(data, containerId) {
 
     
     var rankElement = document.createElement('h4'); // Créer un élément h4 pour le classement
-    rankElement.textContent = '#' + mediaRank;
+    rankElement.textContent =  mediaRank+'.' ;
     rankElement.classList.add('rank'); // Ajouter votre classe personnalisée souhaitée ici
     contentWrapper.appendChild(rankElement);
     
@@ -546,3 +578,4 @@ function handleAllTimePopularData(data, containerId) {
     container.appendChild(element);
   }
 }
+

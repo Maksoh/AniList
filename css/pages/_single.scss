@@ -1,0 +1,14 @@
+.popularBlock--single__card img{
+    position: relative;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.popularBlock--single{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: var(--mainGap);
+}
+

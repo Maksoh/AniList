@@ -5,7 +5,20 @@ nav {
     align-items: center;
     padding: 10px 30px;
     border-radius: 0 0 10px 10px;
+    position: fixed;
+    top: 0;
+    transition: transform 0.4s;
+    z-index: 9999;
+    width: -moz-available;
+    margin-right: 150px;
 }
+.navigation.scrolled-up {
+    transform: translateY(-100%);
+  }
+  
+  .navigation.scrolled-down {
+    transform: translateY(0);
+  }
 
 .nav--logo img {
     height: 30px;
