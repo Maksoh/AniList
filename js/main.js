@@ -27,7 +27,7 @@ var lastScrollPosition = window.pageYOffset;
 window.addEventListener('scroll', function() {
   var currentScrollPosition = window.pageYOffset;
 
-  if (currentScrollPosition > lastScrollPosition && currentScrollPosition > 115) {
+  if (currentScrollPosition > lastScrollPosition && currentScrollPosition > 110) {
     // L'utilisateur fait défiler vers le haut
     navigation.classList.remove('scrolled-down');
     navigation.classList.add('scrolled-up');
