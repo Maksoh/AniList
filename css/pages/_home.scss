@@ -31,7 +31,8 @@
         min-height: 400px;
         position: relative;
         object-fit: cover;
-
+        border-radius: var(--mainRadius);
+        box-shadow: var(--boxShadowCard);
     }
     p{
         margin-bottom: 0;

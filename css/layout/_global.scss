@@ -7,6 +7,15 @@ body{
     font-family: 'Roboto Flex', sans-serif;
 }
 
+::-webkit-scrollbar{
+    height: 8px;
+    width: 8px;
+}
+::-webkit-scrollbar-thumb{
+    background-color: var(--blackColor);
+    border-radius: 5px;
+}
+
 .wrapper{
     width: 100%;
     padding-right: 150px;
@@ -20,6 +29,7 @@ body{
     border-radius: var(--mainRadius);
     overflow: hidden;
     position: relative;
+    box-shadow: var(--boxShadow);
 }
 
 h1, h2, h3, h4{
@@ -48,5 +58,9 @@ h2{
     text-transform: uppercase;
     font-weight: 600;
     color: var(--white);;
+    // text-align: center;
+}
 
+.popularBlock a{
+text-decoration: none;
 }

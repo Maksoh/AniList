@@ -396,6 +396,8 @@ var queryUpcomingAnime = `
   }
 `;
 
+
+
 var variables = {
   page: 1 // Page number, adjust as needed
 };
@@ -450,7 +452,7 @@ fetch(url, options)
             });
           })
           .then(function (upcomingAnimeData) {
-            handleData(upcomingAnimeData, 'upcoming');
+            handleData(upcomingAnimeData, 'upcominganime');
 
             // Fetch all-time popular anime data
             options.body = JSON.stringify({
@@ -465,7 +467,7 @@ fetch(url, options)
                 });
               })
               .then(function (allTimePopularData) {
-                handleAllTimePopularData(allTimePopularData, 'allTimePopular');
+                handleAllTimePopularData(allTimePopularData, 'alltimepopular');
               });
           });
       });
@@ -494,27 +496,30 @@ function handleData(data, containerId) {
     var mediaImage = mediaTitles[i].coverImage.extraLarge; // Obtenez l'URL de l'image du média
 
     var swiperSlide = document.createElement('div'); // Créez un élément div pour swiper-slide
-    swiperSlide.classList.add('popularBlock--slider__card', 'swiper-slide');
+    swiperSlide.classList.add('popularBlock--slider__card', 'swiper-slide', 'card');
     swiperSlide.title = mediaTitles[i].title.english;
-
+    // swiperSlide.innerHTML = `
+    // // <img src="${mediaImage}" alt="cover">
+    // <p class="titleOf">${ mediaTitles[i].title.english}</p>
+    // `
+    // swiperWrapper.appendChild(swiperSlide);
     var imageElement = document.createElement('img'); // Créez un élément img pour l'image
     imageElement.src = mediaImage;
     imageElement.alt = mediaTitle;
     imageElement.title = mediaTitles[i].title.english; // Ajoute le titre complet en tant qu'attribut "title" de l'élément "img"
-
+    
     var titleElement = document.createElement('p'); // Créez un élément p pour le titre romaji
     titleElement.textContent = mediaTitle;
-
+    
     var slideText = document.createElement('div'); // Créez un élément div pour le conteneur de texte
     slideText.classList.add('titleOf');
     slideText.appendChild(titleElement);
-
+    
     swiperSlide.appendChild(imageElement);
     swiperSlide.appendChild(slideText);
     swiperWrapper.appendChild(swiperSlide);
   }
 }
-
 
 function handleAllTimePopularData(data, containerId) {
   console.log(data);
@@ -525,6 +530,8 @@ function handleAllTimePopularData(data, containerId) {
     console.error('Le conteneur', containerId, 'n\'existe pas');
     return;
   }
+
+  var currentPage = window.location.href; // Obtenir l'URL de la page actuelle
 
   for (var i = 0; i < mediaList.length; i++) {
     var media = mediaList[i];
@@ -552,12 +559,11 @@ function handleAllTimePopularData(data, containerId) {
     var contentWrapper = document.createElement('div'); // Créer un élément div pour envelopper le contenu
     contentWrapper.classList.add('headerBlock--top__elmentTxt'); // Ajouter votre classe personnalisée souhaitée ici
 
-    
     var rankElement = document.createElement('h4'); // Créer un élément h4 pour le classement
-    rankElement.textContent =  mediaRank+'.' ;
+    rankElement.textContent = mediaRank + '.';
     rankElement.classList.add('rank'); // Ajouter votre classe personnalisée souhaitée ici
     contentWrapper.appendChild(rankElement);
-    
+
     var titleElement = document.createElement('p'); // Créer un élément p pour le titre
     titleElement.classList.add('titleOf'); // Ajouter votre classe personnalisée souhaitée ici
     titleElement.textContent = mediaTitle;
@@ -572,10 +578,59 @@ function handleAllTimePopularData(data, containerId) {
       tagElement.textContent = genre;
       tagsElement.appendChild(tagElement);
     }
-    
+
     contentWrapper.appendChild(tagsElement);
     element.appendChild(contentWrapper);
+
+    if (currentPage.includes('search-manga')) {
+      var infoWrapper = document.createElement('div');
+      infoWrapper.classList.add('infoWrapper');
+    
+      var statusWrapper = document.createElement('div');
+      statusWrapper.classList.add('score');
+      
+      var statusElement = document.createElement('p');
+      statusElement.textContent = media.averageScore;
+      
+      statusWrapper.appendChild(statusElement);
+      
+      infoWrapper.appendChild(statusWrapper);
+    
+      var episodesWrapper = document.createElement('div');
+      episodesWrapper.classList.add('format');
+      
+      var episodesElement = document.createElement('p');
+      episodesElement.textContent = media.format;
+      
+      var episodesSpan = document.createElement('span');
+      if (media.episodes > 1) {
+        episodesSpan.textContent = media.episodes + 'épisodes';
+      } else {
+        episodesSpan.textContent = media.episodes+ 'film';
+      }
+      
+      episodesElement.appendChild(episodesSpan);
+      episodesWrapper.appendChild(episodesElement);
+      
+      infoWrapper.appendChild(episodesWrapper);
+    
+      var formatWrapper = document.createElement('div');
+      formatWrapper.classList.add('date');
+      
+      var formatElement = document.createElement('p');
+      formatElement.textContent = media.startDate.year;
+      
+      var formatSpan = document.createElement('span');
+      formatSpan.textContent = media.status;
+      
+      formatElement.appendChild(formatSpan);
+      formatWrapper.appendChild(formatElement);
+      
+      infoWrapper.appendChild(formatWrapper);
+    
+      element.appendChild(infoWrapper);
+    }
+
     container.appendChild(element);
   }
 }
-

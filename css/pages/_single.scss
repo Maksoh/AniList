@@ -3,12 +3,57 @@
     width: 100%;
     object-fit: cover;
     object-position: center;
+    max-height: 390px;
+    border-radius: var(--mainRadius);
+    box-shadow: var(--boxShadowCard);
 }
 
 .popularBlock--single{
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    justify-content: center;
     width: 100%;
     gap: var(--mainGap);
+    padding: var(--paddingBlock);
+}
+.infoWrapper *{
+    margin: 0;
+}
+.infoWrapper{
+    display: flex;
+    gap: var(--mainGap);
+    padding: var(--paddingBlock);
+}
+.popularBlock--single__card{
+
+    width: 100%;
+    box-sizing: border-box;
 }
 
+.date{
+    p{
+
+    }
+
+    span{
+        display: block;
+    }
+}
+.score{
+    p{
+
+    }
+
+    span{
+        display: block;
+    }
+}
+.format{
+    p{
+
+    }
+
+    span{
+        display: block;
+    }
+}
