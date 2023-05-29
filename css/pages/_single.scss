@@ -1,16 +1,18 @@
 .popularBlock--single__card img{
     position: relative;
     width: 100%;
+    height: 100%;
     object-fit: cover;
     object-position: center;
-    max-height: 390px;
+    max-height: 370px;
+    min-height: 370px;
     border-radius: var(--mainRadius);
     box-shadow: var(--boxShadowCard);
 }
 
 .popularBlock--single{
     display: grid;
-    grid-template-columns: repeat(5,1fr);
+    grid-template-columns: repeat(6,1fr);
     justify-content: center;
     width: 100%;
     gap: var(--mainGap);
@@ -21,39 +23,29 @@
 }
 .infoWrapper{
     display: flex;
+    justify-content: space-between;
+    width: 100%;
     gap: var(--mainGap);
     padding: var(--paddingBlock);
 }
 .popularBlock--single__card{
-
+    height: 100%;
     width: 100%;
     box-sizing: border-box;
 }
 
-.date{
+.infoItemQuery{
+    
     p{
-
+        text-transform: uppercase;
+        color: var(--white);
     }
-
+    
     span{
+        margin-top: 10px;
         display: block;
+        color: var(--sousTitres);
+        text-transform: uppercase;
     }
 }
-.score{
-    p{
 
-    }
-
-    span{
-        display: block;
-    }
-}
-.format{
-    p{
-
-    }
-
-    span{
-        display: block;
-    }
-}

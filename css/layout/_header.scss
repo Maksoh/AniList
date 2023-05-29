@@ -38,12 +38,15 @@ header{
     border-bottom: 1px solid gray;
     padding-bottom: 15px;
     padding-top: 15px;
+    align-items: center;
+    justify-content: space-between;
 }
 .headerBlock--top__element:last-child{
     border-bottom: 0;
 }
 .headerBlock--top__elmentImg{
-    width: 105px;
+    min-width: 105px;
+    max-width: 108px;
     height: 100%;
     position: relative;
     object-fit: cover;

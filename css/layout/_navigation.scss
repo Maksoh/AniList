@@ -38,10 +38,11 @@ nav {
     color: #fff;
     text-decoration: none;
     padding: 5px;
+    transition: .3s all ease-in-out;
 }
 
-// .nav--links li a:hover {
-//     border-bottom: 2px solid #fff;    
+.nav--links li a:hover {
+    color: var(--mainColor);    
 
-// }
+}
 

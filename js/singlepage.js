@@ -1,3 +1,36 @@
+// SWIPER JS 
+
+var swiper = new Swiper(".popularBlock--slider", {
+  slidesPerView: 6,
+  spaceBetween: 20,
+  freeMode: true,
+
+});
+
+// NAV SCROLL 
+var navigation = document.querySelector('.navigation');
+var lastScrollPosition = window.pageYOffset;
+
+window.addEventListener('scroll', function() {
+var currentScrollPosition = window.pageYOffset;
+
+if (currentScrollPosition > lastScrollPosition && currentScrollPosition > 110) {
+  // L'utilisateur fait défiler vers le haut
+  navigation.classList.remove('scrolled-down');
+  navigation.classList.add('scrolled-up');
+} else if (currentScrollPosition < lastScrollPosition) {
+  // L'utilisateur fait défiler vers le bas
+  navigation.classList.remove('scrolled-up');
+  navigation.classList.add('scrolled-down');
+}
+
+lastScrollPosition = currentScrollPosition;
+});
+
+// // SCROLL REVEAL
+// ScrollReveal().reveal('.popularBlock--single__card', { duration: 800, easing:'ease-in', interval: 150});
+
+
 
 var queryAllTimePopular = `
   query ($page: Int) {
@@ -42,8 +75,6 @@ var queryManga = `
         coverImage {
           extraLarge
         }
-        chapters
-        volumes
       }
     }
   }
@@ -172,10 +203,10 @@ function handleData(data, containerId) {
   var mediaTitles = data.data.Page.media; // Obtenez les titres des médias à partir des données de réponse
   var swiperWrapper = document.getElementById(containerId); // Sélectionnez le conteneur des éléments swiper
 
-  if (!swiperWrapper) {
-    console.error('Le conteneur', containerId, 'n\'existe pas');
-    return;
-  }
+  // if (!swiperWrapper) {
+  //   console.error('Le conteneur', containerId, 'n\'existe pas');
+  //   return;
+  // }
 
   for (var i = 0; i < mediaTitles.length; i++) {
     var mediaTitle = mediaTitles[i].title.english; // Obtenez le titre romaji du média correspondant
@@ -207,6 +238,11 @@ function handleData(data, containerId) {
     swiperSlide.appendChild(imageElement);
     swiperSlide.appendChild(slideText);
     swiperWrapper.appendChild(swiperSlide);
+
+    // SCROLL REVEAL
+    ScrollReveal().reveal('.popularBlock--single__card', { duration: 800, easing:'ease-in', interval: 150});
+
+
   }
 }
 
@@ -316,10 +352,10 @@ function handleAllTimePopularData(data, containerId) {
     var mediaTitles = data.data.Page.media; // Obtenez les titres des médias à partir des données de réponse
     var swiperWrapper = document.getElementById(containerId); // Sélectionnez le conteneur des éléments swiper
   
-    if (!swiperWrapper) {
-      console.error('Le conteneur', containerId, 'n\'existe pas');
-      return;
-    }
+    // if (!swiperWrapper) {
+    //   console.error('Le conteneur', containerId, 'n\'existe pas');
+    //   return;
+    // }
   
     for (var i = 0; i < mediaTitles.length; i++) {
       var mediaTitle = mediaTitles[i].title.english; // Obtenez le titre romaji du média correspondant
@@ -351,5 +387,8 @@ function handleAllTimePopularData(data, containerId) {
       swiperSlide.appendChild(imageElement);
       swiperSlide.appendChild(slideText);
       swiperWrapper.appendChild(swiperSlide);
+          // SCROLL REVEAL
+    ScrollReveal().reveal('.popularBlock--single__card', { duration: 800, easing:'ease-in', interval: 150});
+      
     }
   }

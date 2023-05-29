@@ -587,17 +587,17 @@ function handleAllTimePopularData(data, containerId) {
       infoWrapper.classList.add('infoWrapper');
     
       var statusWrapper = document.createElement('div');
-      statusWrapper.classList.add('score');
+      statusWrapper.classList.add('infoItemQuery');
       
-      var statusElement = document.createElement('p');
-      statusElement.textContent = media.averageScore;
+      var statusElement = document.createElement('p'); 
+      statusElement.textContent = media.averageScore + '%';
       
       statusWrapper.appendChild(statusElement);
       
       infoWrapper.appendChild(statusWrapper);
     
       var episodesWrapper = document.createElement('div');
-      episodesWrapper.classList.add('format');
+      episodesWrapper.classList.add('infoItemQuery');
       
       var episodesElement = document.createElement('p');
       episodesElement.textContent = media.format;
@@ -615,7 +615,7 @@ function handleAllTimePopularData(data, containerId) {
       infoWrapper.appendChild(episodesWrapper);
     
       var formatWrapper = document.createElement('div');
-      formatWrapper.classList.add('date');
+      formatWrapper.classList.add('infoItemQuery');
       
       var formatElement = document.createElement('p');
       formatElement.textContent = media.startDate.year;
