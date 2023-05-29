@@ -82,7 +82,8 @@
 .addList{
     min-width: 150px;
     max-width: 180px;
-    position:relative;
+    // position:relative;
+
     .addBtn{
         width: 100%;
         text-transform: uppercase;
@@ -157,9 +158,9 @@ transition: .2s all ease-in-out;
 }
 
 .overviewBlock--content{
-    display: flex;
-    gap: 40px;
-    flex-wrap: wrap;
+    display: grid;
+    gap: var(--mainGap);
+    grid-template-columns: repeat(5, 1fr);
 }
 
 .personCard{
@@ -214,12 +215,12 @@ transition: .2s all ease-in-out;
         border: none;
         border-radius: var(--mainRadius);
         font-weight: 500;
-        font-size: 1em;
+        font-size: 11px;
         transition: .3s all ease-in-out;
         border: 1px solid var(--white);;
         color: var(--mainColor);
         letter-spacing: 1px;
-        padding: 11px 25px;
+        padding: 8px 15px;
     }
 }
 
@@ -229,3 +230,24 @@ transition: .2s all ease-in-out;
     background-color: var(--mainColor);
     transition: .2s all ease-in-out;
     }
+
+.relationsBlock{
+    grid-row: span 2;
+    // display: none;
+}    
+
+.characteresBlock{
+    grid-row: span 3;
+    display: none;
+}
+.staffBlock{
+    grid-row: span 3;
+    display: none;
+
+}
+.socialsBlock{
+    // grid-row: 2;
+    // display: block;
+    display: none;
+}
+
