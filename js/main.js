@@ -18,15 +18,23 @@ var swiper = new Swiper(".popularBlock--slider", {
     spaceBetween: 20,
     freeMode: true,
     breakpoints: {
-      640: {
-        slidesPerView: 2,
+      0: {
+        slidesPerView: 1,
         spaceBetween: 20,
       },
-      768: {
-        slidesPerView: 4,
+      400: {
+        slidesPerView: 2,
         spaceBetween: 40,
       },
-      1024: {
+      600: {
+        slidesPerView: 3,
+        spaceBetween: 40,
+      },
+      991: {
+        slidesPerView: 4,
+        spaceBetween: 50,
+      },
+      1201: {
         slidesPerView: 5,
         spaceBetween: 50,
       },
@@ -41,7 +49,7 @@ var lastScrollPosition = window.pageYOffset;
 window.addEventListener('scroll', function() {
   var currentScrollPosition = window.pageYOffset;
 
-  if (currentScrollPosition > lastScrollPosition && currentScrollPosition > 110) {
+  if (currentScrollPosition > lastScrollPosition && currentScrollPosition > 100) {
     // L'utilisateur fait défiler vers le haut
     navigation.classList.remove('scrolled-down');
     navigation.classList.add('scrolled-up');

@@ -46,7 +46,7 @@
 }
 
 .itemInfos{
-
+    // margin-bottom: var(--mainGap);
     display: grid;
     grid-template-columns: 1fr 5fr;
     gap: var(--mainGap);
@@ -167,12 +167,12 @@ transition: .2s all ease-in-out;
     display: flex;
     align-items: flex-end;
     gap: var(--mainGap);
-    max-width: 150px;
+    max-width: 56px;
+    min-width: 55px;
     box-sizing: content-box;
 
 
     img{
-        max-width: 150px;
         width: 100%;
         height: 100%;
         position: relative;

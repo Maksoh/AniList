@@ -6,6 +6,8 @@
     object-position: center;
     max-height: 370px;
     min-height: 370px;
+    min-width: 230px;
+    max-width: 240px;
     border-radius: var(--mainRadius);
     box-shadow: var(--boxShadowCard);
 }
@@ -47,5 +49,100 @@
         color: var(--sousTitres);
         text-transform: uppercase;
     }
+}
+
+// 1200 PXIEL MEDIA SCREEN 
+
+@media screen and (max-width: 1800px) {
+    .popularBlock--single{
+        display: grid;
+        grid-template-columns: repeat(5,1fr);
+        
+    }
+    .popularBlock--single__card img{
+        max-width: 190px;
+        min-width: 180px;
+        min-height: 280px;
+        max-height: 290px;
+    }
+
+}
+// 1200 PXIEL MEDIA SCREEN 
+
+@media screen and (max-width: 1200px) {
+    .popularBlock--single{
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+    }
+    .popularBlock--single__card img{
+        max-width: 190px;
+        min-width: 180px;
+        min-height: 280px;
+        max-height: 290px;
+    }
+
+}
+
+
+// 800 PXIEL MEDIA SCREEN 
+
+@media screen and (max-width: 800px) {
+    .popularBlock--single{
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+    }
+    .popularBlock--single__card img{
+        max-width: 190px;
+        min-width: 180px;
+        min-height: 280px;
+        max-height: 290px;
+    }
+
+}
+
+// 650 PXIEL MEDIA SCREEN 
+
+@media screen and (max-width: 650px) {
+    .popularBlock--single{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+    }
+    .popularBlock--single__card img{
+        max-width: 190px;
+        min-width: 180px;
+        min-height: 280px;
+        max-height: 290px;
+
+    }
+
+
+}
+
+@media screen and (max-width: 650px) {
+    .popularBlock--single{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+    }
+    .popularBlock--single__card img{
+        max-width: 190px;
+        min-width: 180px;
+        min-height: 280px;
+        max-height: 290px;
+
+    }
+
+
+}
+
+@media screen and (max-width: 500px) {
+    .popularBlock--single__card img{
+        max-width: 140px;
+        min-width: 130px;
+        min-height: 210px;
+        max-height: 200px;
+
+    }
+
+
 }
 

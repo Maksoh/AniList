@@ -24,6 +24,41 @@ body{
     margin-left: auto;
 }
 
+// 1200 PXIEL MEDIA SCREEN 
+@media screen and (max-width: 1200px) {
+    .wrapper{
+        padding-right: 90px;
+        padding-left: 90px;
+    }
+
+}
+
+// 990 PXIEL MEDIA SCREEN 
+@media screen and (max-width: 990px) {
+    .wrapper{
+        padding-right: 60px;
+        padding-left: 60px;
+    }
+
+}
+// 800 PXIEL MEDIA SCREEN 
+@media screen and (max-width: 800px) {
+    .wrapper{
+        padding-right: 40px;
+        padding-left: 40px;
+    }
+
+}
+
+// 600 PXIEL MEDIA SCREEN 
+@media screen and (max-width: 600px) {
+    .wrapper{
+        padding-right: 20px;
+        padding-left: 20px;
+    }
+
+}
+
 .is--block{
     background-color: var(--blackColor);
     border-radius: var(--mainRadius);
@@ -52,6 +87,14 @@ h2{
     border-radius: 10px;
     padding: 2px 8px;
     margin-right: 5px;
+}
+
+// 1200 PXIEL MEDIA SCREEN 
+@media screen and (max-width: 1200px) {
+    .genres *{
+        font-size: 9px;
+    }
+
 }
 
 .titleOf{

@@ -5,19 +5,20 @@ nav {
     align-items: center;
     padding: 10px 30px;
     border-radius: 0 0 10px 10px;
-    position: fixed;
+    position: sticky;
     top: 0;
     transition: transform 0.4s;
     z-index: 9999;
-    width:78%;
-    margin-right: 150px;
+    width:100%;
 }
 .navigation.scrolled-up {
     transform: translateY(-100%);
+    transition: .5s all ease-in-out;
   }
   
   .navigation.scrolled-down {
     transform: translateY(0);
+    transition: .5s all ease-in-out;
   }
 
 .nav--logo img {

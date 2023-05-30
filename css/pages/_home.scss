@@ -28,6 +28,7 @@
     width: 100%;
     img{
         width: 100%;
+        max-height: 400px;
         min-height: 400px;
         position: relative;
         object-fit: cover;
@@ -37,4 +38,13 @@
     p{
         margin-bottom: 0;
     }
+}
+
+// 1200 PXIEL MEDIA SCREEN SWIPER IMG
+@media screen and (max-width: 1200px) {
+    .popularBlock--slider img{
+        max-height: 300px;
+        min-height: 300px;
+    }
+
 }
