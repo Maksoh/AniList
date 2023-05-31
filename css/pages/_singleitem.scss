@@ -291,7 +291,7 @@ transition: .2s all ease-in-out;
 // 560 PXIEL MEDIA SCREEN 
 @media screen and (max-width:560px) {
     .overviewBlock--trailers img{
-        max-height:150px !important;;
+        max-height:200px !important;;
     }
 
 }
@@ -354,6 +354,7 @@ transition: .2s all ease-in-out;
     }
     .socialsBlock {
         order: 2;
+        margin-bottom: var(--mainGap);
     }
     .itemInfosWrapper{
         display: flex;
@@ -378,6 +379,7 @@ transition: .2s all ease-in-out;
 .socialsBlock{
     // grid-row: 2;
     display: block;
+
     // display: none;
 }
 

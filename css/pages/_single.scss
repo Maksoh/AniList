@@ -30,6 +30,10 @@
     gap: var(--mainGap);
     padding: var(--paddingBlock);
 }
+
+.topCentSearch .infoWrapper{
+    text-align: center;
+}
 .popularBlock--single__card{
     height: 100%;
     width: 100%;

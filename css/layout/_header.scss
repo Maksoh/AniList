@@ -95,6 +95,9 @@ header{
         margin: 0;
         font-size: 12px;
     }
+    .topCentSearch .infoItemQuery{
+        font-size: 12px;
+    }
     .headerBlock{
         max-height: 550px;
     }
@@ -121,6 +124,9 @@ header{
         margin: 0;
         font-size: 11px;
     }
+    .topCentSearch .infoItemQuery{
+        font-size: 12px;
+    }
     .headerBlock{
         max-height: 550px;
     }
@@ -131,6 +137,34 @@ header{
 @media screen and (max-width: 800px) {
     .headerBlock--top{
         display: none;
+    }
+    .topCentSearch{
+        display: block;
+    }
+}
+// 600 PXIEL MEDIA SCREEN SEARCH TOP 100
+@media screen and (max-width: 600px) {
+    .topCentSearch .infoItemQuery{
+        font-size: 10px;
+    }
+    .headerBlock--top__elmentTxt p{
+        font-size: 9px;
+    }
+    .genres *{
+        font-size: 7px;
+    }
+
+}
+// 512 PXIEL MEDIA SCREEN SEARCH TOP 100
+@media screen and (max-width: 522px) {
+    .topCentSearch .infoItemQuery{
+        font-size: 7px;
+    }
+    .headerBlock--top__elmentTxt p{
+        font-size: 8px;
+    }
+    .genres *{
+        font-size: 5px;
     }
 
 }
