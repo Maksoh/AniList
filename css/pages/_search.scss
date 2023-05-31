@@ -49,6 +49,31 @@
     text-align: center;
     border:none;
 }
+// 850 MEDIA SCREEN INPUT 
+@media screen and (max-width: 850px) {
+    .searchInput{
+        width: 480px;
+    }
+}
+// 660 MEDIA SCREEN INPUT 
+@media screen and (max-width: 660px) {
+    .searchInput{
+        width: 400px;
+    }
+}
+// 530 MEDIA SCREEN INPUT 
+@media screen and (max-width: 530px) {
+    .searchInput{
+        width: 350px;
+    }
+}
+// 470 MEDIA SCREEN INPUT 
+@media screen and (max-width: 470px) {
+    .searchInput{
+        width: 280px;
+    }
+}
+
 
 .searchBlock--txt__filtres select{
     border-radius: var(--mainRadius);
@@ -80,7 +105,7 @@
     color:rgba(0, 0, 0, 0.564);
 }
 
-infosPageSearch{
-    align-items: center;
-    justify-content: space-between;
-}
+// infosPageSearch{
+//     align-items: center;
+//     justify-content: space-between;
+// }
