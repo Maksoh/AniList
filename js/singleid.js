@@ -19,7 +19,7 @@ removeListBtn.addEventListener('click', function() {
 
 
 // BLOCK APPARITION
-const socialsBlock = document.querySelector('.socialsBlock');
+
 // OVERVIEW BLOCK ACTION 
 const overviewTitle = document.querySelector('.overviewTitle');
 const overviewBlock = document.querySelector('.relationsBlock');
@@ -28,7 +28,6 @@ overviewTitle.addEventListener('click', function(event) {
     event.preventDefault();
     overviewBlock.style.display = 'block'; // Modifier le display en 'none'
     characteresBlock.style.display = 'none'; // Modifier le display en 'none'
-    socialsBlock.style.display = 'none'; // Modifier le display en 'block'
     staffBlock.style.display = 'none'; // Modifier le display en 'block'
 });
 
@@ -39,7 +38,6 @@ const characteresBlock = document.querySelector('.characteresBlock');
 characteresTitle.addEventListener('click', function(event) {
     event.preventDefault();
     characteresBlock.style.display = 'block'; // Modifier le display en 'none'
-    socialsBlock.style.display = 'block'; // Modifier le display en 'block'
     overviewBlock.style.display = 'none'; // Modifier le display en 'block'
     staffBlock.style.display = 'none'; // Modifier le display en 'block'
 
@@ -52,7 +50,6 @@ const staffBlock = document.querySelector('.staffBlock');
 staffTitle.addEventListener('click', function(event) {
     event.preventDefault();
     staffBlock.style.display = 'block'; // Modifier le display en 'none'
-    socialsBlock.style.display = 'block'; // Modifier le display en 'block'
     overviewBlock.style.display = 'none'; // Modifier le display en 'block'
     characteresBlock.style.display = 'none'; // Modifier le display en 'none'
 });

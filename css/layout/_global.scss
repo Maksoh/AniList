@@ -24,6 +24,14 @@ body{
     margin-left: auto;
 }
 
+// 1250 PXIEL MEDIA SCREEN 
+@media screen and (max-width: 1250px) {
+    .wrapper{
+        padding-right: 90px;
+        padding-left: 90px;
+    }
+
+}
 // 1200 PXIEL MEDIA SCREEN 
 @media screen and (max-width: 1200px) {
     .wrapper{

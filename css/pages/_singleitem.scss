@@ -1,8 +1,7 @@
 .itemBlock{
     height: 100%;
     width: 100%;
-    margin-top: 80px;
-    margin-bottom: 30px;
+    margin: var(--mainGap) 0;
     display: flex;
     flex-direction: column;
 
@@ -56,6 +55,10 @@
     display: grid;
     grid-template-columns: 1fr;
     padding: 0;
+}
+
+.informationsBlock{
+    margin-bottom: 0 !important;
 }
 
 .itemBlock--content__title{
@@ -131,14 +134,36 @@ transition: .2s all ease-in-out;
     color: var(--mainColor);
 }
 
+// 670 PXIEL MEDIA SCREEN 
+@media screen and (max-width:670px) {
+    .itemBlock--content__rubiqres {
+        flex-wrap: wrap;
+    }
+    .itemBlock--content__rubiqres a{
+        font-size: 12px;
+    }
+}
+
+// 500 PXIEL MEDIA SCREEN 
+@media screen and (max-width:500px) {
+    .personCard{
+        gap: 5px !important;     
+    }
+    .infoItemQuery{
+        font-size: 14px;
+    }
+}
+
 .active{
     color: var(--mainColor)!important;
     box-shadow: var(--boxShadowCard);
 }
 
-.relationsBlock img{
-    max-height: 270px;
-    min-height: 0!important;
+.relationsBlockSwiper img{
+    max-height: 180px;
+    min-height: 180px;
+    max-width: 140px;
+    min-width: 140px;
 }
 
 .overviewBlock{
@@ -166,7 +191,7 @@ transition: .2s all ease-in-out;
 .personCard{
     display: flex;
     align-items: flex-end;
-    gap: var(--mainGap);
+    gap: 15px;
     max-width: 56px;
     min-width: 55px;
     box-sizing: content-box;
@@ -181,6 +206,50 @@ transition: .2s all ease-in-out;
     }
 }
 
+// 1355 PXIEL MEDIA SCREEN 
+@media screen and (max-width:1350px) {
+    .personcard{
+        font-size: 11px;
+    }
+}
+// 1270 PXIEL MEDIA SCREEN 
+@media screen and (max-width:1270px) {
+    .personCard{
+        max-width: 45px;
+        min-width: 40px;
+    }
+    .cardBlock{
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+// 1070 PXIEL MEDIA SCREEN 
+@media screen and (max-width:1070px) {
+    .personCard{
+        max-width: 40px;
+        min-width: 35px;
+    }
+}
+// 970 PXIEL MEDIA SCREEN 
+@media screen and (max-width:970px) {
+    .cardBlock{
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+// 580 PXIEL MEDIA SCREEN 
+@media screen and (max-width:580px) {
+    .cardBlock{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+// 880 PXIEL MEDIA SCREEN 
+@media screen and (max-width:880px) {
+    .overviewBlockCharacteres{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        margin-bottom: 10px;
+    }
+}
+
 .personCard *{
     margin: 0;
 }
@@ -191,26 +260,52 @@ transition: .2s all ease-in-out;
     object-fit: cover;
 
 }
+// 1085 PXIEL MEDIA SCREEN 
+@media screen and (max-width: 1085px) {
+    .overviewBlock--trailers img{
+        max-height:350px !important;;
+    }
 
-.trailerSocials{
-    display: flex;
-    gap: var(--mainGap);
 }
+// 950 PXIEL MEDIA SCREEN 
+@media screen and (max-width: 950px) {
+    .overviewBlock--trailers img{
+        max-height:300px !important;;
+    }
 
-.trailer::after{
-    max-width: 600px;
+}
+// 835 PXIEL MEDIA SCREEN 
+@media screen and (max-width:835px) {
+    .overviewBlock--trailers img{
+        max-height:250px !important;;
+    }
+
+}
+// 710 PXIEL MEDIA SCREEN 
+@media screen and (max-width:710px) {
+    .overviewBlock--trailers img{
+        max-height:200px !important;;
+    }
+
+}
+// 560 PXIEL MEDIA SCREEN 
+@media screen and (max-width:560px) {
+    .overviewBlock--trailers img{
+        max-height:150px !important;;
+    }
+
 }
 
 .overviewBlock--socials{
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
+    align-items: center;
     gap: var(--mainGap);
     a{
         text-align: center;
         width: 100%;
         text-transform: uppercase;
-        font-size: 15px;
         background-color: var(--white);
         border: none;
         border-radius: var(--mainRadius);
@@ -229,7 +324,42 @@ transition: .2s all ease-in-out;
     color: var(--white);
     background-color: var(--mainColor);
     transition: .2s all ease-in-out;
+}
+
+// 1270 PXIEL MEDIA SCREEN 
+@media screen and (max-width:1270px) {
+    .overviewBlock--socials a{
+        font-size: 9px;
     }
+}
+// 1070 PXIEL MEDIA SCREEN 
+@media screen and (max-width:1070px) {
+    .socialsBlock {
+        padding: var(--paddingBlock) 15px;
+    }
+}
+// 850 PXIEL MEDIA SCREEN 
+@media screen and (max-width:850px) {
+    .itemInfos {
+        display: flex;
+        flex-direction: column;
+    }
+    .relationsBlock{
+        margin-bottom: 0 !important;
+
+    }
+    .informationsBlock{
+        margin-bottom: 0 !important;
+        order: 1;
+    }
+    .socialsBlock {
+        order: 2;
+    }
+    .itemInfosWrapper{
+        display: flex;
+        flex-wrap: wrap;
+    }
+}
 
 .relationsBlock{
     grid-row: span 2;
@@ -247,7 +377,7 @@ transition: .2s all ease-in-out;
 }
 .socialsBlock{
     // grid-row: 2;
-    // display: block;
-    display: none;
+    display: block;
+    // display: none;
 }
 

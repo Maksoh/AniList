@@ -42,6 +42,36 @@ var swiper = new Swiper(".popularBlock--slider", {
 
 });
 
+
+// var swiper = new Swiper(".relationsBlockSwiper", {
+//     slidesPerView: 7,
+//     spaceBetween: 20,
+//     freeMode: true,
+//     breakpoints: {
+//       0: {
+//         slidesPerView: 1,
+//         spaceBetween: 20,
+//       },
+//       400: {
+//         slidesPerView: 2,
+//         spaceBetween: 40,
+//       },
+//       600: {
+//         slidesPerView: 3,
+//         spaceBetween: 40,
+//       },
+//       991: {
+//         slidesPerView: 4,
+//         spaceBetween: 50,
+//       },
+//       1201: {
+//         slidesPerView: 6,
+//         spaceBetween: 10,
+//       },
+//     },
+
+// });
+
 // NAV SCROLL 
 var navigation = document.querySelector('.navigation');
 var lastScrollPosition = window.pageYOffset;
