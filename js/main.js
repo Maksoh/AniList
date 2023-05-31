@@ -43,34 +43,6 @@ var swiper = new Swiper(".popularBlock--slider", {
 });
 
 
-// var swiper = new Swiper(".relationsBlockSwiper", {
-//     slidesPerView: 7,
-//     spaceBetween: 20,
-//     freeMode: true,
-//     breakpoints: {
-//       0: {
-//         slidesPerView: 1,
-//         spaceBetween: 20,
-//       },
-//       400: {
-//         slidesPerView: 2,
-//         spaceBetween: 40,
-//       },
-//       600: {
-//         slidesPerView: 3,
-//         spaceBetween: 40,
-//       },
-//       991: {
-//         slidesPerView: 4,
-//         spaceBetween: 50,
-//       },
-//       1201: {
-//         slidesPerView: 6,
-//         spaceBetween: 10,
-//       },
-//     },
-
-// });
 
 // NAV SCROLL 
 var navigation = document.querySelector('.navigation');
@@ -92,273 +64,165 @@ window.addEventListener('scroll', function() {
   lastScrollPosition = currentScrollPosition;
 });
 
+// API -----
 
-// SEARCH FOCUS 
+// Fonction pour récupérer les données des mangas tendances
+async function getTrendingManga() {
+  const queryTrendingManga = `
+    query ($page: Int) {
+      Page(page: $page, perPage: 18) {
+        media(type: MANGA, sort: TRENDING_DESC) {
+          id
+          title {
+            romaji
+            english
+            native
+          }
+          coverImage {
+            extraLarge
+          }
+          chapters
+          volumes
+        }
+      }
+    }
+  `;
 
-// const search=document.getElementById('searchInputlight');
+  const variables = {
+    page: 1,
+  };
 
-// search.addEventListener('focus',(event)=>{
+  try {
+    const data = await fetchData(queryTrendingManga, variables);
+    const trendingManga = data.data.Page.media;
+    displayTrendingManga(trendingManga);
+  } catch (error) {
+    console.log(error);
+  }
+}
 
-// document.getElementById('search-wrapper').style.border="1px solid var(--mainColor)";
+// Fonction spécifique pour afficher les résultats des mangas tendances
+function displayTrendingManga(results) {
+  const swiperWrapper = document.getElementById('trendingMangaAll');
 
-// });
+  for (const result of results) {
+    const mediaTitle = result.title.english || result.title.romaji || result.title.native;
+    const mediaImage = result.coverImage.extraLarge;
 
+    const swiperSlide = document.createElement('div');
+    swiperSlide.classList.add('popularBlock--slider__card', 'swiper-slide', 'card');
+    swiperSlide.title = mediaTitle;
 
-// search.addEventListener('focusout',(event)=>{
+    const imageElement = document.createElement('img');
+    imageElement.src = mediaImage;
+    imageElement.alt = mediaTitle;
+    imageElement.title = mediaTitle;
 
-// document.getElementById('search-wrapper').style.border="1px solid rgba(0, 0, 0, 0.276)";
+    const titleElement = document.createElement('p');
+    titleElement.textContent = mediaTitle;
 
-// });
+    const slideText = document.createElement('div');
+    slideText.classList.add('titleOf');
+    slideText.appendChild(titleElement);
 
+    swiperSlide.appendChild(imageElement);
+    swiperSlide.appendChild(slideText);
+    swiperWrapper.appendChild(swiperSlide);
+  }
+}
 
+// Fonction pour récupérer les données des animes tendances
+async function getTrendingAnime() {
+  const queryTrendingAnime = `
+    query ($page: Int) {
+      Page(page: $page, perPage: 18) {
+        media(type: ANIME, sort: TRENDING_DESC) {
+          id
+          title {
+            romaji
+            english
+            native
+          }
+          coverImage {
+            extraLarge
+          }
+        }
+      }
+    }
+  `;
 
+  const variables = {
+    page: 1,
+  };
 
+  try {
+    const data = await fetchData(queryTrendingAnime, variables);
+    const trendingAnime = data.data.Page.media;
+    displayTrendingAnime(trendingAnime);
+  } catch (error) {
+    console.log(error);
+  }
+}
 
-// API 
+// Fonction spécifique pour afficher les résultats des animes tendances
+function displayTrendingAnime(results) {
+  const swiperWrapper = document.getElementById('trendingAnimeAll');
 
-// var query = `
-// query ($page: Int) {
-//   Page(page: $page, perPage: 10) {
-//     media(type: MANGA, sort: TRENDING_DESC) {
-//       id
-//       title {
-//         romaji
-//         english
-//         native
-//       }
-//       coverImage{
-//         extraLarge
-//       }
-//     }
-//   }
-// }
-// `;
+  for (const result of results) {
+    const mediaTitle = result.title.english || result.title.romaji || result.title.native;
+    const mediaImage = result.coverImage.extraLarge;
 
-// var variables = {
-//   page: 1 // Page number, adjust as needed
-// };
+    const swiperSlide = document.createElement('div');
+    swiperSlide.classList.add('popularBlock--slider__card', 'swiper-slide', 'card');
+    swiperSlide.title = mediaTitle;
 
-// var url = 'https://graphql.anilist.co';
-// var options = {
-//   method: 'POST',
-//   headers: {
-//     'Content-Type': 'application/json',
-//     'Accept': 'application/json',
-//   },
-//   body: JSON.stringify({
-//     query: query,
-//     variables: variables
-//   })
-// };
+    const imageElement = document.createElement('img');
+    imageElement.src = mediaImage;
+    imageElement.alt = mediaTitle;
+    imageElement.title = mediaTitle;
 
-// fetch(url, options)
-//   .then(handleResponse)
-//   .then(handleData)
-//   .catch(handleError);
+    const titleElement = document.createElement('p');
+    titleElement.textContent = mediaTitle;
 
-// function handleResponse(response) {
-//   return response.json().then(function (json) {
-//     return response.ok ? json : Promise.reject(json);
-//   });
-// }
+    const slideText = document.createElement('div');
+    slideText.classList.add('titleOf');
+    slideText.appendChild(titleElement);
 
-// function handleData(data) {
-//   console.log(data);
-//   // Traitement des données de réponse ici
-//   var mangaTitles = data.data.Page.media; // Obtenez les titres des mangas à partir des données de réponse
+    swiperSlide.appendChild(imageElement);
+    swiperSlide.appendChild(slideText);
+    swiperWrapper.appendChild(swiperSlide);
+    
+  }
+}
 
-//   var swiperWrapper = document.querySelector('.swiper-wrapper'); // Sélectionnez le conteneur des éléments swiper
+// Fonction générique pour effectuer une requête GraphQL
+async function fetchData(query, variables) {
+  const url = 'https://graphql.anilist.co';
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    },
+    body: JSON.stringify({
+      query,
+      variables,
+    }),
+  };
 
-//   for (var i = 0; i < mangaTitles.length; i++) {
-//     var mangaTitle = mangaTitles[i].title.romaji; // Obtenez le titre romaji du manga correspondant
-//     var mangaImage = mangaTitles[i].coverImage.extraLarge; // Obtenez l'URL de l'image du manga
+  const response = await fetch(url, options);
+  const data = await response.json();
 
-//     var swiperSlide = document.createElement('div'); // Créez un élément div pour swiper-slide
-//     swiperSlide.classList.add('popularBlock--slider__card', 'swiper-slide');
+  if (response.ok) {
+    return data;
+  } else {
+    throw new Error(data.errors[0].message);
+  }
+}
 
-//     var imageElement = document.createElement('img'); // Créez un élément img pour l'image
-//     imageElement.src = mangaImage;
-//     imageElement.alt = '';
-
-//     var titleElement = document.createElement('p'); // Créez un élément h1 pour le titre romaji
-//     titleElement.textContent = mangaTitle;
-
-//     var slideText = document.createElement('div'); // Créez un élément div pour le conteneur de texte
-//     slideText.classList.add('titleOf');
-//     slideText.appendChild(titleElement);
-
-//     swiperSlide.appendChild(imageElement);
-//     swiperSlide.appendChild(slideText);
-//     swiperWrapper.appendChild(swiperSlide);
-//   }
-  
-  
-// }
-
-// function handleError(error) {
-//   alert('Erreur, consultez la console');
-//   console.error(error);
-// }
-
-
-
-
-
-
-
-// var queryManga = `
-//   query ($page: Int) {
-//     Page(page: $page, perPage: 12) {
-//       media(type: MANGA, sort: POPULARITY_DESC,) {
-//         id
-//         title {
-//           romaji
-//           english
-//           native
-//         }
-//         coverImage {
-//           extraLarge
-//         }
-//       }
-//     }
-//   }
-// `;
-
-// var queryAnime = `
-//   query ($page: Int) {
-//     Page(page: $page, perPage: 12) {
-//       media(type: ANIME, sort: POPULARITY_DESC) {
-//         id
-//         title {
-//           romaji
-//           english
-//           native
-//         }
-//         coverImage {
-//           extraLarge
-//         }
-//       }
-//     }
-//   }
-// `;
-
-// var queryUpcomingAnime = `
-//   query ($page: Int) {
-//     Page(page: $page, perPage: 12) {
-//       media(type: ANIME, sort: POPULARITY_DESC, seasonYear: 2023, season: WINTER) {
-//         id
-//         title {
-//           romaji
-//           english
-//           native
-//         }
-//         coverImage {
-//           extraLarge
-//         }
-//       }
-//     }
-//   }
-// `;
-
-// var variables = {
-//   page: 1 // Page number, adjust as needed
-// };
-
-// var url = 'https://graphql.anilist.co';
-// var options = {
-//   method: 'POST',
-//   headers: {
-//     'Content-Type': 'application/json',
-//     'Accept': 'application/json',
-//   },
-//   body: JSON.stringify({
-//     query: queryManga,
-//     variables: variables
-//   })
-// };
-
-// fetch(url, options)
-//   .then(function (response) {
-//     return response.json().then(function (json) {
-//       return response.ok ? json : Promise.reject(json);
-//     });
-//   })
-//   .then(function (mangaData) {
-//     handleData(mangaData, 'manga');
-
-//     // Fetch anime data
-//     options.body = JSON.stringify({
-//       query: queryAnime,
-//       variables: variables
-//     });
-
-//     return fetch(url, options)
-//       .then(function (response) {
-//         return response.json().then(function (json) {
-//           return response.ok ? json : Promise.reject(json);
-//         });
-//       })
-//       .then(function (animeData) {
-//         handleData(animeData, 'anime');
-
-//         // Fetch upcoming anime data
-//         options.body = JSON.stringify({
-//           query: queryUpcomingAnime,
-//           variables: variables
-//         });
-
-//         return fetch(url, options)
-//           .then(function (response) {
-//             return response.json().then(function (json) {
-//               return response.ok ? json : Promise.reject(json);
-//             });
-//           })
-//           .then(function (upcomingAnimeData) {
-//             handleData(upcomingAnimeData, 'upcoming');
-//           });
-//       });
-//   })
-//   .catch(function (error) {
-//     alert('Erreur, consultez la console');
-//     console.error(error);
-//   });
-
-// function handleData(data, containerId) {
-//   console.log(data);
-//   var mediaTitles = data.data.Page.media; // Obtenez les titres des médias à partir des données de réponse
-//   var swiperWrapper = document.getElementById(containerId); // Sélectionnez le conteneur des éléments swiper
-
-//   if (!swiperWrapper) {
-//     console.error('Le conteneur', containerId, 'n\'existe pas');
-//     return;
-//   }
-
-//   for (var i = 0; i < mediaTitles.length; i++) {
-//     var mediaTitle = mediaTitles[i].title.romaji; // Obtenez le titre romaji du média correspondant
-//     if (mediaTitle.length > 28) {
-//       mediaTitle = mediaTitle.substring(0, 20) + '...'; // Limite la longueur du titre à 28 caractères
-//     }
-//     var mediaImage = mediaTitles[i].coverImage.extraLarge; // Obtenez l'URL de l'image du média
-
-//     var swiperSlide = document.createElement('div'); // Créez un élément div pour swiper-slide
-//     swiperSlide.classList.add('popularBlock--slider__card', 'swiper-slide');
-
-//     var imageElement = document.createElement('img'); // Créez un élément img pour l'image
-//     imageElement.src = mediaImage;
-//     imageElement.alt = '';
-
-//     var titleElement = document.createElement('p'); // Créez un élément p pour le titre romaji
-//     titleElement.textContent = mediaTitle;
-
-//     var slideText = document.createElement('div'); // Créez un élément div pour le conteneur de texte
-//     slideText.classList.add('titleOf');
-//     slideText.appendChild(titleElement);
-
-//     swiperSlide.appendChild(imageElement);
-//     swiperSlide.appendChild(slideText);
-//     swiperWrapper.appendChild(swiperSlide);
-//   }
-// }
+// Appel des fonctions pour récupérer les données des mangas et animes tendances
+getTrendingManga();
+getTrendingAnime();
 
 
 
@@ -429,6 +293,7 @@ var queryAnime = `
     }
   }
 `;
+
 
 var queryUpcomingAnime = `
   query ($page: Int) {
@@ -519,7 +384,7 @@ fetch(url, options)
                 });
               })
               .then(function (allTimePopularData) {
-                handleAllTimePopularData(allTimePopularData, 'alltimepopular');
+                handleAllTimePopularData(allTimePopularData, 'alltimepopularAll');
               });
           });
       });
@@ -528,6 +393,7 @@ fetch(url, options)
     alert('Erreur, consultez la console');
     console.error(error);
   });
+
 
 // SWIPER FUNCTION 
 function handleData(data, containerId) {

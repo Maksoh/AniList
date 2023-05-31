@@ -32,6 +32,8 @@ lastScrollPosition = currentScrollPosition;
 
 
 
+
+
 var queryAllTimePopular = `
   query ($page: Int) {
     Page(page: $page) {
@@ -82,7 +84,7 @@ var queryManga = `
 
 var queryAnime = `
   query ($page: Int) {
-    Page(page: $page) {
+    Page(page: $page,) {
       media(type: ANIME, sort: POPULARITY_DESC) {
         id
         title {
@@ -187,7 +189,7 @@ fetch(url, options)
                 });
               })
               .then(function (allTimePopularData) {
-                handleAllTimePopularData(allTimePopularData, 'alltimepopular');
+                handleData(allTimePopularData, 'alltimepopular');
               });
           });
       });
@@ -247,48 +249,43 @@ function handleData(data, containerId) {
 }
 
 
-function handleAllTimePopularData(data, containerId) {
-    console.log(data);
-    var mediaTitles = data.data.Page.media; // Obtenez les titres des médias à partir des données de réponse
-    var swiperWrapper = document.getElementById(containerId); // Sélectionnez le conteneur des éléments swiper
+// function handleAllTimePopularData(data, containerId) {
+//     console.log(data);
+//     var mediaTitles = data.data.Page.media; // Obtenez les titres des médias à partir des données de réponse
+//     var swiperWrapper = document.getElementById(containerId); // Sélectionnez le conteneur des éléments swiper
   
-    // if (!swiperWrapper) {
-    //   console.error('Le conteneur', containerId, 'n\'existe pas');
-    //   return;
-    // }
+//     // if (!swiperWrapper) {
+//     //   console.error('Le conteneur', containerId, 'n\'existe pas');
+//     //   return;
+//     // }
   
-    for (var i = 0; i < mediaTitles.length; i++) {
-      var mediaTitle = mediaTitles[i].title.english; // Obtenez le titre romaji du média correspondant
-      if (mediaTitle.length > 25) {
-        mediaTitle = mediaTitle.substring(0, 24) + '...'; // Limite la longueur du titre à 28 caractères
-      }
-      var mediaImage = mediaTitles[i].coverImage.extraLarge; // Obtenez l'URL de l'image du média
+//     for (var i = 0; i < mediaTitles.length; i++) {
+//       var mediaTitle = mediaTitles[i].title.english; // Obtenez le titre romaji du média correspondant
+//       if (mediaTitle.length > 25) {
+//         mediaTitle = mediaTitle.substring(0, 24) + '...'; // Limite la longueur du titre à 28 caractères
+//       }
+//       var mediaImage = mediaTitles[i].coverImage.extraLarge; // Obtenez l'URL de l'image du média
   
-      var swiperSlide = document.createElement('div'); // Créez un élément div pour swiper-slide
-      swiperSlide.classList.add('popularBlock--single__card', 'card');
-      swiperSlide.title = mediaTitles[i].title.english;
-      // swiperSlide.innerHTML = `
-      // // <img src="${mediaImage}" alt="cover">
-      // <p class="titleOf">${ mediaTitles[i].title.english}</p>
-      // `
-      // swiperWrapper.appendChild(swiperSlide);
-      var imageElement = document.createElement('img'); // Créez un élément img pour l'image
-      imageElement.src = mediaImage;
-      imageElement.alt = mediaTitle;
-      imageElement.title = mediaTitles[i].title.english; // Ajoute le titre complet en tant qu'attribut "title" de l'élément "img"
+//       var swiperSlide = document.createElement('div'); // Créez un élément div pour swiper-slide
+//       swiperSlide.classList.add('popularBlock--single__card', 'card');
+//       swiperSlide.title = mediaTitles[i].title.english;
+//       var imageElement = document.createElement('img'); // Créez un élément img pour l'image
+//       imageElement.src = mediaImage;
+//       imageElement.alt = mediaTitle;
+//       imageElement.title = mediaTitles[i].title.english; // Ajoute le titre complet en tant qu'attribut "title" de l'élément "img"
       
-      var titleElement = document.createElement('p'); // Créez un élément p pour le titre romaji
-      titleElement.textContent = mediaTitle;
+//       var titleElement = document.createElement('p'); // Créez un élément p pour le titre romaji
+//       titleElement.textContent = mediaTitle;
       
-      var slideText = document.createElement('div'); // Créez un élément div pour le conteneur de texte
-      slideText.classList.add('titleOf');
-      slideText.appendChild(titleElement);
+//       var slideText = document.createElement('div'); // Créez un élément div pour le conteneur de texte
+//       slideText.classList.add('titleOf');
+//       slideText.appendChild(titleElement);
       
-      swiperSlide.appendChild(imageElement);
-      swiperSlide.appendChild(slideText);
-      swiperWrapper.appendChild(swiperSlide);
-          // SCROLL REVEAL
-    ScrollReveal().reveal('.popularBlock--single__card', { duration: 800, easing:'ease-in', interval: 150});
+//       swiperSlide.appendChild(imageElement);
+//       swiperSlide.appendChild(slideText);
+//       swiperWrapper.appendChild(swiperSlide);
+//           // SCROLL REVEAL
+//     ScrollReveal().reveal('.popularBlock--single__card', { duration: 800, easing:'ease-in', interval: 150});
       
-    }
-  }
+//     }
+//   }
