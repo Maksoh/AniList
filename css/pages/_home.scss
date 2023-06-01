@@ -42,9 +42,31 @@
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
-        max-width: 280px;
+        transition: all 0.3s ease-in-out; /* Ajoute une transition fluide */
     }
 }
+.popularBlock--slider__card .titleOf{
+    max-width: 280px;
+    overflow: hidden;
+}
+
+.popularBlock--slider__card:hover p {
+    text-overflow: inherit;
+    overflow: visible;
+    animation: marquee 6s linear infinite;
+    width: max-content;
+  }
+  
+  @keyframes marquee {
+    0% {
+      transform: translateX(210px);
+
+    }
+    100% {
+      transform: translateX(-100%);
+
+    }
+  }
 
 // 1700 PXIEL MEDIA SCREEN SWIPER IMG
 @media screen and (max-width: 1700px) {
@@ -54,7 +76,7 @@
         max-width: 280px;
         min-width: 240px;
     }
-    .popularBlock--slider .titleOf p{
+    .popularBlock--slider .titleOf {
         max-width: 280px;
         min-width: 240px;
     }
@@ -68,7 +90,7 @@
         max-width: 220px;
         min-width: 220px;
     }
-    .popularBlock--slider .titleOf p{
+    .popularBlock--slider .titleOf {
         max-width: 220px;
         min-width: 220px;
     }
@@ -83,7 +105,7 @@
         max-width: 195px;
         min-width: 195px;
     }
-    .popularBlock--slider .titleOf p{
+    .popularBlock--slider .titleOf {
         max-width: 195px;
         min-width: 195px;
     }
@@ -106,7 +128,7 @@
         min-width: 160px;
         max-width: 160px;
     }
-    .popularBlock--slider .titleOf p{
+    .popularBlock--slider .titleOf {
         min-width: 160px;
         max-width: 160px;
     }

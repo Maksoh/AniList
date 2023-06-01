@@ -166,12 +166,13 @@ transition: .2s all ease-in-out;
     min-width: 165px;
 }
 .relationsBlockSwiper p{
-    max-width: 165px;
-    min-width: 165px;
+    // max-width: 165px;
+    // min-width: 165px;
     margin-bottom: 0 !important;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    transition: all 0.3s ease-in-out; /* Ajoute une transition fluide */
 }
 .relationsBlockSwiper {
     display: flex;
@@ -187,6 +188,30 @@ transition: .2s all ease-in-out;
     }
 }
 
+.relationsBlockSwiper .titleOf{
+    max-width: 165px;
+    overflow: hidden;
+}
+
+.relationsBlockSwiper .popularBlock--slider__card :hover p {
+    text-overflow: inherit;
+    overflow: visible;
+    animation: marquee 6s linear infinite;
+    width: max-content;
+  }
+  
+  @keyframes marquee {
+    0% {
+      transform: translateX(0%);
+
+    }
+    100% {
+      transform: translateX(-100%);
+
+    }
+  }
+
+
 // 1030 PXIEL MEDIA SCREEN 
 @media screen and (max-width:1030px) {
     .relationsBlockSwiper img{
@@ -195,7 +220,7 @@ transition: .2s all ease-in-out;
         max-width: 145px;
         min-width: 145px;
     }
-    .relationsBlockSwiper p{
+    .relationsBlockSwiper  .titleOf{
         max-width: 145px;
         min-width: 145px;
     }
@@ -209,7 +234,7 @@ transition: .2s all ease-in-out;
         max-width: 145px;
         min-width: 145px;
     }
-    .relationsBlockSwiper p{
+    .relationsBlockSwiper .titleOf{
         max-width: 145px;
         min-width: 145px;
     }
@@ -223,7 +248,7 @@ transition: .2s all ease-in-out;
         max-width: 120px;
         min-width: 120px;
     }
-    .relationsBlockSwiper p{
+    .relationsBlockSwiper .titleOf{
         max-width: 120px;
         min-width: 120px;
     }
@@ -237,7 +262,7 @@ transition: .2s all ease-in-out;
         max-width: 145px;
         min-width: 145px;
     }
-    .relationsBlockSwiper p{
+    .relationsBlockSwiper .titleOf{
         max-width: 145px;
         min-width: 145px;
     }

@@ -43,6 +43,9 @@ var swiper = new Swiper(".popularBlock--slider", {
 });
 
 
+// TITLE EFFECT 
+
+
 
 // NAV SCROLL 
 var navigation = document.querySelector('.navigation');
@@ -170,7 +173,6 @@ function displayTrendingAnime(results) {
 
   for (const result of results) {
     const mediaTitle = result.title.english || result.title.romaji || result.title.native;
-    const truncatedTitle = mediaTitle.length > 25 ? mediaTitle.slice(0, 25) + '...' : mediaTitle;
     const mediaImage = result.coverImage.extraLarge;
 
     const swiperSlide = document.createElement('div');
@@ -183,7 +185,7 @@ function displayTrendingAnime(results) {
     imageElement.title = mediaTitle;
 
     const titleElement = document.createElement('p');
-    titleElement.textContent = truncatedTitle;
+    titleElement.textContent = mediaTitle;
 
     const slideText = document.createElement('div');
     slideText.classList.add('titleOf');

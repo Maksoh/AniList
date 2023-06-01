@@ -7,6 +7,10 @@ body{
     font-family: 'Roboto Flex', sans-serif;
 }
 
+img{
+    cursor: pointer;
+}
+
 ::-webkit-scrollbar{
     height: 8px;
     width: 8px;
@@ -120,6 +124,12 @@ h2{
     font-weight: 600;
     color: var(--white);;
     // text-align: center;
+    transition: .4s all ease-in-out;
+    cursor: pointer;
+}
+
+.titleOf:hover{
+    color: var(--mainColor);
 }
 
 .popularBlock a{

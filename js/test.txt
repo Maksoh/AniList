@@ -1,155 +1,117 @@
-//!\\variables pour changer de page, attendre l'eenement au scroll ??//!\\
---------------------------------------------------------------------------
-var variables = {
-  page: 1 // Page number, adjust as needed
-};
-
-var url = 'https://graphql.anilist.co';
-var options = {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json',
-  },
-  body: JSON.stringify({
-    query: queryManga,
-    variables: variables
-  })
-};
-
-fetch(url, options)
-  .then(function (response) {
-    return response.json().then(function (json) {
-      return response.ok ? json : Promise.reject(json);
-    });
-  })
-  .then(function (mangaData) {
-    handleData(mangaData, 'popularmangaAll');
-
-    // Fetch anime data
-    options.body = JSON.stringify({
-      query: queryAnime,
-      variables: variables
-    });
-
-    return fetch(url, options)
-      .then(function (response) {
-        return response.json().then(function (json) {
-          return response.ok ? json : Promise.reject(json);
-        });
-      })
-      .then(function (animeData) {
-        handleData(animeData, 'popularanimeAll');
-
-        // Fetch upcoming anime data
-        options.body = JSON.stringify({
-          query: queryUpcomingAnime,
-          variables: variables
-        });
-
-        return fetch(url, options)
-          .then(function (response) {
-            return response.json().then(function (json) {
-              return response.ok ? json : Promise.reject(json);
-            });
-          })
-          .then(function (upcomingAnimeData) {
-            handleData(upcomingAnimeData, 'upcominganimeAll');
-
-            // Fetch all-time popular anime data
-            options.body = JSON.stringify({
-              query: queryAllTimePopular,
-              variables: variables
-            });
-
-            return fetch(url, options)
-              .then(function (response) {
-                return response.json().then(function (json) {
-                  return response.ok ? json : Promise.reject(json);
-                });
-              })
-              .then(function (allTimePopularData) {
-                handleAllTimePopularData(allTimePopularData, 'alltimepopular');
-              });
-          });
-      });
-  })
-  .catch(function (error) {
-    alert('Erreur, consultez la console');
-    console.error(error);
-  });
-
-// SWIPER FUNCTION 
-function handleData(data, containerId) {
-  console.log(data);
-  var mediaTitles = data.data.Page.media; // Obtenez les titres des médias à partir des données de réponse
-  var swiperWrapper = document.getElementById(containerId); // Sélectionnez le conteneur des éléments swiper
-
-  if (!swiperWrapper) {
-    console.error('Le conteneur', containerId, 'n\'existe pas');
-    return;
-  }
-
-  for (var i = 0; i < mediaTitles.length; i++) {
-    var mediaTitle = mediaTitles[i].title.english; // Obtenez le titre romaji du média correspondant
-    if (mediaTitle.length > 25) {
-      mediaTitle = mediaTitle.substring(0, 24) + '...'; // Limite la longueur du titre à 28 caractères
-    }
-    var mediaImage = mediaTitles[i].coverImage.extraLarge; // Obtenez l'URL de l'image du média
-
-    var swiperSlide = document.createElement('div'); // Créez un élément div pour swiper-slide
-    swiperSlide.classList.add('popularBlock--single__card', 'card');
-    swiperSlide.title = mediaTitles[i].title.english;
-    // swiperSlide.innerHTML = `
-    // // <img src="${mediaImage}" alt="cover">
-    // <p class="titleOf">${ mediaTitles[i].title.english}</p>
-    // `
-    // swiperWrapper.appendChild(swiperSlide);
-    var imageElement = document.createElement('img'); // Créez un élément img pour l'image
-    imageElement.src = mediaImage;
-    imageElement.alt = mediaTitle;
-    imageElement.title = mediaTitles[i].title.english; // Ajoute le titre complet en tant qu'attribut "title" de l'élément "img"
-
-    var titleElement = document.createElement('p'); // Créez un élément p pour le titre romaji
-    titleElement.textContent = mediaTitle;
-
-    var slideText = document.createElement('div'); // Créez un élément div pour le conteneur de texte
-    slideText.classList.add('titleOf');
-    slideText.appendChild(titleElement);
-
-    swiperSlide.appendChild(imageElement);
-    swiperSlide.appendChild(slideText);
-    swiperWrapper.appendChild(swiperSlide);
-  }
-}
-
-// Changer la valeur de la variable "page"
-function changePage(page) {
-  variables.page = page;
-
-  // Fetch manga data
-  options.body = JSON.stringify({
-    query: queryManga,
-    variables: variables
-  });
-
-  fetch(url, options)
-    .then(function (response) {
-      return response.json().then(function (json) {
-        return response.ok ? json : Promise.reject(json);
-      });
-    })
-    .then(function (mangaData) {
-      handleData(mangaData, 'popularmangaAll');
-    })
-    .catch(function (error) {
-      alert('Erreur, consultez la console');
-      console.error(error);
-    });
-}
-
-// Exemple d'utilisation : changer la page à 2
-changePage(2);
-
-//!\\variables pour changer de page, attendre l'eenement au scroll ??//!\\
---------------------------------------------------------------------------
+ const query = `
+      query {
+        Media(id: 31706, type: MANGA) {
+          id
+          title {
+            romaji
+            english
+            native
+          }
+          coverImage {
+            extraLarge
+          }
+          description
+          startDate {
+            year
+            month
+            day
+          }
+          endDate {
+            year
+            month
+            day
+          }
+          status
+          format
+          episodes
+          chapters
+          volumes
+          averageScore
+          genres
+          tags {
+            name
+            description
+          }
+          staff {
+            edges {
+              role
+              node {
+                id
+                name {
+                  full
+                  native
+                }
+                languageV2
+                image {
+                  large
+                }
+              }
+            }
+          }
+          characters {
+            edges {
+              role
+              node {
+                id
+                name {
+                  full
+                  native
+                }
+                image {
+                  medium
+                }
+              }
+            }
+          }
+          reviews {
+            edges {
+              node {
+                id
+                rating
+                summary
+                body
+                user {
+                  id
+                  name
+                }
+              }
+            }
+          }
+          recommendations {
+            edges {
+              node {
+                mediaRecommendation {
+                  id
+                  title {
+                    romaji
+                    english
+                    native
+                  }
+                  coverImage {
+                    extraLarge
+                  }
+                }
+                rating
+                userRating
+              }
+            }
+          }
+          relations {
+            edges {
+              relationType
+              node {
+                id
+                title {
+                  romaji
+                  english
+                  native
+                }
+                coverImage {
+                  extraLarge
+                }
+              }
+            }
+          }
+        }
+      }
+    `;

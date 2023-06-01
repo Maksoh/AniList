@@ -40,14 +40,37 @@
     box-sizing: border-box;
 }
 
+.popularBlock--single__card .titleOf{
+    overflow: hidden;
+    min-width: 230px;
+    max-width: 240px;
+}
 .popularBlock--single__card p{
     margin-bottom: 0 !important;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    min-width: 230px;
-    max-width: 240px;
+    transition: all 0.3s ease-in-out; /* Ajoute une transition fluide */
 }
+.popularBlock--single__card:hover p {
+    text-overflow: inherit;
+    overflow: visible;
+    animation: marquee 6s linear infinite;
+    width: max-content;
+  }
+  
+  @keyframes marquee {
+    0% {
+      transform: translateX(0%);
+
+    }
+    100% {
+      transform: translateX(-100%);
+
+    }
+  }
+
+
 
 .infoItemQuery{
     
@@ -78,7 +101,7 @@
         min-height: 280px;
         max-height: 290px;
     }
-    .popularBlock--single__card p{
+    .popularBlock--single__card .titleOf{
         max-width: 190px;
         min-width: 180px;
     }
@@ -97,7 +120,7 @@
         min-height: 280px;
         max-height: 290px;
     }
-    .popularBlock--single__card p{
+    .popularBlock--single__card  .titleOf{
         max-width: 190px;
         min-width: 180px;
     }
@@ -118,7 +141,7 @@
         min-height: 280px;
         max-height: 290px;
     }
-    .popularBlock--single__card p{
+    .popularBlock--single__card .titleOf{
         max-width: 190px;
         min-width: 180px;
     }
@@ -167,7 +190,7 @@
         max-height: 200px;
 
     }
-    .popularBlock--single__card p{
+    .popularBlock--single__card .titleOf{
         max-width: 140px;
         min-width: 130px;
     }
