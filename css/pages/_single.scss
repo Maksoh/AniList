@@ -40,6 +40,15 @@
     box-sizing: border-box;
 }
 
+.popularBlock--single__card p{
+    margin-bottom: 0 !important;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    min-width: 230px;
+    max-width: 240px;
+}
+
 .infoItemQuery{
     
     p{
@@ -69,6 +78,10 @@
         min-height: 280px;
         max-height: 290px;
     }
+    .popularBlock--single__card p{
+        max-width: 190px;
+        min-width: 180px;
+    }
 
 }
 // 1200 PXIEL MEDIA SCREEN 
@@ -83,6 +96,10 @@
         min-width: 180px;
         min-height: 280px;
         max-height: 290px;
+    }
+    .popularBlock--single__card p{
+        max-width: 190px;
+        min-width: 180px;
     }
 
 }
@@ -100,6 +117,10 @@
         min-width: 180px;
         min-height: 280px;
         max-height: 290px;
+    }
+    .popularBlock--single__card p{
+        max-width: 190px;
+        min-width: 180px;
     }
 
 }
@@ -145,6 +166,10 @@
         min-height: 210px;
         max-height: 200px;
 
+    }
+    .popularBlock--single__card p{
+        max-width: 140px;
+        min-width: 130px;
     }
 
 

@@ -170,6 +170,7 @@ function displayTrendingAnime(results) {
 
   for (const result of results) {
     const mediaTitle = result.title.english || result.title.romaji || result.title.native;
+    const truncatedTitle = mediaTitle.length > 25 ? mediaTitle.slice(0, 25) + '...' : mediaTitle;
     const mediaImage = result.coverImage.extraLarge;
 
     const swiperSlide = document.createElement('div');
@@ -182,7 +183,7 @@ function displayTrendingAnime(results) {
     imageElement.title = mediaTitle;
 
     const titleElement = document.createElement('p');
-    titleElement.textContent = mediaTitle;
+    titleElement.textContent = truncatedTitle;
 
     const slideText = document.createElement('div');
     slideText.classList.add('titleOf');
@@ -191,9 +192,9 @@ function displayTrendingAnime(results) {
     swiperSlide.appendChild(imageElement);
     swiperSlide.appendChild(slideText);
     swiperWrapper.appendChild(swiperSlide);
-    
   }
 }
+
 
 // Fonction générique pour effectuer une requête GraphQL
 async function fetchData(query, variables) {
@@ -408,9 +409,6 @@ function handleData(data, containerId) {
 
   for (var i = 0; i < mediaTitles.length; i++) {
     var mediaTitle = mediaTitles[i].title.english; // Obtenez le titre romaji du média correspondant
-    if (mediaTitle.length > 25) {
-      mediaTitle = mediaTitle.substring(0, 24) + '...'; // Limite la longueur du titre à 28 caractères
-    }
     var mediaImage = mediaTitles[i].coverImage.extraLarge; // Obtenez l'URL de l'image du média
 
     var swiperSlide = document.createElement('div'); // Créez un élément div pour swiper-slide

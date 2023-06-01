@@ -169,6 +169,9 @@ transition: .2s all ease-in-out;
     max-width: 165px;
     min-width: 165px;
     margin-bottom: 0 !important;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 .relationsBlockSwiper {
     display: flex;

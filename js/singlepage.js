@@ -1,11 +1,11 @@
 // SWIPER JS 
 
-var swiper = new Swiper(".popularBlock--slider", {
-  slidesPerView: 6,
-  spaceBetween: 20,
-  freeMode: true,
+// var swiper = new Swiper(".relationsBlockSwiper", {
+//   slidesPerView: 6,
+//   spaceBetween: 20,
+//   freeMode: true,
 
-});
+// });
 
 // NAV SCROLL 
 var navigation = document.querySelector('.navigation');
