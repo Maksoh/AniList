@@ -20,7 +20,7 @@ document.getElementById('search-wrapper').style.border="1px solid rgba(0, 0, 0, 
 
 
 // Récupérer les éléments <a> dans la div
-const searchButtons = document.querySelectorAll('.searchBlock--txt__icons a');
+const searchButtons = document.querySelectorAll('.searchBlock--txt__icons a i');
 
 // Fonction pour gérer le clic et le survol sur un lien
 function handleInteraction(event) {

@@ -69,6 +69,273 @@ window.addEventListener('scroll', function() {
 
 // API -----
 
+// Fonction pour récupérer les animes au format "Movie"
+async function getMovieAnime() {
+  const queryMovieAnime = `
+    query ($page: Int, $perPage: Int) {
+      Page(page: $page, perPage: $perPage) {
+        media(type: ANIME, format: MOVIE, sort: POPULARITY_DESC) {
+          id
+          title {
+            romaji
+            english
+            native
+          }
+          coverImage {
+            extraLarge
+          }
+        }
+      }
+    }
+  `;
+
+  const variables = {
+    page: 1,
+    perPage: 18,
+  };
+
+  try {
+    const data = await fetchData(queryMovieAnime, variables);
+    const movieAnime = data.data.Page.media;
+    displayMovieAnime(movieAnime);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// Fonction spécifique pour afficher les animes au format "Movie"
+function displayMovieAnime(results) {
+  const swiperWrapper = document.getElementById('movieAnime');
+
+  for (const result of results) {
+    const mediaTitle = result.title.english || result.title.romaji || result.title.native;
+    const mediaImage = result.coverImage.extraLarge;
+
+    const swiperSlide = document.createElement('div');
+    swiperSlide.classList.add('popularBlock--slider__card', 'swiper-slide', 'card');
+    swiperSlide.title = mediaTitle;
+
+    const imageElement = document.createElement('img');
+    imageElement.src = mediaImage;
+    imageElement.alt = mediaTitle;
+    imageElement.title = mediaTitle;
+
+    const titleElement = document.createElement('p');
+    titleElement.textContent = mediaTitle;
+
+    const slideText = document.createElement('div');
+    slideText.classList.add('titleOf');
+    slideText.appendChild(titleElement);
+
+    swiperSlide.appendChild(imageElement);
+    swiperSlide.appendChild(slideText);
+    swiperWrapper.appendChild(swiperSlide);
+  }
+}
+
+// Appel de la fonction pour récupérer les animes au format "Movie"
+getMovieAnime();
+
+
+// Fonction pour récupérer les mangas au format One-Shot
+async function getOneShotManga() {
+  const queryOneShotManga = `
+    query ($page: Int, $perPage: Int) {
+      Page(page: $page, perPage: $perPage) {
+        media(type: MANGA, format: ONE_SHOT, sort: POPULARITY_DESC) {
+          id
+          title {
+            romaji
+            english
+            native
+          }
+          coverImage {
+            extraLarge
+          }
+        }
+      }
+    }
+  `;
+
+  const variables = {
+    page: 1,
+    perPage: 18,
+  };
+
+  try {
+    const data = await fetchData(queryOneShotManga, variables);
+    const oneShotManga = data.data.Page.media;
+    displayOneShotManga(oneShotManga);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// Fonction spécifique pour afficher les mangas au format One-Shot
+function displayOneShotManga(results) {
+  const swiperWrapper = document.getElementById('oneShotManga');
+
+  for (const result of results) {
+    const mediaTitle = result.title.english || result.title.romaji || result.title.native;
+    const mediaImage = result.coverImage.extraLarge;
+
+    const swiperSlide = document.createElement('div');
+    swiperSlide.classList.add('popularBlock--slider__card', 'swiper-slide', 'card');
+    swiperSlide.title = mediaTitle;
+
+    const imageElement = document.createElement('img');
+    imageElement.src = mediaImage;
+    imageElement.alt = mediaTitle;
+    imageElement.title = mediaTitle;
+
+    const titleElement = document.createElement('p');
+    titleElement.textContent = mediaTitle;
+
+    const slideText = document.createElement('div');
+    slideText.classList.add('titleOf');
+    slideText.appendChild(titleElement);
+
+    swiperSlide.appendChild(imageElement);
+    swiperSlide.appendChild(slideText);
+    swiperWrapper.appendChild(swiperSlide);
+  }
+}
+
+
+
+
+// Fonction pour récupérer les données des mangas populaires de genre "Ecchi"
+async function getPopularEcchiManga() {
+  const queryPopularEcchiManga = `
+    query ($page: Int) {
+      Page(page: $page, perPage: 18) {
+        media(type: MANGA, sort: POPULARITY_DESC, genre: "Ecchi") {
+          id
+          title {
+            romaji
+            english
+            native
+          }
+          coverImage {
+            extraLarge
+          }
+          chapters
+          volumes
+        }
+      }
+    }
+  `;
+
+  const variables = {
+    page: 1,
+  };
+
+  try {
+    const data = await fetchData(queryPopularEcchiManga, variables);
+    const popularEcchiManga = data.data.Page.media;
+    displayPopularEcchiManga(popularEcchiManga);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// Fonction spécifique pour afficher les résultats des mangas populaires de genre "Ecchi"
+function displayPopularEcchiManga(results) {
+  const swiperWrapper = document.getElementById('popularEcchiManga');
+
+  for (const result of results) {
+    const mediaTitle = result.title.english || result.title.romaji || result.title.native;
+    const mediaImage = result.coverImage.extraLarge;
+
+    const swiperSlide = document.createElement('div');
+    swiperSlide.classList.add('popularBlock--slider__card', 'swiper-slide', 'card');
+    swiperSlide.title = mediaTitle;
+
+    const imageElement = document.createElement('img');
+    imageElement.src = mediaImage;
+    imageElement.alt = mediaTitle;
+    imageElement.title = mediaTitle;
+
+    const titleElement = document.createElement('p');
+    titleElement.textContent = mediaTitle;
+
+    const slideText = document.createElement('div');
+    slideText.classList.add('titleOf');
+    slideText.appendChild(titleElement);
+
+    swiperSlide.appendChild(imageElement);
+    swiperSlide.appendChild(slideText);
+    swiperWrapper.appendChild(swiperSlide);
+  }
+}
+
+// Fonction pour récupérer les données des mangas d'origine sud-coréenne
+async function getKoreanManga() {
+  const queryKoreanManga = `
+    query ($page: Int) {
+      Page(page: $page, perPage: 18) {
+        media(type: MANGA, sort: POPULARITY_DESC, countryOfOrigin: "KR") {
+          id
+          title {
+            romaji
+            english
+            native
+          }
+          coverImage {
+            extraLarge
+          }
+          chapters
+          volumes
+        }
+      }
+    }
+  `;
+
+  const variables = {
+    page: 1,
+  };
+
+  try {
+    const data = await fetchData(queryKoreanManga, variables);
+    const koreanManga = data.data.Page.media;
+    displayKoreanManga(koreanManga);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// Fonction spécifique pour afficher les résultats des mangas d'origine sud-coréenne
+function displayKoreanManga(results) {
+  const swiperWrapper = document.getElementById('koreanManga');
+
+  for (const result of results) {
+    const mediaTitle = result.title.english || result.title.romaji || result.title.native;
+    const mediaImage = result.coverImage.extraLarge;
+
+    const swiperSlide = document.createElement('div');
+    swiperSlide.classList.add('popularBlock--slider__card', 'swiper-slide', 'card');
+    swiperSlide.title = mediaTitle;
+
+    const imageElement = document.createElement('img');
+    imageElement.src = mediaImage;
+    imageElement.alt = mediaTitle;
+    imageElement.title = mediaTitle;
+
+    const titleElement = document.createElement('p');
+    titleElement.textContent = mediaTitle;
+
+    const slideText = document.createElement('div');
+    slideText.classList.add('titleOf');
+    slideText.appendChild(titleElement);
+
+    swiperSlide.appendChild(imageElement);
+    swiperSlide.appendChild(slideText);
+    swiperWrapper.appendChild(swiperSlide);
+  }
+}
+
+
+
 // Fonction pour récupérer les données des mangas tendances
 async function getTrendingManga() {
   const queryTrendingManga = `
@@ -106,7 +373,7 @@ async function getTrendingManga() {
 
 // Fonction spécifique pour afficher les résultats des mangas tendances
 function displayTrendingManga(results) {
-  const swiperWrapper = document.getElementById('trendingMangaAll');
+  const swiperWrapper = document.getElementById('trendingManga');
 
   for (const result of results) {
     const mediaTitle = result.title.english || result.title.romaji || result.title.native;
@@ -169,7 +436,73 @@ async function getTrendingAnime() {
 
 // Fonction spécifique pour afficher les résultats des animes tendances
 function displayTrendingAnime(results) {
-  const swiperWrapper = document.getElementById('trendingAnimeAll');
+  const swiperWrapper = document.getElementById('trendingAnime');
+
+  for (const result of results) {
+    const mediaTitle = result.title.english || result.title.romaji || result.title.native;
+    const mediaImage = result.coverImage.extraLarge;
+
+    const swiperSlide = document.createElement('div');
+    swiperSlide.classList.add('popularBlock--slider__card', 'swiper-slide', 'card');
+    swiperSlide.title = mediaTitle;
+
+    const imageElement = document.createElement('img');
+    imageElement.src = mediaImage;
+    imageElement.alt = mediaTitle;
+    imageElement.title = mediaTitle;
+
+    const titleElement = document.createElement('p');
+    titleElement.textContent = mediaTitle;
+
+    const slideText = document.createElement('div');
+    slideText.classList.add('titleOf');
+    slideText.appendChild(titleElement);
+
+    swiperSlide.appendChild(imageElement);
+    swiperSlide.appendChild(slideText);
+    swiperWrapper.appendChild(swiperSlide);
+  }
+}
+
+// Fonction pour récupérer les données des manwha tendances
+async function getTrendingMusic() {
+  const queryTrendingMusic = `
+    query ($page: Int) {
+      Page(page: $page, perPage: 18) {
+        media(type: MANGA, sort: POPULARITY_DESC, genre: "music") {
+          id
+          title {
+            romaji
+            english
+            native
+          }
+          coverImage {
+            extraLarge
+          }
+          chapters
+          volumes
+        }
+      }
+    }
+  `;
+
+  const variables = {
+    page: 1,
+  };
+
+  try {
+    const data = await fetchData(queryTrendingMusic, variables);
+    const trendingMusic = data.data.Page.media;
+    displayTrendingMusic(trendingMusic);
+    console.log(data)
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// Fonction spécifique pour afficher les résultats des manwha tendances
+function displayTrendingMusic(results) {
+  const swiperWrapper = document.getElementById('trendingMusic');
 
   for (const result of results) {
     const mediaTitle = result.title.english || result.title.romaji || result.title.native;
@@ -223,9 +556,19 @@ async function fetchData(query, variables) {
   }
 }
 
-// Appel des fonctions pour récupérer les données des mangas et animes tendances
+// Appel des fonctions pour récupérer les données des mangas, animes et manwha tendances
 getTrendingManga();
 getTrendingAnime();
+getTrendingMusic();
+// Appel de la fonction pour récupérer les mangas au format One-Shot
+getOneShotManga();
+// Appel de la fonction pour récupérer les données des mangas d'origine sud-coréenne
+getKoreanManga();
+// Appel de la fonction pour récupérer les données des mangas populaires de genre "Ecchi"
+getPopularEcchiManga();
+// Appel de la fonction pour récupérer les animes au format "Movie"
+getMovieAnime();
+
 
 
 
