@@ -110,10 +110,15 @@ function displayMovieAnime(results) {
   for (const result of results) {
     const mediaTitle = result.title.english || result.title.romaji || result.title.native;
     const mediaImage = result.coverImage.extraLarge;
+    const mediaId = result.id;
 
     const swiperSlide = document.createElement('div');
     swiperSlide.classList.add('popularBlock--slider__card', 'swiper-slide', 'card');
     swiperSlide.title = mediaTitle;
+    swiperSlide.dataset.mediaId = mediaId;
+
+    const linkElement = document.createElement('a');
+    linkElement.href = 'singleid.html?id=' + mediaId; // URL with the ID as a parameter
 
     const imageElement = document.createElement('img');
     imageElement.src = mediaImage;
@@ -127,10 +132,19 @@ function displayMovieAnime(results) {
     slideText.classList.add('titleOf');
     slideText.appendChild(titleElement);
 
-    swiperSlide.appendChild(imageElement);
-    swiperSlide.appendChild(slideText);
+    linkElement.appendChild(imageElement);
+    linkElement.appendChild(slideText);
+    swiperSlide.appendChild(linkElement);
     swiperWrapper.appendChild(swiperSlide);
   }
+  swiperWrapper.addEventListener('click', function(event) {
+    const clickedElement = event.target.closest('.swiper-slide');
+    if (clickedElement) {
+      const mediaId = clickedElement.dataset.mediaId;
+      console.log(mediaId);
+      // Do something with the mediaId
+    }
+  });
 }
 
 // Appel de la fonction pour récupérer les animes au format "Movie"
@@ -178,10 +192,15 @@ function displayOneShotManga(results) {
   for (const result of results) {
     const mediaTitle = result.title.english || result.title.romaji || result.title.native;
     const mediaImage = result.coverImage.extraLarge;
+    const mediaId = result.id;
 
     const swiperSlide = document.createElement('div');
     swiperSlide.classList.add('popularBlock--slider__card', 'swiper-slide', 'card');
     swiperSlide.title = mediaTitle;
+    swiperSlide.dataset.mediaId = mediaId;
+
+    const linkElement = document.createElement('a');
+    linkElement.href = 'singleid.html?id=' + mediaId; // URL with the ID as a parameter
 
     const imageElement = document.createElement('img');
     imageElement.src = mediaImage;
@@ -195,10 +214,19 @@ function displayOneShotManga(results) {
     slideText.classList.add('titleOf');
     slideText.appendChild(titleElement);
 
-    swiperSlide.appendChild(imageElement);
-    swiperSlide.appendChild(slideText);
+    linkElement.appendChild(imageElement);
+    linkElement.appendChild(slideText);
+    swiperSlide.appendChild(linkElement);
     swiperWrapper.appendChild(swiperSlide);
   }
+  swiperWrapper.addEventListener('click', function(event) {
+    const clickedElement = event.target.closest('.swiper-slide');
+    if (clickedElement) {
+      const mediaId = clickedElement.dataset.mediaId;
+      console.log(mediaId);
+      // Do something with the mediaId
+    }
+  });
 }
 
 
@@ -246,10 +274,15 @@ function displayPopularEcchiManga(results) {
   for (const result of results) {
     const mediaTitle = result.title.english || result.title.romaji || result.title.native;
     const mediaImage = result.coverImage.extraLarge;
+    const mediaId = result.id;
 
     const swiperSlide = document.createElement('div');
     swiperSlide.classList.add('popularBlock--slider__card', 'swiper-slide', 'card');
     swiperSlide.title = mediaTitle;
+    swiperSlide.dataset.mediaId = mediaId;
+
+    const linkElement = document.createElement('a');
+    linkElement.href = 'singleid.html?id=' + mediaId; // URL with the ID as a parameter
 
     const imageElement = document.createElement('img');
     imageElement.src = mediaImage;
@@ -263,10 +296,20 @@ function displayPopularEcchiManga(results) {
     slideText.classList.add('titleOf');
     slideText.appendChild(titleElement);
 
-    swiperSlide.appendChild(imageElement);
-    swiperSlide.appendChild(slideText);
+    linkElement.appendChild(imageElement);
+    linkElement.appendChild(slideText);
+    swiperSlide.appendChild(linkElement);
     swiperWrapper.appendChild(swiperSlide);
   }
+  swiperWrapper.addEventListener('click', function(event) {
+    const clickedElement = event.target.closest('.swiper-slide');
+    if (clickedElement) {
+      const mediaId = clickedElement.dataset.mediaId;
+      console.log(mediaId);
+      // Do something with the mediaId
+    }
+  });
+  
 }
 
 // Fonction pour récupérer les données des mangas d'origine sud-coréenne
@@ -311,10 +354,15 @@ function displayKoreanManga(results) {
   for (const result of results) {
     const mediaTitle = result.title.english || result.title.romaji || result.title.native;
     const mediaImage = result.coverImage.extraLarge;
+    const mediaId = result.id;
 
     const swiperSlide = document.createElement('div');
     swiperSlide.classList.add('popularBlock--slider__card', 'swiper-slide', 'card');
     swiperSlide.title = mediaTitle;
+    swiperSlide.dataset.mediaId = mediaId;
+
+    const linkElement = document.createElement('a');
+    linkElement.href = 'singleid.html?id=' + mediaId; // URL with the ID as a parameter
 
     const imageElement = document.createElement('img');
     imageElement.src = mediaImage;
@@ -328,10 +376,19 @@ function displayKoreanManga(results) {
     slideText.classList.add('titleOf');
     slideText.appendChild(titleElement);
 
-    swiperSlide.appendChild(imageElement);
-    swiperSlide.appendChild(slideText);
+    linkElement.appendChild(imageElement);
+    linkElement.appendChild(slideText);
+    swiperSlide.appendChild(linkElement);
     swiperWrapper.appendChild(swiperSlide);
   }
+  swiperWrapper.addEventListener('click', function(event) {
+    const clickedElement = event.target.closest('.swiper-slide');
+    if (clickedElement) {
+      const mediaId = clickedElement.dataset.mediaId;
+      console.log(mediaId);
+      // Do something with the mediaId
+    }
+  });
 }
 
 
@@ -378,10 +435,15 @@ function displayTrendingManga(results) {
   for (const result of results) {
     const mediaTitle = result.title.english || result.title.romaji || result.title.native;
     const mediaImage = result.coverImage.extraLarge;
+    const mediaId = result.id;
 
     const swiperSlide = document.createElement('div');
     swiperSlide.classList.add('popularBlock--slider__card', 'swiper-slide', 'card');
     swiperSlide.title = mediaTitle;
+    swiperSlide.dataset.mediaId = mediaId;
+
+    const linkElement = document.createElement('a');
+    linkElement.href = 'singleid.html?id=' + mediaId; // URL with the ID as a parameter
 
     const imageElement = document.createElement('img');
     imageElement.src = mediaImage;
@@ -395,10 +457,19 @@ function displayTrendingManga(results) {
     slideText.classList.add('titleOf');
     slideText.appendChild(titleElement);
 
-    swiperSlide.appendChild(imageElement);
-    swiperSlide.appendChild(slideText);
+    linkElement.appendChild(imageElement);
+    linkElement.appendChild(slideText);
+    swiperSlide.appendChild(linkElement);
     swiperWrapper.appendChild(swiperSlide);
   }
+  swiperWrapper.addEventListener('click', function(event) {
+    const clickedElement = event.target.closest('.swiper-slide');
+    if (clickedElement) {
+      const mediaId = clickedElement.dataset.mediaId;
+      console.log(mediaId);
+      // Do something with the mediaId
+    }
+  });
 }
 
 // Fonction pour récupérer les données des animes tendances
@@ -441,10 +512,15 @@ function displayTrendingAnime(results) {
   for (const result of results) {
     const mediaTitle = result.title.english || result.title.romaji || result.title.native;
     const mediaImage = result.coverImage.extraLarge;
+    const mediaId = result.id;
 
     const swiperSlide = document.createElement('div');
     swiperSlide.classList.add('popularBlock--slider__card', 'swiper-slide', 'card');
     swiperSlide.title = mediaTitle;
+    swiperSlide.dataset.mediaId = mediaId;
+
+    const linkElement = document.createElement('a');
+    linkElement.href = 'singleid.html?id=' + mediaId; // URL with the ID as a parameter
 
     const imageElement = document.createElement('img');
     imageElement.src = mediaImage;
@@ -458,10 +534,19 @@ function displayTrendingAnime(results) {
     slideText.classList.add('titleOf');
     slideText.appendChild(titleElement);
 
-    swiperSlide.appendChild(imageElement);
-    swiperSlide.appendChild(slideText);
+    linkElement.appendChild(imageElement);
+    linkElement.appendChild(slideText);
+    swiperSlide.appendChild(linkElement);
     swiperWrapper.appendChild(swiperSlide);
   }
+  swiperWrapper.addEventListener('click', function(event) {
+    const clickedElement = event.target.closest('.swiper-slide');
+    if (clickedElement) {
+      const mediaId = clickedElement.dataset.mediaId;
+      console.log(mediaId);
+      // Do something with the mediaId
+    }
+  });
 }
 
 // Fonction pour récupérer les données des manwha tendances
@@ -507,10 +592,15 @@ function displayTrendingMusic(results) {
   for (const result of results) {
     const mediaTitle = result.title.english || result.title.romaji || result.title.native;
     const mediaImage = result.coverImage.extraLarge;
+    const mediaId = result.id;
 
     const swiperSlide = document.createElement('div');
     swiperSlide.classList.add('popularBlock--slider__card', 'swiper-slide', 'card');
     swiperSlide.title = mediaTitle;
+    swiperSlide.dataset.mediaId = mediaId;
+
+    const linkElement = document.createElement('a');
+    linkElement.href = 'singleid.html?id=' + mediaId; // URL with the ID as a parameter
 
     const imageElement = document.createElement('img');
     imageElement.src = mediaImage;
@@ -524,10 +614,19 @@ function displayTrendingMusic(results) {
     slideText.classList.add('titleOf');
     slideText.appendChild(titleElement);
 
-    swiperSlide.appendChild(imageElement);
-    swiperSlide.appendChild(slideText);
+    linkElement.appendChild(imageElement);
+    linkElement.appendChild(slideText);
+    swiperSlide.appendChild(linkElement);
     swiperWrapper.appendChild(swiperSlide);
   }
+  swiperWrapper.addEventListener('click', function(event) {
+    const clickedElement = event.target.closest('.swiper-slide');
+    if (clickedElement) {
+      const mediaId = clickedElement.dataset.mediaId;
+      console.log(mediaId);
+      // Do something with the mediaId
+    }
+  });
 }
 
 
@@ -755,10 +854,12 @@ function handleData(data, containerId) {
   for (var i = 0; i < mediaTitles.length; i++) {
     var mediaTitle = mediaTitles[i].title.english; // Obtenez le titre romaji du média correspondant
     var mediaImage = mediaTitles[i].coverImage.extraLarge; // Obtenez l'URL de l'image du média
+    const mediaId = result.id;
 
     var swiperSlide = document.createElement('div'); // Créez un élément div pour swiper-slide
     swiperSlide.classList.add('popularBlock--slider__card', 'swiper-slide', 'card');
     swiperSlide.title = mediaTitles[i].title.english;
+    swiperSlide.dataset.mediaId = mediaId;
     // swiperSlide.innerHTML = `
     // // <img src="${mediaImage}" alt="cover">
     // <p class="titleOf">${ mediaTitles[i].title.english}</p>
@@ -780,6 +881,14 @@ function handleData(data, containerId) {
     swiperSlide.appendChild(slideText);
     swiperWrapper.appendChild(swiperSlide);
   }
+  swiperWrapper.addEventListener('click', function(event) {
+    const clickedElement = event.target.closest('.swiper-slide');
+    if (clickedElement) {
+      const mediaId = clickedElement.dataset.mediaId;
+      console.log(mediaId);
+      // Do something with the mediaId
+    }
+  });
 }
 
 function handleAllTimePopularData(data, containerId) {
