@@ -310,6 +310,15 @@ transition: .2s all ease-in-out;
 }
 
 // 1355 PXIEL MEDIA SCREEN 
+@media screen and (max-width:1400px) {
+    .overviewBlockStaff{
+        grid-template-columns: repeat(4, 1fr);
+    }
+    .overviewBlockCharacteres{
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+// 1355 PXIEL MEDIA SCREEN 
 @media screen and (max-width:1350px) {
     .personcard{
         font-size: 11px;
@@ -319,38 +328,58 @@ transition: .2s all ease-in-out;
 @media screen and (max-width:1270px) {
     .personCard img{
         max-width: 45px;
-        min-width: 40px;
+        min-width: 45px;
     }
     .cardBlock{
         grid-template-columns: repeat(4, 1fr);
     }
 }
-// 1070 PXIEL MEDIA SCREEN 
-@media screen and (max-width:1070px) {
-    .personCard img{
-        max-width: 40px;
-        min-width: 35px;
-    }
-}
+// // 1070 PXIEL MEDIA SCREEN 
+// @media screen and (max-width:1070px) {
+//     .personCard img{
+//         max-width: 40px;
+//         min-width: 40px;
+//     }
+// }
 // 970 PXIEL MEDIA SCREEN 
 @media screen and (max-width:970px) {
     .cardBlock{
         grid-template-columns: repeat(3, 1fr);
     }
+    .overviewBlockStaff{
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .overviewBlockCharacteres{
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+// 670 PXIEL MEDIA SCREEN 
+@media screen and (max-width:670px) {
+    .overviewBlockStaff{
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .overviewBlockCharacteres{
+        grid-template-columns: repeat(3, 1fr);
+    }
+
 }
 // 580 PXIEL MEDIA SCREEN 
 @media screen and (max-width:580px) {
     .cardBlock{
         grid-template-columns: repeat(2, 1fr);
     }
-}
-// 880 PXIEL MEDIA SCREEN 
-@media screen and (max-width:880px) {
     .overviewBlockCharacteres{
-        grid-template-columns: repeat(3, 1fr);
-        margin-bottom: 10px;
+        grid-template-columns: repeat(2, 1fr);
     }
+
 }
+// // 880 PXIEL MEDIA SCREEN 
+// @media screen and (max-width:880px) {
+//     .overviewBlockCharacteres{
+//         grid-template-columns: repeat(3, 1fr);
+//         margin-bottom: 10px;
+//     }
+// }
 // 460 PXIEL MEDIA SCREEN 
 @media screen and (max-width:468px) {
     .overviewBlockCharacteres{
@@ -382,7 +411,6 @@ transition: .2s all ease-in-out;
     }
 
     .reviewCard--txt{
-        color: var(--sousTitres);
         text-transform: capitalize;
         border: 1px solid var(--sousTitres);
         border-radius: var(--mainRadius);
@@ -394,6 +422,10 @@ transition: .2s all ease-in-out;
         align-items: center;
         display: flex;
         max-height: 110px;
+
+        a p{
+            color: var(--sousTitres);
+        }
     }
 }
 
@@ -410,8 +442,7 @@ transition: .2s all ease-in-out;
     font-style: italic;
     box-sizing: content-box;
     height: 8px;
-    top: -5px;
-    right: 7px;
+    right: 8px;
 }
 .reviewCard--txt p::after{
     content: " '' ";
@@ -422,8 +453,6 @@ transition: .2s all ease-in-out;
     font-style: italic;
     box-sizing: content-box;
     height: 8px;
-    top: -5px;
-    right: 7px;
 }
 
 // 1530 PXIEL MEDIA SCREEN REVIEWS CARD

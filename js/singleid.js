@@ -57,9 +57,10 @@ const overviewBlock = document.querySelector('.relationsBlock');
 // Ajouter un écouteur d'événement pour le clic sur addListBtn
 overviewTitle.addEventListener('click', function(event) {
     event.preventDefault();
-    overviewBlock.style.display = 'block'; // Modifier le display en 'none'
+    overviewBlock.style.display = 'flex'; // Modifier le display en 'none'
     characteresBlock.style.display = 'none'; // Modifier le display en 'none'
     staffBlock.style.display = 'none'; // Modifier le display en 'block'
+    reviewsBlock.style.display = 'none'; // Modifier le display en 'block'
 });
 
 // CHARACTERES BLOCK ACTION 
@@ -160,7 +161,7 @@ media.relations.edges.forEach((relation) => {
 
   // Création du titre de la relation
   const relationTitle = document.createElement('p');
-  relationTitle.textContent = relationNode.title.native || relationNode.title.native;
+  relationTitle.textContent = relationNode.title.english || relationNode.title.native;
 
   var relationTitleDiv = document.createElement('div'); // Créez un élément div pour le conteneur de texte
   relationTitleDiv.classList.add('titleOf');
@@ -174,7 +175,6 @@ media.relations.edges.forEach((relation) => {
   // Ajout de la carte de relation au conteneur
   relationsSwiper.appendChild(relationCard);
 });
-
 
 }
 
@@ -231,7 +231,8 @@ function displayCharacters(media) {
   media.characters.edges.forEach((character, index) => {
     if (index < 5) {
       const characterNode = character.node;
-      const characterCard = createCharacterCard(characterNode);
+      const characterRolee = character.role;
+      const characterCard = createCharacterCard(characterNode, characterRolee);
       characterContainer.appendChild(characterCard);
     }
   });
@@ -245,13 +246,15 @@ function displayAllCharacters(media) {
   // Parcours des personnages et création des cartes correspondantes
   media.characters.edges.forEach((character) => {
     const characterNode = character.node;
-    const characterCard = createCharacterCard(characterNode);
+    const characterRolee = character.role;
+    const characterCard = createCharacterCard(characterNode, characterRolee);
     characterContainer.appendChild(characterCard);
   });
+
 }
 
 // Fonction pour créer une carte de personnage
-function createCharacterCard(character) {
+function createCharacterCard(character, characterRolee) {
   // Création des éléments HTML de la carte de personnage
   const characterCard = document.createElement('div');
   characterCard.classList.add('personCard');
@@ -270,7 +273,7 @@ function createCharacterCard(character) {
   characterName.textContent = character.name.full;
 
   const characterRole = document.createElement('span');
-  characterRole.textContent = character.role;
+  characterRole.textContent = characterRolee;
 
   characterName.appendChild(characterRole); // Ajout du rôle dans le paragraphe
 
@@ -284,7 +287,108 @@ function createCharacterCard(character) {
   return characterCard;
 }
 
-// ...
+// STAFF FUNCTION -----
+
+// Fonction pour afficher les membres du staff (5 premiers)
+function displayStaff(media) {
+  // Sélection de l'élément HTML
+  const staffContainer = document.querySelector('.overviewBlockStaff');
+
+  // Parcours des membres du staff et création des cartes correspondantes (5 premiers)
+  media.staff.edges.slice(0, 5).forEach((staffMember) => {
+    const staffNode = staffMember.node;
+    const staffRole = staffMember.role;
+    const staffCard = createStaffCard(staffNode, staffRole);
+    staffContainer.appendChild(staffCard);
+  });
+}
+
+// Fonction pour afficher tous les membres du staff
+function displayAllStaff(media) {
+  // Sélection de l'élément HTML
+  const staffContainer = document.querySelector('.staffBlock .cardBlock');
+
+  // Parcours des membres du staff et création des cartes correspondantes
+  media.staff.edges.forEach((staffMember) => {
+    const staffNode = staffMember.node;
+    const staffRole = staffMember.role;
+    const staffCard = createStaffCard(staffNode, staffRole);
+    staffContainer.appendChild(staffCard);
+  });
+}
+
+// Fonction pour créer une carte de membre du staff
+function createStaffCard(staffMember, staffRole) {
+  // Création des éléments HTML de la carte du membre du staff
+  const staffCard = document.createElement('div');
+  staffCard.classList.add('personCard');
+
+  const staffImageLink = document.createElement('a');
+  staffImageLink.href = staffMember.siteUrl;
+
+  const staffImage = document.createElement('img');
+  staffImage.src = staffMember.image.large;
+  staffImage.alt = '';
+
+  const staffInfo = document.createElement('div');
+  staffInfo.classList.add('infoItemQuery');
+
+  const staffName = document.createElement('p');
+  staffName.textContent = staffMember.name.full;
+
+  const staffPosition = document.createElement('span');
+  staffPosition.textContent = staffRole;
+
+  staffName.appendChild(staffPosition); // Ajout du poste dans le paragraphe
+
+  // Ajout des éléments à la carte du membre du staff
+  staffImageLink.appendChild(staffImage);
+  staffInfo.appendChild(staffName);
+
+  staffCard.appendChild(staffImageLink);
+  staffCard.appendChild(staffInfo);
+
+  return staffCard;
+}
+
+
+
+// REVIEWS FUNCTIONS ----
+
+
+function displayReviews(media) {
+  const reviewsContainer = document.querySelector('.reviewsCardBlock');
+  media.reviews.edges.forEach((review) => {
+    const reviewNode = review.node;
+    const reviewCard = createReviewCard(reviewNode);
+    reviewsContainer.appendChild(reviewCard);
+  });
+}
+
+function createReviewCard(review) {
+  const reviewCard = document.createElement('div');
+  reviewCard.classList.add('reviewCard');
+
+  const userAvatar = document.createElement('img');
+  userAvatar.src = review.user.avatar.large;
+  userAvatar.alt = 'User Avatar';
+  reviewCard.appendChild(userAvatar);
+
+  const reviewText = document.createElement('div');
+  reviewText.classList.add('reviewCard--txt');
+
+  const reviewContent = document.createElement('p');
+  reviewContent.textContent = review.summary;
+
+  const reviewLink = document.createElement('a');
+  reviewLink.href = review.siteUrl;
+  reviewLink.appendChild(reviewContent);
+
+  reviewText.appendChild(reviewLink);
+  reviewCard.appendChild(reviewText);
+
+  return reviewCard;
+}
 
 
 
@@ -369,13 +473,15 @@ if (mediaId) {
           edges {
             node {
               id
-              rating
               summary
               body
               user {
-                id
                 name
+                avatar{
+                  large
+                }
               }
+              siteUrl
             }
           }
         }
@@ -430,6 +536,9 @@ if (mediaId) {
       displayRecommendations(media);
       displayCharacters(media);
       displayAllCharacters(media);
+      displayStaff(media);
+      displayAllStaff(media);
+      displayReviews(media);
       console.log(media); // Affichage des données du média
     } catch (error) {
       console.log(error);
@@ -465,3 +574,5 @@ if (mediaId) {
 } else {
   console.log('Media ID not found in the URL.');
 }
+
+ScrollReveal().reveal('.popularBlock--slider__card', { duration: 800, easing:'ease-in', interval: 150});
