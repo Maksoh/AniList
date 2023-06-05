@@ -10,6 +10,7 @@ nav {
     transition: transform 0.4s;
     z-index: 9999;
     width:100%;
+    box-shadow: var(--boxShadow);
 }
 .navigation.scrolled-up {
     transform: translateY(-100%);

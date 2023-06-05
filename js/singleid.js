@@ -420,7 +420,7 @@ function displayTrailer(media) {
     // Création de l'élément <img> avec le thumbnail et le site en tant que titre
     const trailerImage = document.createElement('img');
     trailerImage.src = trailerThumbnail;
-    trailerImage.alt = '';
+    trailerImage.alt = 'Thumbnail';
     trailerImage.title = trailerSite;
 
     // Ajout de l'élément <img> à la section des trailers
@@ -430,6 +430,90 @@ function displayTrailer(media) {
     overviewBlockTrailer.style.display = 'none';
   }
 }
+
+
+// FORMAT FUNCTION -------------
+function displayFormat(media) {
+  // Sélection de l'élément HTML
+  const formatElement = document.querySelector('.formatQuery p span');
+  // Mise à jour du format
+  formatElement.textContent = media.format;
+}
+// STATUS FUNCTION -------------
+function displayStatus(media) {
+  // Sélection de l'élément HTML
+  const statusElement = document.querySelector('.statusQuery p span');
+  // Mise à jour du format
+  statusElement.textContent = media.status ;
+}
+// START FUNCTION -------------
+function displayStartDate(media) {
+  const moisEcrits = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  // Sélection de l'élément HTML
+  const startElement = document.querySelector('.startQuery p span');
+  // Mise à jour du format
+  startElement.textContent = moisEcrits[media.startDate.month - 1]  + ' ' + media.startDate.day  + ','+ ' ' +media.startDate.year ;
+}
+
+// END FUNCTION -------------
+function displayEndDate(media) {
+  const moisEcrits = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  // Sélection de l'élément HTML
+  const endElement = document.querySelector('.endQuery p span');
+  // Mise à jour du format
+  endElement.textContent = moisEcrits[media.endDate.month - 1]  + ' ' + media.endDate.day  + ','+ ' ' +media.endDate.year ;
+}
+
+// STUDIO OR SOURCE  FUNCTION -------------
+function displaySourceOrStudio(media) {
+  // Sélection de l'élément HTML
+  const sourceOrStudioElement = document.querySelector('.studioQuery p span');
+  const pElement = document.querySelector('.studioQuery p');
+  
+  if (media.format === 'MANGA') {
+    sourceOrStudioElement.textContent = media.source;
+    pElement.innerHTML = ` Source <span>${sourceOrStudioElement.textContent}</span> `;
+  } else if (media.studios.edges.length > 0) {
+    sourceOrStudioElement.textContent = media.studios.edges[0].node.name;
+  } 
+}
+
+
+// SCORE FUNCTION -------------
+function displayScore(media) {
+  // Sélection de l'élément HTML
+  const scoreElement = document.querySelector('.scoreQuery p span');
+  // Mise à jour du format
+  scoreElement.textContent = media.averageScore + '%'+ ' ' +'❤';
+}
+
+
 
 
 
@@ -594,6 +678,12 @@ if (mediaId) {
       displayReviews(media);
       displaySocials(media);
       displayTrailer(media);
+      displayFormat(media);
+      displayStatus(media);
+      displayStartDate(media);
+      displayEndDate(media);
+      displaySourceOrStudio(media);
+      displayScore(media);
       console.log(media); // Affichage des données du média
     } catch (error) {
       console.log(error);

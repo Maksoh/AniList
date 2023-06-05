@@ -59,6 +59,7 @@
 
 .informationsBlock{
     margin-bottom: 0 !important;
+    height: fit-content;
 }
 
 .itemBlock--content__title{
@@ -582,6 +583,11 @@ transition: .2s all ease-in-out;
 .socialsBlock{
     // grid-row: 2;
     display: block;
+    height: fit-content;
     // display: none;
 }
 
+
+// .hiddenQuery{
+//     display: none;
+// }
