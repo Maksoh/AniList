@@ -161,7 +161,7 @@ media.relations.edges.forEach((relation) => {
 
   // Création du titre de la relation
   const relationTitle = document.createElement('p');
-  relationTitle.textContent = relationNode.title.english || relationNode.title.native;
+  relationTitle.textContent = relationNode.title.english || relationNode.title.romaji || relationNode.title.native;
 
   var relationTitleDiv = document.createElement('div'); // Créez un élément div pour le conteneur de texte
   relationTitleDiv.classList.add('titleOf');
@@ -193,7 +193,7 @@ function displayRecommendations(media) {
     // Création de la carte de recommandation
     const recommendationCard = document.createElement('div');
     recommendationCard.classList.add('popularBlock--slider__card', 'swiper-slide');
-    recommendationCard.title= recommendationNode.mediaRecommendation.title.english || recommendationNode.mediaRecommendation.title.native;
+    recommendationCard.title= recommendationNode.mediaRecommendation.title.english || recommendationNode.mediaRecommendation.title.romaji|| recommendationNode.mediaRecommendation.title.native;
 
     const linkElement = document.createElement('a');
     linkElement.href = 'singleid.html?id=' + recommendationId; // URL with the ID as a parameter
@@ -205,7 +205,7 @@ function displayRecommendations(media) {
 
     // Création du titre de la recommandation
     const recommendationTitle = document.createElement('p');
-    recommendationTitle.textContent = recommendationNode.mediaRecommendation.title.english || recommendationNode.mediaRecommendation.title.native;
+    recommendationTitle.textContent = recommendationNode.mediaRecommendation.title.english || recommendationNode.mediaRecommendation.title.romaji || recommendationNode.mediaRecommendation.title.native;
 
     var recommendationTitleDiv = document.createElement('div'); // Créez un élément div pour le conteneur de texte
     recommendationTitleDiv.classList.add('titleOf');
@@ -378,7 +378,7 @@ function createReviewCard(review) {
   reviewText.classList.add('reviewCard--txt');
 
   const reviewContent = document.createElement('p');
-  reviewContent.textContent = review.summary;
+  reviewContent.textContent = '" '+ review.summary + ' "';
 
   const reviewLink = document.createElement('a');
   reviewLink.href = review.siteUrl;
@@ -390,6 +390,46 @@ function createReviewCard(review) {
   return reviewCard;
 }
 
+
+// SOCIALS FUNCTION -------------
+function displaySocials(media) {
+  // Sélection de l'élément HTML
+  const socialsContainer = document.querySelector('.overviewBlock--socials');
+
+  // Parcours des liens sociaux et création des éléments HTML correspondants
+  media.externalLinks.forEach((link) => {
+    const socialLink = document.createElement('a');
+    socialLink.href = link.url;
+    socialLink.textContent = link.site;
+
+    socialsContainer.appendChild(socialLink);
+  });
+}
+
+// TRAILER FUNCTION -------------
+function displayTrailer(media) {
+  // Sélection de l'élément HTML
+  const trailerContainer = document.querySelector('.overviewBlock--trailers');
+  const overviewBlockTrailer = document.querySelector('.overviewBlockTrailer');
+
+  // Vérification de la présence du trailer
+  if (media.trailer) {
+    const trailerThumbnail = media.trailer.thumbnail;
+    const trailerSite = media.trailer.site;
+
+    // Création de l'élément <img> avec le thumbnail et le site en tant que titre
+    const trailerImage = document.createElement('img');
+    trailerImage.src = trailerThumbnail;
+    trailerImage.alt = '';
+    trailerImage.title = trailerSite;
+
+    // Ajout de l'élément <img> à la section des trailers
+    trailerContainer.appendChild(trailerImage);
+  } else {
+    // Si le média n'a pas de trailer, masquer le bloc "overviewBlockTrailer"
+    overviewBlockTrailer.style.display = 'none';
+  }
+}
 
 
 
@@ -492,16 +532,28 @@ if (mediaId) {
                 id
                 title {
                   english
+                  romaji
                   native
                 }
                 coverImage {
                   extraLarge
                 }
               }
-              rating
-              userRating
             }
           }
+        }
+        studios {
+          edges {
+            node {
+              id
+              name
+            }
+          }
+        }
+        source
+        externalLinks {
+          site
+          url
         }
         relations {
           edges {
@@ -510,6 +562,7 @@ if (mediaId) {
               id
               title {
                 english
+                romaji
                 native
               }
               coverImage {
@@ -539,6 +592,8 @@ if (mediaId) {
       displayStaff(media);
       displayAllStaff(media);
       displayReviews(media);
+      displaySocials(media);
+      displayTrailer(media);
       console.log(media); // Affichage des données du média
     } catch (error) {
       console.log(error);
@@ -574,5 +629,3 @@ if (mediaId) {
 } else {
   console.log('Media ID not found in the URL.');
 }
-
-ScrollReveal().reveal('.popularBlock--slider__card', { duration: 800, easing:'ease-in', interval: 150});

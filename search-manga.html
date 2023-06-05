@@ -29,8 +29,8 @@
     <div class="searchBlock--img"><img src="img/BannerManga.jpg" alt=""></div>
     <div class="searchBlock--txt">
         <div class="searchBlock--txt__icons">
-            <a href="#" class="activeSearchBtn" id="mangaSearchBtn" ><i class="fa-solid fa-book fa-xl" style="color: var(--mainColor);"></i></a>
-            <a href="#" class="" id="animeSearchBtn" ><i class="fa-solid fa-tv fa-xl" style="color: #ffffff;"></i></a>
+            <a href="#" class="activeSearchBtn" id="mangaSearchBtn" ><i class="fa-solid fa-book fa-xl" ></i></a>
+            <a href="#" class="" id="animeSearchBtn" ><i class="fa-solid fa-tv fa-xl"></i></a>
         </div>
         <div id="search-wrapper">
 
@@ -38,11 +38,11 @@
             <img src="img/search.png" alt="Search" width="24" height="24" class="searchIcon">
         </div>
         <div class="searchBlock--txt__filtres">
-            <select name="1" id="1">1</select>
-            <select name="1" id="1">1</select>
-            <select name="1" id="1">1</select>
-            <select name="1" id="1">1</select>
-            <select name="1" id="1">1</select>
+            <select name="Genres" id="genres">Any</select>
+            <select name="" id="status">Any</select>
+            <select name="" id="format">Any</select>
+            <select name="" id="country">Any</select>
+            <select name="" id="year">Any</select>
 
         </div>
         
@@ -51,7 +51,7 @@
 </section>
 
 <!-- PRINCIPAL MANGA SEARCH BLOCK   -->
-<section class="principalSearchMangaBlock" >
+<section id="principalSearchMangaBlock" >
 
 
 
@@ -197,7 +197,7 @@
 </section>
 
 <!-- PRINCIPAL ANIME SEARCH BLOCK   -->
-<section class="principalSearchAnimeBlock"  style="display:none">
+<section id="principalSearchAnimeBlock"  style="display:none">
 
 
 
@@ -208,7 +208,7 @@
         </a>
         <div class="popularBlock--slider swiper">
 
-            <div class="swiper-wrapper" id="upcominganime">
+            <div class="swiper-wrapper" id="upcomingAnime">
                 <!-- <div class="popularBlock--slider__card swiper-slide">
                     <img src="img/test.jpg" alt="">
                     <p class="titleOf">Name of</p>
@@ -254,7 +254,7 @@
             <section class="popularBlock is--block">
                 <h2>Popular Anime</h2>
                 <div class="popularBlock--slider swiper">
-                    <div class="swiper-wrapper" id="popularanime">
+                    <div class="swiper-wrapper" id="popularAnime">
                         <!-- <div class="popularBlock--slider__card swiper-slide">
                             <img src="img/test.jpg" alt="">
                             <p class="titleOf">Name of</p>
@@ -302,7 +302,7 @@
     </section>
     
     <!-- TOP 100 -->
-    <div class="headerBlock--top is--block topCentSearch" id="alltimepopularAll">
+    <div class="headerBlock--top is--block topCentSearch" id="AllTimePopularAnime">
         <h2>TOP 100</h2>
     
         <!-- <div class="headerBlock--top__element" id="">
@@ -381,6 +381,6 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 <script src="js/main.js"> </script>
 <!-- <script src="js/singlepage.js"> </script> -->
-<!-- <script src="js/search.js"> </script> -->
+<script src="js/search.js"> </script>
 </body>
 </html>

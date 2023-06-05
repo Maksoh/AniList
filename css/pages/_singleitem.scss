@@ -423,6 +423,10 @@ transition: .2s all ease-in-out;
         display: flex;
         max-height: 110px;
 
+        a{
+            display: flex;
+            align-items: center;
+        }
         a p{
             color: var(--sousTitres);
         }
@@ -433,27 +437,7 @@ transition: .2s all ease-in-out;
     grid-template-columns: repeat(2, 1fr);
 }
 
-.reviewCard--txt p::before{
-    content: " '' ";
-    color: var(--sousTitres);
-    position: relative;
-    font-size: 20px;
-    float: left;
-    font-style: italic;
-    box-sizing: content-box;
-    height: 8px;
-    right: 8px;
-}
-.reviewCard--txt p::after{
-    content: " '' ";
-    color: var(--sousTitres);
-    position: relative;
-    font-size: 20px;
-    float: right;
-    font-style: italic;
-    box-sizing: content-box;
-    height: 8px;
-}
+
 
 // 1530 PXIEL MEDIA SCREEN REVIEWS CARD
 @media screen and (max-width: 1530px) {
