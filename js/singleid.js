@@ -48,6 +48,20 @@ removeListBtn.addEventListener('click', function() {
 
 // ::::::::::: //
 
+// FUNCTION ACTIVE CLASS TITRE-----
+function setActiveLinkTitle(clickedLink) {
+  // Sélection de tous les éléments <a> dans la div itemBlock--content__rubiqres
+  const links = document.querySelectorAll('.itemBlock--content__rubiqres a');
+
+  // Parcours de tous les liens
+  links.forEach((link) => {
+    // Retire la classe active de tous les liens
+    link.classList.remove('active');
+  });
+
+  // Ajoute la classe active à l'élément cliqué
+  clickedLink.classList.add('active');
+}
 
 // BLOCK APPARITION
 // ScrollReveal().reveal('.personCard', { duration: 800, easing:'ease-in', interval: 150});
@@ -61,6 +75,8 @@ overviewTitle.addEventListener('click', function(event) {
     characteresBlock.style.display = 'none'; // Modifier le display en 'none'
     staffBlock.style.display = 'none'; // Modifier le display en 'block'
     reviewsBlock.style.display = 'none'; // Modifier le display en 'block'
+
+    setActiveLinkTitle(this);
 });
 
 // CHARACTERES BLOCK ACTION 
@@ -73,6 +89,7 @@ characteresTitle.addEventListener('click', function(event) {
     overviewBlock.style.display = 'none'; // Modifier le display en 'block'
     staffBlock.style.display = 'none'; // Modifier le display en 'block'
     reviewsBlock.style.display = 'none'; // Modifier le display en 'none'
+    setActiveLinkTitle(this);
 });
 
 // STAFF BLOCK ACTION 
@@ -85,6 +102,7 @@ staffTitle.addEventListener('click', function(event) {
     overviewBlock.style.display = 'none'; // Modifier le display en 'block'
     characteresBlock.style.display = 'none'; // Modifier le display en 'none'
     reviewsBlock.style.display = 'none'; // Modifier le display en 'none'
+    setActiveLinkTitle(this);
 });
 
 // REVIEWS BLOCK ACTION 
@@ -97,6 +115,7 @@ reviewsTitle.addEventListener('click', function(event) {
     overviewBlock.style.display = 'none'; // Modifier le display en 'block'
     staffBlock.style.display = 'none'; // Modifier le display en 'block'
     characteresBlock.style.display = 'none'; // Modifier le display en 'none'
+    setActiveLinkTitle(this);
 });
 
 const queryString = window.location.search;
@@ -120,6 +139,8 @@ function getMediaIdFromURL() {
 }
 
 
+// ---------- API----------
+
 // HEADER FUNCTION -------------
 function displayMediaData(media) {
   // Sélection des éléments HTML
@@ -132,7 +153,7 @@ function displayMediaData(media) {
   bannerImage.src = media.bannerImage;
   coverImage.src = media.coverImage.extraLarge;
   titleElement.textContent = media.title.english;
-  const cleanedDescription = media.description.replace(/<br>/gi, '').replace(/<i>/gi, '').replace(/<\/i>/gi, '');
+  const cleanedDescription = media.description.replace(/<br>/gi, '').replace(/<\/br>/gi, '').replace(/<i>/gi, '').replace(/<\/i>/gi, '').replace(/<\/a>/gi, '').replace(/<a\s+(?:[^>]*?\s+)?href=(['"])(?:.(?!\1))*.\1[^>]*?>/gi, '');
   
   // Afficher la description nettoyée
   descriptionElement.textContent = cleanedDescription;
@@ -180,6 +201,20 @@ media.relations.edges.forEach((relation) => {
 });
 
 }
+// HIDDEN RELATIONS BLOCK -----
+function hideRelationsBlockIfEmpty() {
+  const relationsSwiper = document.getElementById('relationsSwiper');
+  const relationsBlockSwiper = document.querySelector('.relationsBlockSwiper');
+  const relationsBlockTitle = document.querySelector('.relationsBlockTitle');
+
+  if (relationsSwiper.children.length === 0) {
+    relationsBlockSwiper.style.display = 'none';
+    relationsBlockTitle.style.display = 'none';
+  } else {
+    relationsBlockSwiper.style.display = ''; // Rétablir l'affichage si nécessaire
+    relationsBlockTitle.style.display = ''; // Rétablir l'affichage si nécessaire
+  }
+}
 
 
 // RECOMMENDATIONS FUNCTION -------------
@@ -223,6 +258,19 @@ function displayRecommendations(media) {
     relationsSwiper.appendChild(recommendationCard);
   });
 }
+
+// HIDDEN RECOMMENDATIONS --------
+function hideRecommendationsBlockIfEmpty() {
+  const recommendationsSwiper = document.getElementById('recommendationsSwiper');
+  const recommendationsBlock = document.querySelector('.recommendationsBlock');
+
+  if (recommendationsSwiper.children.length === 0) {
+    recommendationsBlock.style.display = 'none';
+  } else {
+    recommendationsBlock.style.display = ''; // Rétablir l'affichage si nécessaire
+  }
+}
+
 
 // CHARACTERES FUNCTION -------------
 // Fonction pour afficher les personnages
@@ -408,6 +456,17 @@ function displaySocials(media) {
     socialsContainer.appendChild(socialLink);
   });
 }
+// HIDDEN SOCIAL BLOCK ------
+function hideSocialsBlockIfEmpty() {
+  const socialsContainer = document.querySelector('.overviewBlock--socials');
+  const socialsBlock = document.querySelector('.socialsBlock');
+
+  if (socialsContainer.children.length === 0) {
+    socialsBlock.style.display = 'none';
+  } else {
+    socialsBlock.style.display = ''; // Rétablir l'affichage si nécessaire
+  }
+}
 
 // TRAILER FUNCTION -------------
 function displayTrailer(media) {
@@ -572,12 +631,15 @@ function displayEpisodes(media) {
 
 // DURATION FUNCTION -------------
 function displayDuration(media) {
-  // Sélection de l'élément HTML
-  const durationElement = document.querySelector('.durationQuery p span');
+  // Sélection de l'élément span
+  const spanElement = document.querySelector('.durationQuery p span');
+  
+  // Sélection de la div parent
+  const durationQueryDiv = document.querySelector('.durationQuery');
 
-  // Vérifier si la durée est inférieure à 60 minutes
-  if (media.duration < 60) {
-    durationElement.textContent = media.duration + ' min';
+  // Vérifier si la durée est null ou inférieure à 60 minutes
+  if (media.duration === null || media.duration < 60) {
+    spanElement.textContent = media.duration + ' min';
   } else {
     // Calculer les heures et les minutes
     const hours = Math.floor(media.duration / 60);
@@ -590,9 +652,19 @@ function displayDuration(media) {
     }
     durationString += minutes + 'min';
 
-    durationElement.textContent = durationString;
+    spanElement.textContent = durationString;
+  }
+
+  // Masquer la div si la durée est null
+  if (media.duration === null) {
+    durationQueryDiv.style.display = 'none';
+  } else {
+    durationQueryDiv.style.display = ''; // Rétablir l'affichage si nécessaire
   }
 }
+
+
+
 
   
 
@@ -632,13 +704,14 @@ function hideEmptyInformationBlocks() {
     // Sélection du span à l'intérieur du div
     const spanElement = infoItemQuery.querySelector('span');
 
-    // Vérification si le span est vide
+    // Vérification si le span est vide ou contient "NULL MIN"
     if (!spanElement.textContent.trim()) {
       // Masquage du div parent
       infoItemQuery.style.display = 'none';
     }
   });
 }
+
 
 
 
@@ -819,6 +892,9 @@ if (mediaId) {
       displayScore(media);
       displayRomaji(media);
       displayNative(media);
+      hideSocialsBlockIfEmpty();
+      hideRelationsBlockIfEmpty();
+      hideRecommendationsBlockIfEmpty();
       hideEmptyInformationBlocks();
       console.log(media); // Affichage des données du média
     } catch (error) {

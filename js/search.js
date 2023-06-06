@@ -60,7 +60,7 @@ animeSearchBtn.addEventListener("click", function() {
   // Afficher la section animeBlock
   animeBlock.style.display = "block";
   // Changer la source de l'image
-  imgElement.src = "img/BannerAnime.jpg";
+  imgElement.src = "img/testbanner.jpg";
 });
 
 // Ajouter un gestionnaire d'événements de clic au bouton
@@ -71,8 +71,25 @@ mangaSearchBtn.addEventListener("click", function() {
   // Afficher la section animeBlock
   animeBlock.style.display = "none";
   // Changer la source de l'image
-  imgElement.src = "img/BannerManga.jpg";
+  imgElement.src = "img/testbannermanga.jpg";
 });
 
 
 
+const image = document.querySelector('.searchBlock--img img');
+const blockHeight = 440; // Hauteur du bloc de l'image en pixels
+const maxScale = 1.2; // Échelle maximale de zoom
+
+function handleZoomScroll() {
+  const scrollPosition = window.pageYOffset;
+  const scrollPercentage = (scrollPosition / blockHeight) * 100;
+
+  if (scrollPercentage <= 100) {
+    const scale = 1 + (scrollPercentage / 100) * (maxScale - 1); // Ajustez le coefficient de mise à l'échelle ici
+    image.style.transform = `scale(${scale})`;
+  } else {
+    image.style.transform = `scale(${maxScale})`; // Maintient l'échelle maximale lorsque le défilement dépasse la hauteur du bloc
+  }
+}
+
+window.addEventListener('scroll', handleZoomScroll);

@@ -220,11 +220,6 @@ function handleData(data, containerId) {
     var swiperSlide = document.createElement('div'); // Créez un élément div pour swiper-slide
     swiperSlide.classList.add('popularBlock--single__card', 'card');
     swiperSlide.title = mediaTitles[i].title.english;
-    // swiperSlide.innerHTML = '
-    // // <img src="${mediaImage}" alt="cover">
-    // <p class="titleOf">${ mediaTitles[i].title.english}</p>
-    // '
-    // swiperWrapper.appendChild(swiperSlide);
     var imageElement = document.createElement('img'); // Créez un élément img pour l'image
     imageElement.src = mediaImage;
     imageElement.alt = mediaTitle;

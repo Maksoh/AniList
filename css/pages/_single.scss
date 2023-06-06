@@ -12,6 +12,10 @@
     box-shadow: var(--boxShadowCard);
 }
 
+.popularBlock--single__card img::after{
+
+}
+
 .popularBlock--single{
     display: grid;
     grid-template-columns: repeat(6,1fr);

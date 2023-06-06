@@ -69,6 +69,147 @@ window.addEventListener('scroll', function() {
 
 // API -----
 
+
+async function getAllTimePopularManga() {
+  const queryAllTimePopularManga = `
+    query ($page: Int) {
+      Page(page: $page, perPage: 5) {
+        media(type: MANGA, sort: SCORE_DESC) {
+          id
+          title {
+            romaji
+            english
+            native
+          }
+          coverImage {
+            extraLarge
+          }
+          genres
+          rankings {
+            rank
+          }
+          averageScore
+          format
+          status
+          chapters
+          startDate {
+            year
+          }
+        }
+      }
+    }
+  `;
+
+  const variables = {
+    page: 1,
+  };
+
+  try {
+    const data = await fetchData(queryAllTimePopularManga, variables);
+    const allTimePopularManga = data.data.Page.media;
+    displayAllTimePopularManga(allTimePopularManga);
+    console.log(data);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+function displayAllTimePopularManga(results) {
+  const container = document.getElementById('AllTimePopularManga');
+  const isSearchMangaPage = (window.location.pathname === '/search-manga.html'); // Vérifie si l'URL correspond à la page "search-manga"
+
+  for (const result of results) {
+    const mediaTitle = result.title.english || result.title.romaji || result.title.native;
+    const mediaImage = result.coverImage.extraLarge;
+    const mediaRank = result.rankings[0].rank;
+    const mediaGenres = result.genres;
+
+    const element = document.createElement('div');
+    element.classList.add('headerBlock--top__element');
+
+    const imageWrapper = document.createElement('div');
+    imageWrapper.classList.add('headerBlock--top__elmentImg');
+
+    const imageElement = document.createElement('img');
+    imageElement.src = mediaImage;
+    imageElement.alt = mediaTitle;
+    imageWrapper.appendChild(imageElement);
+    element.appendChild(imageWrapper);
+
+    const contentWrapper = document.createElement('div');
+    contentWrapper.classList.add('headerBlock--top__elmentTxt');
+
+    const rankElement = document.createElement('h4');
+    rankElement.textContent = mediaRank + '.';
+    contentWrapper.appendChild(rankElement);
+
+    const linkElement = document.createElement('a');
+    linkElement.href = 'singleid.html?id=' + result.id; // URL avec l'ID en tant que paramètre
+
+    const titleElement = document.createElement('p');
+    titleElement.classList.add('titleOf');
+    titleElement.textContent = mediaTitle;
+    linkElement.appendChild(titleElement);
+    contentWrapper.appendChild(linkElement);
+
+    const tagsElement = document.createElement('div');
+    tagsElement.classList.add('genres');
+
+    for (let j = 0; j < 2 && j < mediaGenres.length; j++) {
+      const genre = mediaGenres[j];
+      const tagElement = document.createElement('span');
+      tagElement.textContent = genre;
+      tagsElement.appendChild(tagElement);
+    }
+
+    contentWrapper.appendChild(tagsElement);
+    element.appendChild(contentWrapper);
+
+    // Ajout conditionnel des éléments supplémentaires pour la page "search-anime"
+    if (isSearchMangaPage) {
+      const infoWrapper = document.createElement('div');
+      infoWrapper.classList.add('infoWrapper');
+
+      const statusWrapper = document.createElement('div');
+      statusWrapper.classList.add('infoItemQuery');
+
+      const statusElement = document.createElement('p');
+      statusElement.textContent = result.averageScore + '%';
+      statusWrapper.appendChild(statusElement);
+      infoWrapper.appendChild(statusWrapper);
+
+      const chaptersWrapper = document.createElement('div');
+      chaptersWrapper.classList.add('infoItemQuery');
+
+      const chaptersElement = document.createElement('p');
+      chaptersElement.textContent = result.format;
+
+      const chaptersSpan = document.createElement('span');
+      chaptersSpan.textContent = (result.chapters > 1) ? result.chapters + ' chapitres' : result.chapters + ' chapitre';
+      chaptersElement.appendChild(chaptersSpan);
+      chaptersWrapper.appendChild(chaptersElement);
+      infoWrapper.appendChild(chaptersWrapper);
+
+      const formatWrapper = document.createElement('div');
+      formatWrapper.classList.add('infoItemQuery');
+
+      const formatElement = document.createElement('p');
+      formatElement.textContent = result.startDate.year;
+
+      const formatSpan = document.createElement('span');
+      formatSpan.textContent = result.status;
+      formatElement.appendChild(formatSpan);
+      formatWrapper.appendChild(formatElement);
+      infoWrapper.appendChild(formatWrapper);
+
+      element.appendChild(infoWrapper);
+    }
+
+    container.appendChild(element);
+  }
+}
+
+
 // Fonction pour récupérer les données des animes populaires de tous les temps
 async function getAllTimePopularAnime() {
   const queryAllTimePopularAnime = `
@@ -1038,6 +1179,8 @@ async function fetchData(query, variables) {
   }
 }
 
+// Appel de la fonction pour récupérer les données des animes populaires de tous les temps
+getAllTimePopularManga();
 // Appel de la fonction pour récupérer les données des animes populaires de tous les temps
 getAllTimePopularAnime();
 // Appel de la fonction pour récupérer les données des mangas tendances
