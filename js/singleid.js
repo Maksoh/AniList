@@ -132,7 +132,10 @@ function displayMediaData(media) {
   bannerImage.src = media.bannerImage;
   coverImage.src = media.coverImage.extraLarge;
   titleElement.textContent = media.title.english;
-  descriptionElement.textContent = media.description;
+  const cleanedDescription = media.description.replace(/<br>/gi, '').replace(/<i>/gi, '').replace(/<\/i>/gi, '');
+  
+  // Afficher la description nettoyée
+  descriptionElement.textContent = cleanedDescription;
 }
 
 // RELATIONS FUNCTION -------------
@@ -504,6 +507,94 @@ function displaySourceOrStudio(media) {
   } 
 }
 
+// GENRES FUNCTION -------------
+function displayGenres(media) {
+  // Sélection de l'élément HTML parent
+  const pElement = document.querySelector('.genresQuery p');
+
+  if (media.genres.length > 0) {
+    for (let i = 0; i < media.genres.length; i++) {
+      const spanElement = document.createElement('span');
+      spanElement.textContent = media.genres[i];
+      pElement.appendChild(spanElement);
+
+
+      if (i < media.genres.length - 1) {
+        const commaElement = document.createTextNode(' ');
+        pElement.appendChild(commaElement);
+      }
+    }
+  } else {
+    pElement.textContent = 'Unknown';
+  }
+}
+
+// CHAPTERS FUNCTION -------------
+function displayChapters(media) {
+
+    // Sélection de l'élément HTML
+    const chaptersElement = document.querySelector('.chaptersQuery p span');
+    // Mise à jour du format
+    chaptersElement.textContent = media.chapters ;
+}
+  
+// VOLUMES FUNCTION -------------
+function displayVolumes(media) {
+
+    // Sélection de l'élément HTML
+    const volumesElement = document.querySelector('.volummesQuery p span');
+    // Mise à jour du format
+   volumesElement.textContent = media.volumes ;
+}
+  
+// // EPISODES FUNCTION -------------
+// function displayEpisodes(media) {
+
+//     // Sélection de l'élément HTML
+//     const episodesElement = document.querySelector('.episodesQuery p span');
+//     // Mise à jour du format
+//     episodesElement.textContent = media.episodes ;
+// }
+
+function displayEpisodes(media) {
+  // Sélection de l'élément HTML
+  const episodesElement = document.querySelector('.episodesQuery p span');
+  const pElement = document.querySelector('.episodesQuery p');
+
+  if (media.episodes === 1) {
+    episodesElement.textContent = media.episodes;
+    pElement.innerHTML = `Film <span>${episodesElement.textContent}</span> `;
+  } else {
+    episodesElement.textContent = media.episodes;
+  }
+}
+
+
+// DURATION FUNCTION -------------
+function displayDuration(media) {
+  // Sélection de l'élément HTML
+  const durationElement = document.querySelector('.durationQuery p span');
+
+  // Vérifier si la durée est inférieure à 60 minutes
+  if (media.duration < 60) {
+    durationElement.textContent = media.duration + ' min';
+  } else {
+    // Calculer les heures et les minutes
+    const hours = Math.floor(media.duration / 60);
+    const minutes = media.duration % 60;
+
+    // Construire la chaîne de format "h min"
+    let durationString = '';
+    if (hours > 0) {
+      durationString += hours + 'h ';
+    }
+    durationString += minutes + 'min';
+
+    durationElement.textContent = durationString;
+  }
+}
+
+  
 
 // SCORE FUNCTION -------------
 function displayScore(media) {
@@ -513,6 +604,41 @@ function displayScore(media) {
   scoreElement.textContent = media.averageScore + '%'+ ' ' +'❤';
 }
 
+// ROMAJI TITLE FUNCTION -------------
+function displayRomaji(media) {
+
+  // Sélection de l'élément HTML
+  const romajiElement = document.querySelector('.romajiQuery p span');
+  // Mise à jour du format
+  romajiElement.textContent = media.title.romaji ;
+}
+
+// NATIVE TITLE FUNCTION -------------
+function displayNative(media) {
+
+  // Sélection de l'élément HTML
+  const scoreElement = document.querySelector('.nativeQuery p span');
+  // Mise à jour du format
+  scoreElement.textContent = media.title.native ;
+}
+
+
+function hideEmptyInformationBlocks() {
+  // Sélection de tous les divs "infoItemQuery" dans "itemInfosWrapper"
+  const infoItemQueries = document.querySelectorAll('.itemInfosWrapper .infoItemQuery');
+
+  // Parcours de chaque div
+  infoItemQueries.forEach((infoItemQuery) => {
+    // Sélection du span à l'intérieur du div
+    const spanElement = infoItemQuery.querySelector('span');
+
+    // Vérification si le span est vide
+    if (!spanElement.textContent.trim()) {
+      // Masquage du div parent
+      infoItemQuery.style.display = 'none';
+    }
+  });
+}
 
 
 
@@ -530,6 +656,7 @@ if (mediaId) {
     query ($mediaId: Int) {
       Media(id: $mediaId) {
         id
+        type
         title {
           romaji
           english
@@ -557,6 +684,7 @@ if (mediaId) {
         status
         format
         episodes
+        duration
         chapters
         volumes
         averageScore
@@ -683,7 +811,15 @@ if (mediaId) {
       displayStartDate(media);
       displayEndDate(media);
       displaySourceOrStudio(media);
+      displayGenres(media);
+      displayChapters(media);
+      displayVolumes(media);
+      displayEpisodes(media);
+      displayDuration(media);
       displayScore(media);
+      displayRomaji(media);
+      displayNative(media);
+      hideEmptyInformationBlocks();
       console.log(media); // Affichage des données du média
     } catch (error) {
       console.log(error);

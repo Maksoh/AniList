@@ -33,6 +33,14 @@
     }
 }
 
+.imgAddBtn{
+    grid-row-start: 1;
+    grid-row-end: 2;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
 .itemBlock--content{
     width: 100%;
     position: relative;
@@ -122,6 +130,7 @@ transition: .2s all ease-in-out;
     justify-content: flex-end;
     align-items: flex-end;
     gap: var(--mainGap);
+    grid-column: 2;
     a{
         text-decoration: none;
         text-transform: uppercase;
@@ -294,24 +303,33 @@ transition: .2s all ease-in-out;
 
 .personCard{
     display: flex;
-    align-items: flex-end;
+    // align-items: flex-end;
     gap: 15px;
     box-sizing: content-box;
     
-    
+    .infoItemQuery{
+        margin-top: 5px;
+    }
     img{
-        max-width: 56px;
-        min-width: 55px;
-        width: 100%;
-        height: 100%;
+        max-width: 70px;
+        min-width: 70px;
+        min-height: 105px;
+        max-height: 105px;
         position: relative;
         object-fit:cover;
         border-radius: var(--mainRadius);
     }
 }
 
-// 1355 PXIEL MEDIA SCREEN 
-@media screen and (max-width:1400px) {
+// 1650 PXIEL MEDIA SCREEN 
+@media screen and (max-width:1650px) {
+    .cardBlock{
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+// 1545 PXIEL MEDIA SCREEN 
+@media screen and (max-width:1545px) {
     .overviewBlockStaff{
         grid-template-columns: repeat(4, 1fr);
     }
@@ -319,29 +337,37 @@ transition: .2s all ease-in-out;
         grid-template-columns: repeat(4, 1fr);
     }
 }
-// 1355 PXIEL MEDIA SCREEN 
-@media screen and (max-width:1350px) {
+// 1400 PXIEL MEDIA SCREEN 
+@media screen and (max-width:1400px) {
     .personcard{
         font-size: 11px;
     }
 }
-// 1270 PXIEL MEDIA SCREEN 
-@media screen and (max-width:1270px) {
-    .personCard img{
-        max-width: 45px;
-        min-width: 45px;
-    }
-    .cardBlock{
-        grid-template-columns: repeat(4, 1fr);
-    }
-}
-// // 1070 PXIEL MEDIA SCREEN 
-// @media screen and (max-width:1070px) {
-//     .personCard img{
-//         max-width: 40px;
-//         min-width: 40px;
+// // 1270 PXIEL MEDIA SCREEN 
+// @media screen and (max-width:1270px) {
+//     .cardBlock{
+//         grid-template-columns: repeat(4, 1fr);
 //     }
 // }
+// 1320 PXIEL MEDIA SCREEN 
+@media screen and (max-width:1320px) {
+    .personCard img{
+        max-width: 55px;
+        min-width: 55px;
+        min-height: 80px;
+        max-height: 78px;
+    }
+    .personCard .infoItemQuery{
+        font-size: 13px;
+
+    }
+}
+// 1080 PXIEL MEDIA SCREEN 
+@media screen and (max-width:1080px) {
+    .cardBlock{
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
 // 970 PXIEL MEDIA SCREEN 
 @media screen and (max-width:970px) {
     .cardBlock{
@@ -362,13 +388,13 @@ transition: .2s all ease-in-out;
     .overviewBlockCharacteres{
         grid-template-columns: repeat(3, 1fr);
     }
+    .cardBlock{
+        grid-template-columns: repeat(2, 1fr);
+    }
 
 }
 // 580 PXIEL MEDIA SCREEN 
 @media screen and (max-width:580px) {
-    .cardBlock{
-        grid-template-columns: repeat(2, 1fr);
-    }
     .overviewBlockCharacteres{
         grid-template-columns: repeat(2, 1fr);
     }
@@ -385,6 +411,10 @@ transition: .2s all ease-in-out;
 @media screen and (max-width:468px) {
     .overviewBlockCharacteres{
         grid-template-columns: repeat(2, 1fr);
+
+    }
+    .personCard .infoItemQuery{
+        font-size: 11px;
 
     }
 }
@@ -534,6 +564,20 @@ transition: .2s all ease-in-out;
         padding: var(--paddingBlock) 15px;
     }
 }
+
+// 710 PXIEL MEDIA SCREEN 
+@media screen and (max-width:710px) {
+    .itemBlock--content__title {
+        h5{
+            font-size: 18px;
+        }
+        p{
+            font-size: 13px;
+        }
+
+    }
+
+}
 // 850 PXIEL MEDIA SCREEN 
 @media screen and (max-width:850px) {
     .itemInfos {
@@ -558,6 +602,17 @@ transition: .2s all ease-in-out;
     }
     .itemBlock--content__img {
         margin-top: 0;
+    }
+    .itemBlock--content__title {
+        grid-column: 2;
+        grid-row: 2;
+    }
+    .itemBlock--content__rubiqres{
+        grid-column: 2;
+        grid-row: 3;
+    }
+    .imgAddBtn{
+        grid-row: 2;
     }
 }
 
