@@ -31,20 +31,29 @@ var swiper = new Swiper(".relationsBlockSwiper", {
 
 });
 
-// BOUTON LIST ADD 
-// Récupérer les références des boutons
-const addListBtn = document.querySelector('.addListbtn');
-const removeListBtn = document.querySelector('.removeListbtn');
 
-// Ajouter un écouteur d'événement pour le clic sur addListBtn
-addListBtn.addEventListener('click', function() {
-    addListBtn.style.display = 'none'; // Modifier le display en 'none'
-    removeListBtn.style.display = 'block'; // Modifier le display en 'block'
-});
-removeListBtn.addEventListener('click', function() {
-  addListBtn.style.display = 'block'; // Modifier le display en 'none'
-  removeListBtn.style.display = 'none'; // Modifier le display en 'block'
-});
+
+
+// // BOUTON LIST ADD 
+// // Récupérer les références des boutons
+// const addListBtn = document.querySelector('.addListbtn');
+// const removeListBtn = document.querySelector('.removeListbtn');
+
+// // Ajouter un écouteur d'événement pour le clic sur addListBtn
+// addListBtn.addEventListener('click', function() {
+//     addListBtn.style.display = 'none'; // Modifier le display en 'none'
+//     removeListBtn.style.display = 'block'; // Modifier le display en 'block'
+// });
+// removeListBtn.addEventListener('click', function() {
+//   addListBtn.style.display = 'block'; // Modifier le display en 'none'
+//   removeListBtn.style.display = 'none'; // Modifier le display en 'block'
+// });
+
+// Tableau pour stocker les IDs des médias ajoutés à la liste
+
+
+
+
 
 // ::::::::::: //
 
@@ -117,6 +126,9 @@ reviewsTitle.addEventListener('click', function(event) {
     characteresBlock.style.display = 'none'; // Modifier le display en 'none'
     setActiveLinkTitle(this);
 });
+
+
+
 
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
@@ -961,3 +973,82 @@ if (mediaId) {
 } else {
   console.log('Media ID not found in the URL.');
 }
+
+
+
+
+
+
+
+let mediaList = [];
+
+
+// Fonction appelée lors du clic sur le bouton "Add"
+function addToMediaList() {
+  // Récupérer l'ID du média (supposons que vous l'ayez déjà stocké dans la variable "mediaId")
+  if (mediaId) {
+    // Vérifier si le média n'est pas déjà dans la liste
+    if (!mediaList.includes(mediaId)) {
+      // Ajouter l'ID du média à la liste
+      mediaList.push(mediaId);
+
+      localStorage.setItem('mediaList', JSON.stringify(mediaList));
+
+      // Masquer le bouton "Add" et afficher le bouton "Remove"
+      document.querySelector('.addListbtn').style.display = 'none';
+      document.querySelector('.removeListbtn').style.display = '';
+
+      console.log('Media added to the list:', mediaId);
+      console.log('Media List:', mediaList);
+    } else {
+      console.log('Media already exists in the list:', mediaId);
+    }
+  } else {
+    console.log('Media ID not found.');
+  }
+}
+
+
+// Fonction appelée lors du clic sur le bouton "Remove"
+function removeFromMediaList() {
+  // Supprimer l'ID du média de la liste
+  const index = mediaList.indexOf(mediaId);
+  if (index > -1) {
+    mediaList.splice(index, 1);
+
+    // Mettre à jour le stockage local avec la nouvelle liste
+    localStorage.setItem('mediaList', JSON.stringify(mediaList));
+
+    // Masquer le bouton "Remove" et afficher le bouton "Add"
+    document.querySelector('.removeListbtn').style.display = 'none';
+    document.querySelector('.addListbtn').style.display = '';
+
+    console.log('Media removed from the list:', mediaId);
+    console.log('Media List:', mediaList);
+  } else {
+    console.log('Media does not exist in the list:', mediaId);
+  }
+}
+console.log(mediaList);
+// Attacher les fonctions aux événements de clic sur les boutons
+document.querySelector('.addListbtn').addEventListener('click', addToMediaList);
+document.querySelector('.removeListbtn').addEventListener('click', removeFromMediaList);
+
+// Récupérer les données du stockage local lors du chargement de la page
+window.addEventListener('load', function() {
+  const storedMediaList = localStorage.getItem('mediaList');
+
+  if (storedMediaList) {
+    mediaList = JSON.parse(storedMediaList);
+
+    // Mettre à jour l'affichage des boutons en fonction de mediaList
+    if (mediaList.includes(mediaId)) {
+      document.querySelector('.addListbtn').style.display = 'none';
+      document.querySelector('.removeListbtn').style.display = '';
+    } else {
+      document.querySelector('.removeListbtn').style.display = 'none';
+      document.querySelector('.addListbtn').style.display = '';
+    }
+  }
+});
+

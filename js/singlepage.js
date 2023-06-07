@@ -7,25 +7,7 @@
 
 // });
 
-// NAV SCROLL 
-var navigation = document.querySelector('.navigation');
-var lastScrollPosition = window.pageYOffset;
 
-window.addEventListener('scroll', function() {
-var currentScrollPosition = window.pageYOffset;
-
-if (currentScrollPosition > lastScrollPosition && currentScrollPosition > 110) {
-  // L'utilisateur fait défiler vers le haut
-  navigation.classList.remove('scrolled-down');
-  navigation.classList.add('scrolled-up');
-} else if (currentScrollPosition < lastScrollPosition) {
-  // L'utilisateur fait défiler vers le bas
-  navigation.classList.remove('scrolled-up');
-  navigation.classList.add('scrolled-down');
-}
-
-lastScrollPosition = currentScrollPosition;
-});
 
 // // SCROLL REVEAL
 // ScrollReveal().reveal('.popularBlock--single__card', { duration: 800, easing:'ease-in', interval: 150});
@@ -1452,6 +1434,122 @@ if (popularTopMangaAllWrapper) {
 if (popularTopAnimeAllWrapper) {
   getTopAnime100();
 }
+
+
+
+
+
+let mediaList = [];
+
+// Récupérer les données du stockage local lors du chargement de la page
+window.addEventListener('load', function() {
+  const storedMediaList = localStorage.getItem('mediaList');
+
+  if (storedMediaList) {
+    mediaList = JSON.parse(storedMediaList);
+
+    // Parcourir mediaList et appliquer l'action à chaque élément
+    for (const mediaId of mediaList) {
+      performActionOnMedia(mediaId);
+    }
+  }
+});
+
+// Fonction pour récupérer les détails du média en utilisant son ID
+async function getMediaDetails(mediaId) {
+  const query = `
+    query ($id: Int) {
+      Media (id: $id) {
+        id
+        title {
+          english
+          romaji
+          native
+        }
+        coverImage {
+          extraLarge
+        }
+      }
+    }
+  `;
+
+  const variables = {
+    id: mediaId
+  };
+
+  const response = await fetch('https://graphql.anilist.co', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
+    body: JSON.stringify({
+      query: query,
+      variables: variables
+    })
+  });
+
+  const data = await response.json();
+  return data.data.Media;
+}
+
+// Fonction pour afficher le titre et l'image d'un média dans #listResult
+function displayMedia(media) {
+  const swiperWrapper = document.getElementById('listResult');
+
+  const mediaTitle = media.title.english || media.title.romaji || media.title.native;
+  const mediaImage = media.coverImage.extraLarge;
+
+  const swiperSlide = document.createElement('div');
+  swiperSlide.classList.add('popularBlock--single__card', 'card');
+  swiperSlide.title = mediaTitle;
+  swiperSlide.dataset.mediaId = media.id;
+
+  const linkElement = document.createElement('a');
+  linkElement.href = 'singleid.html?id=' + media.id; // URL avec l'ID en tant que paramètre
+
+  const imageElement = document.createElement('img');
+  imageElement.src = mediaImage;
+  imageElement.alt = mediaTitle;
+  imageElement.title = mediaTitle;
+
+  const titleElement = document.createElement('p');
+  titleElement.textContent = mediaTitle;
+
+  const slideText = document.createElement('div');
+  slideText.classList.add('titleOf');
+  slideText.appendChild(titleElement);
+
+  linkElement.appendChild(imageElement);
+  linkElement.appendChild(slideText);
+  swiperSlide.appendChild(linkElement);
+  swiperWrapper.appendChild(swiperSlide);
+}
+
+// Exemple d'action à appliquer aux éléments de mediaList
+async function performActionOnMedia(mediaId) {
+  // Récupérer les détails du média en utilisant son ID
+  const media = await getMediaDetails(mediaId);
+
+  // Afficher le titre et l'image du média dans #listResult
+  displayMedia(media);
+}
+
+// Parcourir mediaList et appliquer l'action à chaque élément
+for (const mediaId of mediaList) {
+  performActionOnMedia(mediaId);
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 

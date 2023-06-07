@@ -43,30 +43,6 @@ var swiper = new Swiper(".popularBlock--slider", {
 });
 
 
-// TITLE EFFECT 
-
-
-
-// NAV SCROLL 
-var navigation = document.querySelector('.navigation');
-var lastScrollPosition = window.pageYOffset;
-
-window.addEventListener('scroll', function() {
-  var currentScrollPosition = window.pageYOffset;
-
-  if (currentScrollPosition > lastScrollPosition && currentScrollPosition > 100) {
-    // L'utilisateur fait défiler vers le haut
-    navigation.classList.remove('scrolled-down');
-    navigation.classList.add('scrolled-up');
-  } else if (currentScrollPosition < lastScrollPosition) {
-    // L'utilisateur fait défiler vers le bas
-    navigation.classList.remove('scrolled-up');
-    navigation.classList.add('scrolled-down');
-  }
-
-  lastScrollPosition = currentScrollPosition;
-});
-
 // API -----
 
 

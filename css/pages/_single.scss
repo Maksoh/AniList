@@ -11,10 +11,25 @@
     border-radius: var(--mainRadius);
     box-shadow: var(--boxShadowCard);
 }
+// .popularBlock--single__cardImg{
+    // .popularBlock--single__card img{
+        // position: relative;
+        // width: 100%;
+        // height: 100%;
+        // object-fit: cover;
+        // object-position: center;
 
-// .popularBlock--single__card img::after{
+#removeCross::before{
+    content: '';
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 300px;
+    background-color: rgba(0, 0, 0, 0.5);
 
-// }
+}
 
 .popularBlock--single{
     display: grid;
@@ -43,6 +58,7 @@
     width: 100%;
     box-sizing: border-box;
     position: relative;
+    overflow: hidden;
 }
 
 .popularBlock--single__card .titleOf{

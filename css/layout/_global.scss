@@ -137,3 +137,11 @@ text-decoration: none;
 height: 100%;
 }
 
+#removeCross{
+    position: absolute;
+    z-index: 3;
+    top: 15px;
+    right: 15px;
+    cursor: default;
+}
+
