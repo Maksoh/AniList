@@ -14,19 +14,3 @@ navLinks.forEach((link) => {
 });
 
 
-function addEllipsisClass() {
-    const sliderCards = document.querySelectorAll('.popularBlock--slider__card .titleOf p');
-    const singleCards = document.querySelectorAll('.popularBlock--single__card .titleOf p');
-  
-    sliderCards.forEach((card) => {
-      if (card.textContent.length > 18) {
-        card.classList.add('ellipsis');
-      }
-    });
-  
-    singleCards.forEach((card) => {
-      if (card.textContent.length > 18) {
-        card.classList.add('ellipsis');
-      }
-    });
-  }
