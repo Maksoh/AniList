@@ -769,7 +769,7 @@ async function getPopularEcchiManga() {
   const queryPopularEcchiManga = `
     query ($page: Int) {
       Page(page: $page, perPage: 18) {
-        media(type: MANGA, sort: POPULARITY_DESC, genre: "Ecchi") {
+        media(type: MANGA, sort: POPULARITY_DESC, genre: "Horror") {
           id
           title {
             romaji
@@ -840,6 +840,85 @@ function displayPopularEcchiManga(results) {
     }
   });
   
+}
+
+
+// Fonction pour récupérer les données des animes du genre sport
+async function getSportAnime() {
+  const querySportAnime = `
+    query ($page: Int) {
+      Page(page: $page, perPage: 18) {
+        media(type: ANIME, sort: POPULARITY_DESC, genre: "Sports") {
+          id
+          title {
+            romaji
+            english
+            native
+          }
+          coverImage {
+            extraLarge
+          }
+        }
+      }
+    }
+  `;
+
+  const variables = {
+    page: 1,
+  };
+
+  try {
+    const data = await fetchData(querySportAnime, variables);
+    const sportAnime = data.data.Page.media;
+    displaySportAnime(sportAnime);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// Fonction spécifique pour afficher les résultats des animes du genre sport
+function displaySportAnime(results) {
+  const swiperWrapper = document.getElementById('sportAnime');
+
+  for (const result of results) {
+    const mediaTitle = result.title.english || result.title.romaji || result.title.native;
+    const mediaImage = result.coverImage.extraLarge;
+    const mediaId = result.id;
+
+    const swiperSlide = document.createElement('div');
+    swiperSlide.classList.add('popularBlock--slider__card', 'swiper-slide', 'card');
+    swiperSlide.title = mediaTitle;
+    swiperSlide.dataset.mediaId = mediaId;
+
+    const linkElement = document.createElement('a');
+    linkElement.href = 'singleid.html?id=' + mediaId; // URL with the ID as a parameter
+
+    const imageElement = document.createElement('img');
+    imageElement.src = mediaImage;
+    imageElement.alt = mediaTitle;
+    imageElement.title = mediaTitle;
+
+    const titleElement = document.createElement('p');
+    titleElement.textContent = mediaTitle;
+
+    const slideText = document.createElement('div');
+    slideText.classList.add('titleOf');
+    slideText.appendChild(titleElement);
+
+    linkElement.appendChild(imageElement);
+    linkElement.appendChild(slideText);
+    swiperSlide.appendChild(linkElement);
+    swiperWrapper.appendChild(swiperSlide);
+  }
+
+  swiperWrapper.addEventListener('click', function(event) {
+    const clickedElement = event.target.closest('.swiper-slide');
+    if (clickedElement) {
+      const mediaId = clickedElement.dataset.mediaId;
+      console.log(mediaId);
+      // Faites quelque chose avec l'ID du media
+    }
+  });
 }
 
 // Fonction pour récupérer les données des mangas d'origine sud-coréenne
@@ -915,6 +994,85 @@ function displayKoreanManga(results) {
       const mediaId = clickedElement.dataset.mediaId;
       console.log(mediaId);
       // Do something with the mediaId
+    }
+  });
+}
+
+
+// Fonction pour récupérer les données des animes du genre thriller
+async function getThrillerAnime() {
+  const queryThrillerAnime = `
+    query ($page: Int) {
+      Page(page: $page, perPage: 18) {
+        media(type: ANIME, sort: POPULARITY_DESC, genre: "Thriller") {
+          id
+          title {
+            romaji
+            english
+            native
+          }
+          coverImage {
+            extraLarge
+          }
+        }
+      }
+    }
+  `;
+
+  const variables = {
+    page: 1,
+  };
+
+  try {
+    const data = await fetchData(queryThrillerAnime, variables);
+    const thrillerAnime = data.data.Page.media;
+    displayThrillerAnime(thrillerAnime);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// Fonction spécifique pour afficher les résultats des animes du genre thriller
+function displayThrillerAnime(results) {
+  const swiperWrapper = document.getElementById('thrillerAnime');
+
+  for (const result of results) {
+    const mediaTitle = result.title.english || result.title.romaji || result.title.native;
+    const mediaImage = result.coverImage.extraLarge;
+    const mediaId = result.id;
+
+    const swiperSlide = document.createElement('div');
+    swiperSlide.classList.add('popularBlock--slider__card', 'swiper-slide', 'card');
+    swiperSlide.title = mediaTitle;
+    swiperSlide.dataset.mediaId = mediaId;
+
+    const linkElement = document.createElement('a');
+    linkElement.href = 'singleid.html?id=' + mediaId; // URL with the ID as a parameter
+
+    const imageElement = document.createElement('img');
+    imageElement.src = mediaImage;
+    imageElement.alt = mediaTitle;
+    imageElement.title = mediaTitle;
+
+    const titleElement = document.createElement('p');
+    titleElement.textContent = mediaTitle;
+
+    const slideText = document.createElement('div');
+    slideText.classList.add('titleOf');
+    slideText.appendChild(titleElement);
+
+    linkElement.appendChild(imageElement);
+    linkElement.appendChild(slideText);
+    swiperSlide.appendChild(linkElement);
+    swiperWrapper.appendChild(swiperSlide);
+  }
+
+  swiperWrapper.addEventListener('click', function(event) {
+    const clickedElement = event.target.closest('.swiper-slide');
+    if (clickedElement) {
+      const mediaId = clickedElement.dataset.mediaId;
+      console.log(mediaId);
+      // Faites quelque chose avec l'ID du media
     }
   });
 }
@@ -1199,6 +1357,10 @@ getKoreanManga();
 getPopularEcchiManga();
 // Appel de la fonction pour récupérer les animes au format "Movie"
 getMovieAnime();
+// Appel de la fonction pour récupérer les données des animes du genre sport
+getSportAnime();
+// Appel de la fonction pour récupérer les données des animes du genre thriller
+getThrillerAnime();
 
 
 

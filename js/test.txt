@@ -111,3 +111,113 @@
         }
       }
     `;
+
+
+
+// Fonction pour récupérer les données des mangas popular
+async function getPopularMangaAll() {
+  const queryManga = `
+    query ($page: Int) {
+      Page(page: $page) {
+        media(type: MANGA, sort: POPULARITY_DESC) {
+          id
+          title {
+            romaji
+            english
+            native
+          }
+          coverImage {
+            extraLarge
+          }
+        }
+      }
+    }
+  `;
+
+  const variables = {
+    page: 1,
+  };
+
+  try {
+    const data = await fetchData(queryManga, variables);
+    const popularMangaAll = data.data.Page.media;
+    displayPopularMangaAll(popularMangaAll);
+    console.log(data)
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// Fonction spécifique pour afficher les résultats des mangas tendances
+function displayPopularMangaAll(results) {
+  const swiperWrapper = document.getElementById('popularMangaAll');
+
+  for (const result of results) {
+    const mediaTitle = result.title.english || result.title.romaji || result.title.native;
+    const mediaImage = result.coverImage.extraLarge;
+    const mediaId = result.id;
+
+    const swiperSlide = document.createElement('div');
+    swiperSlide.classList.add('popularBlock--single__card', 'card');
+    swiperSlide.title = mediaTitle;
+    swiperSlide.dataset.mediaId = mediaId;
+
+    const linkElement = document.createElement('a');
+    linkElement.href = 'singleid.html?id=' + mediaId; // URL avec l'ID en tant que paramètre
+
+    const imageElement = document.createElement('img');
+    imageElement.src = mediaImage;
+    imageElement.alt = mediaTitle;
+    imageElement.title = mediaTitle;
+
+    const titleElement = document.createElement('p');
+    titleElement.textContent = mediaTitle;
+
+    const slideText = document.createElement('div');
+    slideText.classList.add('titleOf');
+    slideText.appendChild(titleElement);
+
+    linkElement.appendChild(imageElement);
+    linkElement.appendChild(slideText);
+    swiperSlide.appendChild(linkElement);
+    swiperWrapper.appendChild(swiperSlide);
+  }
+
+  swiperWrapper.addEventListener('click', function(event) {
+    const clickedElement = event.target.closest('.swiper-slide');
+    if (clickedElement) {
+      const mediaId = clickedElement.dataset.mediaId;
+      console.log(mediaId);
+      // Faites quelque chose avec l'ID du media
+    }
+  });
+}    
+
+
+// Fonction générique pour effectuer une requête GraphQL
+async function fetchData(query, variables) {
+  const url = 'https://graphql.anilist.co';
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    },
+    body: JSON.stringify({
+      query,
+      variables,
+    }),
+  };
+
+  const response = await fetch(url, options);
+  const data = await response.json();
+
+  if (response.ok) {
+    return data;
+  } else {
+    throw new Error(data.errors[0].message);
+  }
+}
+
+// Appel de la fonction pour récupérer les données des animes populaires de tous les temps
+getAllTimePopularMangaAll();

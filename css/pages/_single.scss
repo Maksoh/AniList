@@ -12,9 +12,9 @@
     box-shadow: var(--boxShadowCard);
 }
 
-.popularBlock--single__card img::after{
+// .popularBlock--single__card img::after{
 
-}
+// }
 
 .popularBlock--single{
     display: grid;
@@ -42,6 +42,7 @@
     height: 100%;
     width: 100%;
     box-sizing: border-box;
+    position: relative;
 }
 
 .popularBlock--single__card .titleOf{
@@ -54,25 +55,25 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    transition: all 0.3s ease-in-out; /* Ajoute une transition fluide */
 }
+
 .popularBlock--single__card:hover p {
     text-overflow: inherit;
     overflow: visible;
     animation: marquee 6s linear infinite;
     width: max-content;
-  }
+}
   
-  @keyframes marquee {
-    0% {
-      transform: translateX(0%);
+@keyframes marquee {
+0% {
+    transform: translateX(0%);
 
-    }
-    100% {
-      transform: translateX(-100%);
+}
+100% {
+    transform: translateX(-100%);
 
-    }
-  }
+}
+}
 
 
 
@@ -203,3 +204,100 @@
 
 }
 
+
+
+#marsh-badge .badge {
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    border-radius: 50%;
+    position: relative;
+    width: 50px;
+    height: 50px;
+    background: #02c7ff;
+    overflow: hidden;
+    top: -5px;
+    left: -5px;
+    z-index: 5;
+  }
+  
+  #marsh-badge .badge:before,
+  #marsh-badge .badge:after {
+    -webkit-transform: rotate(40deg);
+    -moz-transform: rotate(40deg);
+    -ms-transform: rotate(40deg);
+    -o-transform: rotate(40deg);
+    transform: rotate(40deg);
+    content: " ";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 50px;
+    width: 50px;
+    background: #02a9ff;
+    z-index: 2;
+  }
+  
+  #marsh-badge .badge:before {
+    margin-left: 20px;
+  }
+  
+  #marsh-badge .badge:after {
+    margin-top: 45px;
+  }
+  
+  #marsh-badge .badge .inner {
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    border-radius: 50%;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    background: #02c7ff;
+    border: solid 6px #02a9ff;
+    overflow: hidden;
+    z-index: 10;
+  }
+  
+  #marsh-badge .badge .inner:before {
+    -webkit-transform: rotate(40deg);
+    -moz-transform: rotate(40deg);
+    -ms-transform: rotate(40deg);
+    -o-transform: rotate(40deg);
+    transform: rotate(40deg);
+    content: " ";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 50px;
+    width: 50px;
+    background: #02a9ff;
+    margin: 10px 0 0 5px;
+    z-index: 2;
+  }
+
+  #marsh-badge h1 {
+    position: absolute;
+    text-align: left;
+    top: -23px;
+    margin: 50% 40%;
+    z-index: 11;
+    transform: translate(-50%, 46%);
+    font-size: 17px;
+    font-weight: 700;
+    color: rgb(74 74 74);
+  }
+
+  #marsh-badge{
+    position: absolute;
+  }
+
+  .small-number {
+    font-size: 15px !important;
+    transform: translate(-50%, 62%) !important;
+  }

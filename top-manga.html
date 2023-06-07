@@ -6,49 +6,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="img/favicon.ico">    
     <link rel="stylesheet" href="css/style.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
     <script src="https://unpkg.com/scrollreveal"></script>
-
     <title>AniList</title>
 </head>
 <body>
     
     <div class="wrapper">
         <!-- NAVIGATION -->
-        <nav>
+        <nav class="navigation">
             <div class="nav--logo">
-              <img src="img/logo.png" alt="Logo">
+              <a href="index.html" style="text-decoration: none;"><img src="img/logo.png" alt="Logo"></a>
             </div>
             <ul class="nav--links">
               <li><a href="index.html" id="style-2" data-replace="HOME">HOME</a></li>
-              <li><a href="search.html">SEARCH</a></li>
-              <li><a href="#">FORUM</a></li>
-              <li><a href="#">MyLIST</a></li>
+              <li><a href="search-manga.html">SEARCH</a></li>
+              <li><a href="mylist.html">MyLIST</a></li>
             </ul>
         </nav>
 
-        <div class="popularBlock--single is--block" id="allTimePopular">
-          <a href="top-manga.html" style="text-decoration: none;">
-              <h2>TOP 100</h2>
-          </a>
 
-          <!-- <div class="headerBlock--top__element" id="">
-              <div class="headerBlock--top__elmentImg">
-                  <img src="img/test.jpg" alt="">
-              </div>
-              <div class="headerBlock--top__elmentTxt">
-                  <h4 >#1</h4>
-                  <p class="titleOf">Name of Anime/Manga</p>
-                  <div class="genres"><span>action</span><span>comedy</span></div>
-              </div>
-          </div> -->
-
-
-      </div>
+        <section class="popularBlock is--block" style="margin-top: 20px;">
+            <h2>Top 100 Manga</h2>
+            <div class="popularBlock--single" id="topMangaAll">
+                <!-- <div class="popularBlock--single__card">
+                    <div id="marsh-badge">
+                        <div class="badge">
+                          <div class="inner"></div>
+                        </div>
+                        <h1>#1</h1>
+                      </div>
+                    <img src="img/test.jpg" alt="">
+                    <p class="titleOf">Name of</p>
+                </div>  -->
+            </div>
+        </section>
 
 
-
-<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-<script src="js/main.js"> </script>
+<script src="js/singlepage.js"> </script>
 </body>
 </html>

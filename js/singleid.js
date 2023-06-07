@@ -149,8 +149,12 @@ function displayMediaData(media) {
   const titleElement = document.querySelector('.itemBlock--content__title h5');
   const descriptionElement = document.querySelector('.itemBlock--content__title p');
 
-  // Mise à jour des valeurs
-  bannerImage.src = media.bannerImage;
+  if (media.bannerImage) {
+    bannerImage.src = media.bannerImage;
+  } else {
+    bannerImage.src = 'img/404.png';
+    bannerImage.style.objectFit = 'contain';
+  }
   coverImage.src = media.coverImage.extraLarge;
   titleElement.textContent = media.title.english;
   const cleanedDescription = media.description.replace(/<br>/gi, '').replace(/<\/br>/gi, '').replace(/<i>/gi, '').replace(/<\/i>/gi, '').replace(/<\/a>/gi, '').replace(/<a\s+(?:[^>]*?\s+)?href=(['"])(?:.(?!\1))*.\1[^>]*?>/gi, '');
@@ -289,6 +293,18 @@ function displayCharacters(media) {
   });
 }
 
+function hideCharacterBlockIfEmpty() {
+  const characterContainer = document.querySelector('.overviewBlockCharacteres');
+  const characterBlock = document.querySelector('.characteresOverviewBlock');
+
+  if (characterContainer.children.length === 0) {
+    characterBlock.style.display = 'none';
+  } else {
+    characterBlock.style.display = ''; // Rétablir l'affichage si nécessaire
+  }
+}
+
+
 // Fonction pour afficher tous les personnages
 function displayAllCharacters(media) {
   // Sélection de l'élément HTML
@@ -353,6 +369,18 @@ function displayStaff(media) {
     staffContainer.appendChild(staffCard);
   });
 }
+
+function hideStaffBlockIfEmpty() {
+  const staffContainer = document.querySelector('.overviewBlockStaff');
+  const staffBlock = document.querySelector('.staffOverviewBlock');
+
+  if (staffContainer.children.length === 0) {
+    staffBlock.style.display = 'none';
+  } else {
+    staffBlock.style.display = ''; // Rétablir l'affichage si nécessaire
+  }
+}
+
 
 // Fonction pour afficher tous les membres du staff
 function displayAllStaff(media) {
@@ -896,6 +924,8 @@ if (mediaId) {
       hideRelationsBlockIfEmpty();
       hideRecommendationsBlockIfEmpty();
       hideEmptyInformationBlocks();
+      hideCharacterBlockIfEmpty();
+      hideStaffBlockIfEmpty();
       console.log(media); // Affichage des données du média
     } catch (error) {
       console.log(error);

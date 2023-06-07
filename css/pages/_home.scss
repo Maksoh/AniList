@@ -42,7 +42,6 @@
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
-        transition: all 0.3s ease-in-out; /* Ajoute une transition fluide */
     }
 }
 .popularBlock--slider__card .titleOf{
@@ -59,12 +58,10 @@
   
   @keyframes marquee {
     0% {
-      transform: translateX(210px);
-
+      transform: translateX(0); /* Départ à la position d'origine */
     }
     100% {
-      transform: translateX(-100%);
-
+      transform: translateX(-100%); /* Déplacement vers la gauche */
     }
   }
 
