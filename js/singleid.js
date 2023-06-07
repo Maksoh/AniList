@@ -587,9 +587,17 @@ function displayEndDate(media) {
     "Dec",
   ];
   // Sélection de l'élément HTML
-  const endElement = document.querySelector('.endQuery p span');
+const endElement = document.querySelector('.endQuery p span');
+
+if (media.endDate.month !== undefined && media.endDate.day !== null && media.endDate.year !== null) {
   // Mise à jour du format
-  endElement.textContent = moisEcrits[media.endDate.month - 1]  + ' ' + media.endDate.day  + ','+ ' ' +media.endDate.year ;
+  endElement.textContent = moisEcrits[media.endDate.month - 1] + ' ' + media.endDate.day + ', ' + media.endDate.year;
+} else {
+  // Masquer la div .endQuery
+  const endQueryDiv = document.querySelector('.endQuery');
+  endQueryDiv.style.display = 'none';
+}
+
 }
 
 // STUDIO OR SOURCE  FUNCTION -------------
@@ -997,6 +1005,7 @@ function addToMediaList() {
       // Masquer le bouton "Add" et afficher le bouton "Remove"
       document.querySelector('.addListbtn').style.display = 'none';
       document.querySelector('.removeListbtn').style.display = '';
+      
 
       console.log('Media added to the list:', mediaId);
       console.log('Media List:', mediaList);
@@ -1022,7 +1031,6 @@ function removeFromMediaList() {
     // Masquer le bouton "Remove" et afficher le bouton "Add"
     document.querySelector('.removeListbtn').style.display = 'none';
     document.querySelector('.addListbtn').style.display = '';
-
     console.log('Media removed from the list:', mediaId);
     console.log('Media List:', mediaList);
   } else {
@@ -1033,6 +1041,9 @@ console.log(mediaList);
 // Attacher les fonctions aux événements de clic sur les boutons
 document.querySelector('.addListbtn').addEventListener('click', addToMediaList);
 document.querySelector('.removeListbtn').addEventListener('click', removeFromMediaList);
+
+
+
 
 // Récupérer les données du stockage local lors du chargement de la page
 window.addEventListener('load', function() {

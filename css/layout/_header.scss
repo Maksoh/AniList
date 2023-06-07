@@ -7,7 +7,7 @@ header{
 
 .headerBlock{
     display: flex;
-    gap: 40px;
+    gap: 25px;
     height: 800px;
 }
 
@@ -31,6 +31,10 @@ header{
     margin-left: 10px;
 }
 
+.headerBlock--top__element:hover p{
+    color: var(--mainColor);
+
+}
 .headerBlock--top__element{
     display: flex;
     gap: var(--mainGap);

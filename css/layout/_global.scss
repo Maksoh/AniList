@@ -47,8 +47,8 @@ img{
 // 1200 PXIEL MEDIA SCREEN 
 @media screen and (max-width: 1200px) {
     .wrapper{
-        padding-right: 70px;
-        padding-left: 70px;
+        padding-right: 55px;
+        padding-left: 55px;
     }
 
 }
@@ -56,16 +56,16 @@ img{
 // 990 PXIEL MEDIA SCREEN 
 @media screen and (max-width: 990px) {
     .wrapper{
-        padding-right: 50px;
-        padding-left: 50px;
+        padding-right: 40px;
+        padding-left: 40px;
     }
 
 }
 // 800 PXIEL MEDIA SCREEN 
 @media screen and (max-width: 800px) {
     .wrapper{
-        padding-right: 40px;
-        padding-left: 40px;
+        padding-right: 30px;
+        padding-left: 30px;
     }
 
 }
@@ -100,6 +100,7 @@ h2{
     display: flex;
     flex-wrap: wrap;
     gap: 5px;
+    cursor: default;
 }
 .genres *{
     background-color:var(--mainColor);
@@ -137,7 +138,7 @@ text-decoration: none;
 height: 100%;
 }
 
-#removeCross{
+#removeListbtn{
     position: absolute;
     z-index: 3;
     top: 15px;

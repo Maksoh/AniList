@@ -43,6 +43,7 @@ var swiper = new Swiper(".popularBlock--slider", {
 });
 
 
+
 // API -----
 
 
@@ -161,7 +162,9 @@ function displayAllTimePopularManga(results) {
       chaptersElement.textContent = result.format;
 
       const chaptersSpan = document.createElement('span');
-      chaptersSpan.textContent = (result.chapters > 1) ? result.chapters + ' chapitres' : result.chapters + ' chapitre';
+      if (result.chapters !== null) {
+        chaptersSpan.textContent = (result.chapters > 1) ? result.chapters + ' chapitres' : result.chapters + ' chapitre';
+      }
       chaptersElement.appendChild(chaptersSpan);
       chaptersWrapper.appendChild(chaptersElement);
       infoWrapper.appendChild(chaptersWrapper);

@@ -12,7 +12,97 @@
 // // SCROLL REVEAL
 // ScrollReveal().reveal('.popularBlock--single__card', { duration: 800, easing:'ease-in', interval: 150});
 
+
+
+
 //------------- API ----------
+
+
+// Fonction spécifique pour afficher les résultats de la recherche de mangas
+function displaySearchAllManga(results) {
+  const searchWrapper = document.getElementById('resultSearchMangaBlock');
+  searchWrapper.innerHTML = ''; // Effacer les résultats précédents
+
+  for (const result of results) {
+    const mediaTitle = result.title.english || result.title.romaji || result.title.native;
+    const mediaImage = result.coverImage.extraLarge;
+    const mediaId = result.id;
+
+    const resultItem = document.createElement('div');
+    resultItem.classList.add('searchResultItem', 'card');
+    resultItem.title = mediaTitle;
+    resultItem.dataset.mediaId = mediaId;
+
+    const linkElement = document.createElement('a');
+    linkElement.href = 'singleid.html?id=' + mediaId; // URL avec l'ID en tant que paramètre
+
+    const imageElement = document.createElement('img');
+    imageElement.src = mediaImage;
+    imageElement.alt = mediaTitle;
+    imageElement.title = mediaTitle;
+
+    const titleElement = document.createElement('p');
+    titleElement.textContent = mediaTitle;
+
+    const resultText = document.createElement('div');
+    resultText.classList.add('titleOf');
+    resultText.appendChild(titleElement);
+
+    linkElement.appendChild(imageElement);
+    linkElement.appendChild(resultText);
+    resultItem.appendChild(linkElement);
+    searchWrapper.appendChild(resultItem);
+  }
+
+  searchWrapper.addEventListener('click', function(event) {
+    const clickedElement = event.target.closest('.searchResultItem');
+    if (clickedElement) {
+      const mediaId = clickedElement.dataset.mediaId;
+      console.log(mediaId);
+      // Faites quelque chose avec l'ID du media
+    }
+  });
+  // SCROLL REVEAL
+  ScrollReveal().reveal('.searchResultItem', { duration: 800, easing: 'ease-in', interval: 150 });
+}
+
+// Requête GraphQL pour rechercher des mangas en fonction de l'entrée utilisateur
+async function getSearchAllManga(searchQuery) {
+  const querySearchManga = `
+    query ($search: String) {
+      Page {
+        media(type: MANGA, search: $search) {
+          id
+          title {
+            romaji
+            english
+            native
+          }
+          coverImage {
+            extraLarge
+          }
+        }
+      }
+    }
+  `;
+
+  const variables = {
+    search: searchQuery,
+  };
+
+  try {
+    const searchData = await fetchData(querySearchManga, variables);
+    const searchResults = searchData.data.Page.media;
+
+    displaySearchAllManga(searchResults);
+    console.log(searchData);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+
+
 
 // Fonction pour récupérer les données des 100 meilleurs animes
 async function getTopAnime100() {
@@ -1499,31 +1589,43 @@ function displayMedia(media) {
 
   const mediaTitle = media.title.english || media.title.romaji || media.title.native;
   const mediaImage = media.coverImage.extraLarge;
-
+  
   const swiperSlide = document.createElement('div');
   swiperSlide.classList.add('popularBlock--single__card', 'card');
   swiperSlide.title = mediaTitle;
   swiperSlide.dataset.mediaId = media.id;
-
+  
   const linkElement = document.createElement('a');
   linkElement.href = 'singleid.html?id=' + media.id; // URL avec l'ID en tant que paramètre
-
+  
+  const removeCross = document.createElement('span');
+  removeCross.id = 'removeListbtn';
+  removeCross.innerHTML = '&#10060;';
+  removeCross.dataset.mediaId = media.id;
+  
   const imageElement = document.createElement('img');
   imageElement.src = mediaImage;
   imageElement.alt = mediaTitle;
   imageElement.title = mediaTitle;
-
+  
   const titleElement = document.createElement('p');
   titleElement.textContent = mediaTitle;
-
+  
   const slideText = document.createElement('div');
   slideText.classList.add('titleOf');
   slideText.appendChild(titleElement);
-
+  
+  linkElement.appendChild(removeCross);
   linkElement.appendChild(imageElement);
   linkElement.appendChild(slideText);
   swiperSlide.appendChild(linkElement);
   swiperWrapper.appendChild(swiperSlide);
+
+  removeCross.addEventListener('click', function() {
+  removeMediaFromList(media.id);
+});
+
+  
 }
 
 // Exemple d'action à appliquer aux éléments de mediaList
@@ -1550,256 +1652,3 @@ for (const mediaId of mediaList) {
 
 
 
-
-
-
-// var queryAllTimePopular = `
-//   query ($page: Int) {
-//     Page(page: $page) {
-//       media(type: ANIME, sort: SCORE_DESC) {
-//         id
-//         title {
-//           romaji
-//           english
-//           native
-//         }
-//         coverImage {
-//           extraLarge
-//         }
-//         genres
-//         rankings{
-//           rank
-//         }
-//         averageScore
-//         format
-//         status
-//         episodes
-//         duration
-//         startDate{
-//           year
-//         }
-//       }
-//     }
-//   }
-// `;
-
-// var queryManga = `
-//   query ($page: Int) {
-//     Page(page: $page) {
-//       media(type: MANGA, sort: POPULARITY_DESC,) {
-//         id
-//         title {
-//           romaji
-//           english
-//           native
-//         }
-//         coverImage {
-//           extraLarge
-//         }
-//       }
-//     }
-//   }
-// `;
-
-// var queryAnime = `
-//   query ($page: Int) {
-//     Page(page: $page,) {
-//       media(type: ANIME, sort: POPULARITY_DESC) {
-//         id
-//         title {
-//           romaji
-//           english
-//           native
-//         }
-//         coverImage {
-//           extraLarge
-//         }
-//       }
-//     }
-//   }
-// `;
-
-// var queryUpcomingAnime = `
-//   query ($page: Int) {
-//     Page(page: $page) {
-//       media(type: ANIME, sort: POPULARITY_DESC, seasonYear: 2023, season: WINTER) {
-//         id
-//         title {
-//           romaji
-//           english
-//           native
-//         }
-//         coverImage {
-//           extraLarge
-//         }
-//       }
-//     }
-//   }
-// `;
-
-
-
-// var variables = {
-//   page: 1  // Page number, adjust as needed
-// };
-
-// var url = 'https://graphql.anilist.co';
-// var options = {
-//   method: 'POST',
-//   headers: {
-//     'Content-Type': 'application/json',
-//     'Accept': 'application/json',
-//   },
-//   body: JSON.stringify({
-//     query: queryManga,
-//     variables: variables
-//   })
-// };
-
-// fetch(url, options)
-//   .then(function (response) {
-//     return response.json().then(function (json) {
-//       return response.ok ? json : Promise.reject(json);
-//     });
-//   })
-//   .then(function (mangaData) {
-//     handleData(mangaData, 'popularmangaAll');
-
-//     // Fetch anime data
-//     options.body = JSON.stringify({
-//       query: queryAnime,
-//       variables: variables
-//     });
-
-//     return fetch(url, options)
-//       .then(function (response) {
-//         return response.json().then(function (json) {
-//           return response.ok ? json : Promise.reject(json);
-//         });
-//       })
-//       .then(function (animeData) {
-//         handleData(animeData, 'popularanimeAll');
-
-//         // Fetch upcoming anime data
-//         options.body = JSON.stringify({
-//           query: queryUpcomingAnime,
-//           variables: variables
-//         });
-
-//         return fetch(url, options)
-//           .then(function (response) {
-//             return response.json().then(function (json) {
-//               return response.ok ? json : Promise.reject(json);
-//             });
-//           })
-//           .then(function (upcomingAnimeData) {
-//             handleData(upcomingAnimeData, 'upcominganimeAll');
-
-//             // Fetch all-time popular anime data
-//             options.body = JSON.stringify({
-//               query: queryAllTimePopular,
-//               variables: variables
-//             });
-
-//             return fetch(url, options)
-//               .then(function (response) {
-//                 return response.json().then(function (json) {
-//                   return response.ok ? json : Promise.reject(json);
-//                 });
-//               })
-//               .then(function (allTimePopularData) {
-//                 handleData(allTimePopularData, 'alltimepopular');
-//               });
-//           });
-//       });
-//   })
-//   .catch(function (error) {
-//     alert('Erreur, consultez la console');
-//     console.error(error);
-//   });
-
-// // SWIPER FUNCTION 
-// function handleData(data, containerId) {
-//   console.log(data);
-//   var mediaTitles = data.data.Page.media; // Obtenez les titres des médias à partir des données de réponse
-//   var swiperWrapper = document.getElementById(containerId); // Sélectionnez le conteneur des éléments swiper
-
-//   // if (!swiperWrapper) {
-//   //   console.error('Le conteneur', containerId, 'n\'existe pas');
-//   //   return;
-//   // }
-
-//   for (var i = 0; i < mediaTitles.length; i++) {
-//     var mediaTitle = mediaTitles[i].title.english; // Obtenez le titre romaji du média correspondant
-//     if (mediaTitle.length > 25) {
-//       mediaTitle = mediaTitle.substring(0, 24) + '...'; // Limite la longueur du titre à 28 caractères
-//     }
-//     var mediaImage = mediaTitles[i].coverImage.extraLarge; // Obtenez l'URL de l'image du média
-
-//     var swiperSlide = document.createElement('div'); // Créez un élément div pour swiper-slide
-//     swiperSlide.classList.add('popularBlock--single__card', 'card');
-//     swiperSlide.title = mediaTitles[i].title.english;
-//     var imageElement = document.createElement('img'); // Créez un élément img pour l'image
-//     imageElement.src = mediaImage;
-//     imageElement.alt = mediaTitle;
-//     imageElement.title = mediaTitles[i].title.english; // Ajoute le titre complet en tant qu'attribut "title" de l'élément "img"
-    
-//     var titleElement = document.createElement('p'); // Créez un élément p pour le titre romaji
-//     titleElement.textContent = mediaTitle;
-    
-//     var slideText = document.createElement('div'); // Créez un élément div pour le conteneur de texte
-//     slideText.classList.add('titleOf');
-//     slideText.appendChild(titleElement);
-    
-//     swiperSlide.appendChild(imageElement);
-//     swiperSlide.appendChild(slideText);
-//     swiperWrapper.appendChild(swiperSlide);
-
-//     // SCROLL REVEAL
-//     ScrollReveal().reveal('.popularBlock--single__card', { duration: 800, easing:'ease-in', interval: 150});
-
-
-//   }
-// }
-
-
-// function handleAllTimePopularData(data, containerId) {
-//     console.log(data);
-//     var mediaTitles = data.data.Page.media; // Obtenez les titres des médias à partir des données de réponse
-//     var swiperWrapper = document.getElementById(containerId); // Sélectionnez le conteneur des éléments swiper
-  
-//     // if (!swiperWrapper) {
-//     //   console.error('Le conteneur', containerId, 'n\'existe pas');
-//     //   return;
-//     // }
-  
-//     for (var i = 0; i < mediaTitles.length; i++) {
-//       var mediaTitle = mediaTitles[i].title.english; // Obtenez le titre romaji du média correspondant
-//       if (mediaTitle.length > 25) {
-//         mediaTitle = mediaTitle.substring(0, 24) + '...'; // Limite la longueur du titre à 28 caractères
-//       }
-//       var mediaImage = mediaTitles[i].coverImage.extraLarge; // Obtenez l'URL de l'image du média
-  
-//       var swiperSlide = document.createElement('div'); // Créez un élément div pour swiper-slide
-//       swiperSlide.classList.add('popularBlock--single__card', 'card');
-//       swiperSlide.title = mediaTitles[i].title.english;
-//       var imageElement = document.createElement('img'); // Créez un élément img pour l'image
-//       imageElement.src = mediaImage;
-//       imageElement.alt = mediaTitle;
-//       imageElement.title = mediaTitles[i].title.english; // Ajoute le titre complet en tant qu'attribut "title" de l'élément "img"
-      
-//       var titleElement = document.createElement('p'); // Créez un élément p pour le titre romaji
-//       titleElement.textContent = mediaTitle;
-      
-//       var slideText = document.createElement('div'); // Créez un élément div pour le conteneur de texte
-//       slideText.classList.add('titleOf');
-//       slideText.appendChild(titleElement);
-      
-//       swiperSlide.appendChild(imageElement);
-//       swiperSlide.appendChild(slideText);
-//       swiperWrapper.appendChild(swiperSlide);
-//           // SCROLL REVEAL
-//     ScrollReveal().reveal('.popularBlock--single__card', { duration: 800, easing:'ease-in', interval: 150});
-      
-//     }
-//   }

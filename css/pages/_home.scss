@@ -36,9 +36,11 @@
         object-fit: cover;
         border-radius: var(--mainRadius);
         box-shadow: var(--boxShadowCard);
+        transition: .2s all ease-in-out;
     }
     p{
         margin-bottom: 0;
+        margin-top: 7px;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
@@ -48,7 +50,15 @@
     max-width: 280px;
     overflow: hidden;
 }
+.popularBlock--slider__card img:hover{
+    filter: drop-shadow(2px 4px 6px black);
 
+}
+.popularBlock--slider__card:hover p{
+    color: var(--mainColor);
+
+
+}
 .popularBlock--slider__card:hover p {
     text-overflow: inherit;
     overflow: visible;

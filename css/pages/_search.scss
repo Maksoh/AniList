@@ -138,10 +138,15 @@
     align-items: stretch;
     border-radius: 50px;
     background-color: #fff;
+    position: relative;
     overflow: hidden;
     max-width: 650px;
     box-shadow: 2px 1px 5px 1px rgba(0, 0, 0, 0.273);
-    
+    img{
+        position: absolute;
+        right: .6em;
+        top: .5em
+    }
 }
 
 
