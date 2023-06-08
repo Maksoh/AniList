@@ -11,6 +11,7 @@ nav {
     z-index: 9999;
     width:100%;
     box-shadow: var(--boxShadow);
+    filter: drop-shadow(2px 4px 6px black);
 }
 .navigation.scrolled-up {
     transform: translateY(-100%);
@@ -30,6 +31,7 @@ nav {
 .nav--links {
     list-style: none;
     display: flex;
+    transition: .3s all ease-in-out;
 }
 
 .nav--links li {
@@ -45,10 +47,45 @@ nav {
 
 .nav--links li a:hover {
     color: var(--mainColor);    
-
+    filter: drop-shadow(2px 4px 6px black);
 }
 .nav--links li a:active {
-    color: var(--mainColor);    
+    color: var(--mainColor);   
+    filter: drop-shadow(2px 4px 6px black); 
 
 }
 
+.nav-toggle{
+    color: white;
+    display: none;
+    transition: .2s all ease-in-out;
+}
+.nav-toggle:hover{
+    color: var(--mainColor)!important;   
+    filter: drop-shadow(2px 4px 6px black); 
+}
+
+@media (max-width: 768px){
+    .nav-toggle{
+        display: block;
+    }
+    // .nav--links{
+    //     display: none;
+    // }
+    .nav--links{
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        right: 60px;
+        top: 0px;
+        margin-top: 54px;
+        background-color: var(--blackColor);
+        border-radius: 0 0 15px 15px;
+        gap: var(--mainGap);
+        padding: 20px;
+        font-size: 14px;
+    
+    }
+
+}

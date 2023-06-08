@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/style.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
     <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="https://kit.fontawesome.com/6253f87885.js" crossorigin="anonymous"></script>
 
     <title>AniList</title>
 </head>
@@ -19,6 +20,9 @@
             <div class="nav--logo">
               <a href="index.html" style="text-decoration: none;"><img src="img/logo.png" alt="Logo"></a>
             </div>
+            <div class="nav-toggle">
+                <i class="fas fa-bars fa-2xl"></i>
+              </div>
             <ul class="nav--links">
               <li><a href="index.html" id="style-2" data-replace="HOME">HOME</a></li>
               <li><a href="search-manga.html">SEARCH</a></li>
@@ -29,7 +33,13 @@
         
         <section class="popularBlock listResult is--block" style="margin-top: 20px;">
             <h2>MyList</h2>
-            <div class="popularBlock--single" id="listResult">
+
+            <div class="searchMyList">
+                <a href="" class="active allList">All</a>
+                <a href="" class="mangaList">Manga</a>
+                <a href=""class="animeList">Anime</a>
+            </div>
+            <div class="popularBlock--single" id="listResult" style="padding-top: 0;">
                 <!-- <div class="popularBlock--single__card">
                     <div class="popularBlock--single__cardImg">
                         <span id="removeCross">&#10060</span>

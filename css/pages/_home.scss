@@ -12,6 +12,10 @@
         color: var(--white);
     }
 }
+.popularBlock h2:hover{
+    filter: drop-shadow(2px 4px 6px black);
+    cursor: pointer;
+}
 .popularBlock h2::after{
     content: "";
     position: absolute;

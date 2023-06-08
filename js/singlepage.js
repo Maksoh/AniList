@@ -1534,6 +1534,16 @@ let mediaList = [];
 // Récupérer les données du stockage local lors du chargement de la page
 window.addEventListener('load', function() {
   const storedMediaList = localStorage.getItem('mediaList');
+  document.querySelector('.mangaList').addEventListener('click', function(event) {
+    event.preventDefault();
+    filterMediaByType('MANGA');
+  });
+  
+  document.querySelector('.animeList').addEventListener('click', function(event) {
+    event.preventDefault();
+    filterMediaByType('ANIME');
+  });
+  
 
   if (storedMediaList) {
     mediaList = JSON.parse(storedMediaList);
@@ -1551,6 +1561,7 @@ async function getMediaDetails(mediaId) {
     query ($id: Int) {
       Media (id: $id) {
         id
+        type
         title {
           english
           romaji
@@ -1622,11 +1633,7 @@ function displayMedia(media) {
   swiperSlide.appendChild(slideText);
   swiperWrapper.appendChild(swiperSlide);
 
-  removeCross.addEventListener('click', function() {
-  removeMediaFromList(media.id);
-});
-
-  
+  console.log(media)
 }
 
 // Exemple d'action à appliquer aux éléments de mediaList
@@ -1644,8 +1651,57 @@ for (const mediaId of mediaList) {
 }
 
 
+function setActiveLinkSearch(clickedLink) {
+  const links = document.querySelectorAll('.searchMyList a');
+
+  links.forEach((link) => {
+    link.classList.remove('active');
+  });
+
+  clickedLink.classList.add('active');
+
+  let mediaType;
+  if (clickedLink.classList.contains('mangaList')) {
+    mediaType = 'Manga';
+  } else if (clickedLink.classList.contains('animeList')) {
+    mediaType = 'Anime';
+  } else {
+    mediaType = 'All';
+  }
+
+  filterMediaByType(mediaType);
+}
+
+const searchLinks = document.querySelectorAll('.searchMyList a');
+
+searchLinks.forEach((link) => {
+  link.addEventListener('click', (event) => {
+    event.preventDefault();
+    setActiveLinkSearch(link);
+  });
+});
 
 
+function filterMediaByType(mediaType) {
+  // Récupérer tous les éléments de média dans #listResult
+  const mediaElements = document.querySelectorAll('#listResult .popularBlock--single__card');
+
+  // Parcourir les éléments de média et les afficher ou les masquer en fonction du type sélectionné
+  mediaElements.forEach(function(mediaElement) {
+    const mediaId = mediaElement.dataset.mediaId;
+    getMediaDetails(mediaId)
+      .then(function(media) {
+        if (media.type === mediaType || mediaType === 'All') {
+          mediaElement.style.display = 'block';
+        } else {
+          mediaElement.style.display = 'none';
+        }
+      })
+      .catch(function(error) {
+        console.log('Error retrieving media details:', error);
+      });
+  });
+}
 
 
 

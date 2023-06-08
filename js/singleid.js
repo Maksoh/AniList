@@ -1037,6 +1037,7 @@ function removeFromMediaList() {
     console.log('Media does not exist in the list:', mediaId);
   }
 }
+
 console.log(mediaList);
 // Attacher les fonctions aux événements de clic sur les boutons
 document.querySelector('.addListbtn').addEventListener('click', addToMediaList);

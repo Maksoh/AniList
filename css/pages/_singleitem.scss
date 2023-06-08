@@ -168,6 +168,7 @@ transition: .2s all ease-in-out;
 .active{
     color: var(--mainColor)!important;
     box-shadow: var(--boxShadowCard);
+    filter: drop-shadow(2px 4px 6px black);
 }
 
 .relationsBlockSwiper img{
