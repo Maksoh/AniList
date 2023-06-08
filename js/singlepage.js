@@ -1598,11 +1598,6 @@ function displayMedia(media) {
   const linkElement = document.createElement('a');
   linkElement.href = 'singleid.html?id=' + media.id; // URL avec l'ID en tant que paramètre
   
-  const removeCross = document.createElement('span');
-  removeCross.id = 'removeListbtn';
-  removeCross.innerHTML = '&#10060;';
-  removeCross.dataset.mediaId = media.id;
-  
   const imageElement = document.createElement('img');
   imageElement.src = mediaImage;
   imageElement.alt = mediaTitle;
@@ -1615,10 +1610,16 @@ function displayMedia(media) {
   slideText.classList.add('titleOf');
   slideText.appendChild(titleElement);
   
-  linkElement.appendChild(removeCross);
   linkElement.appendChild(imageElement);
-  linkElement.appendChild(slideText);
+  
+  const removeCross = document.createElement('button');
+  removeCross.id = 'removeListbtn';
+  removeCross.innerHTML = '&#10060;';
+  removeCross.dataset.mediaId = media.id;
+  
+  swiperSlide.appendChild(removeCross);
   swiperSlide.appendChild(linkElement);
+  swiperSlide.appendChild(slideText);
   swiperWrapper.appendChild(swiperSlide);
 
   removeCross.addEventListener('click', function() {
