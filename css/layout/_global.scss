@@ -146,13 +146,17 @@ height: 100%;
     cursor: default;
     background: none;
     border: none;
-    transition: .2s all ease-in-out;
+    transition: .4s all ease-in-out;
     opacity: 0;
 }
 .popularBlock--single__card:hover #removeListbtn  {
-    transition-delay: .2s all ease-in-out;
+    transition-delay: .4s all ease-in-out;
+    transition: .4s all ease-in-out;
     opacity: 1; /* Faire apparaître le bouton lors du survol de la classe popularBlock--single__card */
   }
 #removeListbtn:hover + a img {
     filter: blur(1.5px);
+    transition: .5s all ease-in-out;
+    transition-delay: .4s all ease-in-out;
+
   }

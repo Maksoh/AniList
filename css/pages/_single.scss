@@ -37,6 +37,10 @@
 .topCentSearch .infoWrapper{
     text-align: center;
 }
+.popularBlock--single__card a{
+    transition: .4s all ease-in-out;
+    animation-delay: .5s;
+}
 .popularBlock--single__card{
     height: 100%;
     width: 100%;
