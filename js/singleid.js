@@ -59,18 +59,27 @@ var swiper = new Swiper(".relationsBlockSwiper", {
 
 // FUNCTION ACTIVE CLASS TITRE-----
 function setActiveLinkTitle(clickedLink) {
-  // Sélection de tous les éléments <a> dans la div itemBlock--content__rubiqres
   const links = document.querySelectorAll('.itemBlock--content__rubiqres a');
 
-  // Parcours de tous les liens
-  links.forEach((link) => {
-    // Retire la classe active de tous les liens
+  links.forEach(function(link) {
     link.classList.remove('active');
+    
+    // Vérifie si la classe de l'élément cliqué correspond à celle du lien
+    if (link.classList.contains(clickedLink.classList[0])) {
+      link.classList.add('active');
+    }
   });
-
-  // Ajoute la classe active à l'élément cliqué
-  clickedLink.classList.add('active');
 }
+
+const titles = document.querySelectorAll('.characteresTitle, .staffTitle'); // Sélectionnez tous les titres nécessaires
+
+titles.forEach(function(title) {
+  title.addEventListener('click', function(event) {
+    event.preventDefault();
+    setActiveLinkTitle(title);
+  });
+});
+
 
 // BLOCK APPARITION
 // ScrollReveal().reveal('.personCard', { duration: 800, easing:'ease-in', interval: 150});
@@ -89,30 +98,36 @@ overviewTitle.addEventListener('click', function(event) {
 });
 
 // CHARACTERES BLOCK ACTION 
-const characteresTitle = document.querySelector('.characteresTitle');
+const characteresTitles = document.querySelectorAll('.characteresTitle');
 const characteresBlock = document.querySelector('.characteresBlock');
-// Ajouter un écouteur d'événement pour le clic sur addListBtn
-characteresTitle.addEventListener('click', function(event) {
+
+characteresTitles.forEach(function(characteresTitle) {
+  characteresTitle.addEventListener('click', function(event) {
     event.preventDefault();
     characteresBlock.style.display = 'block'; // Modifier le display en 'none'
     overviewBlock.style.display = 'none'; // Modifier le display en 'block'
     staffBlock.style.display = 'none'; // Modifier le display en 'block'
     reviewsBlock.style.display = 'none'; // Modifier le display en 'none'
     setActiveLinkTitle(this);
+  });
 });
 
+
 // STAFF BLOCK ACTION 
-const staffTitle = document.querySelector('.staffTitle');
+const staffTitles = document.querySelectorAll('.staffTitle');
 const staffBlock = document.querySelector('.staffBlock');
-// Ajouter un écouteur d'événement pour le clic sur addListBtn
-staffTitle.addEventListener('click', function(event) {
+
+staffTitles.forEach(function(staffTitle) {
+  staffTitle.addEventListener('click', function(event) {
     event.preventDefault();
     staffBlock.style.display = 'block'; // Modifier le display en 'none'
     overviewBlock.style.display = 'none'; // Modifier le display en 'block'
     characteresBlock.style.display = 'none'; // Modifier le display en 'none'
     reviewsBlock.style.display = 'none'; // Modifier le display en 'none'
     setActiveLinkTitle(this);
+  });
 });
+
 
 // REVIEWS BLOCK ACTION 
 const reviewsTitle = document.querySelector('.reviewsTitle');
@@ -142,7 +157,7 @@ console.log(mediaIdurl);
 // Fonction pour extraire l'ID de l'URL
 function getMediaIdFromURL() {
   const url = window.location.href;
-  const regex = /\/singleid\/(\d+)/; // Expression régulière pour extraire l'ID de l'URL
+  const regex = /\/item\/(\d+)/; // Expression régulière pour extraire l'ID de l'URL
   const match = url.match(regex);
   if (match && match[1]) {
     return parseInt(match[1]);
@@ -192,7 +207,7 @@ media.relations.edges.forEach((relation) => {
   relationCard.title=relationType
   
     const linkElement = document.createElement('a');
-    linkElement.href = 'singleid.html?id=' + relationId; // URL with the ID as a parameter
+    linkElement.href = 'item.html?id=' + relationId; // URL with the ID as a parameter
 
   // Création de l'image de la relation
   const relationImage = document.createElement('img');
@@ -250,7 +265,7 @@ function displayRecommendations(media) {
     recommendationCard.title= recommendationNode.mediaRecommendation.title.english || recommendationNode.mediaRecommendation.title.romaji|| recommendationNode.mediaRecommendation.title.native;
 
     const linkElement = document.createElement('a');
-    linkElement.href = 'singleid.html?id=' + recommendationId; // URL with the ID as a parameter
+    linkElement.href = 'item.html?id=' + recommendationId; // URL with the ID as a parameter
 
     // Création de l'image de la recommandation
     const recommendationImage = document.createElement('img');
@@ -525,13 +540,19 @@ function displayTrailer(media) {
     trailerImage.alt = 'Thumbnail';
     trailerImage.title = trailerSite;
 
-    // Ajout de l'élément <img> à la section des trailers
-    trailerContainer.appendChild(trailerImage);
+    // Création de l'élément <a>
+    const trailerLink = document.createElement('a');
+    trailerLink.href = 'https://www.youtube.com/@CrunchyrollCollection'; // Ajoutez l'URL du trailer ici
+    trailerLink.appendChild(trailerImage); // Ajoutez l'image à l'élément <a>
+
+    // Ajout de l'élément <a> à la section des trailers
+    trailerContainer.appendChild(trailerLink);
   } else {
     // Si le média n'a pas de trailer, masquer le bloc "overviewBlockTrailer"
     overviewBlockTrailer.style.display = 'none';
   }
 }
+
 
 
 // FORMAT FUNCTION -------------

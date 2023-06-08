@@ -93,7 +93,7 @@ async function getAllTimePopularManga() {
 
 function displayAllTimePopularManga(results) {
   const container = document.getElementById('AllTimePopularManga');
-  const isSearchMangaPage = (window.location.pathname === '/search-manga.html'); // Vérifie si l'URL correspond à la page "search-manga"
+  const isSearchMangaPage = (window.location.pathname === '/search.html'); // Vérifie si l'URL correspond à la page "search-manga"
 
   for (const result of results) {
     const mediaTitle = result.title.english || result.title.romaji || result.title.native;
@@ -121,7 +121,7 @@ function displayAllTimePopularManga(results) {
     contentWrapper.appendChild(rankElement);
 
     const linkElement = document.createElement('a');
-    linkElement.href = 'singleid.html?id=' + result.id; // URL avec l'ID en tant que paramètre
+    linkElement.href = 'item.html?id=' + result.id; // URL avec l'ID en tant que paramètre
 
     const titleElement = document.createElement('p');
     titleElement.classList.add('titleOf');
@@ -186,6 +186,7 @@ function displayAllTimePopularManga(results) {
 
     container.appendChild(element);
   }
+  
 }
 
 
@@ -237,7 +238,7 @@ async function getAllTimePopularAnime() {
 
 function displayAllTimePopularAnime(results) {
   const container = document.getElementById('AllTimePopularAnime');
-  const isSearchMangaPage = (window.location.pathname === '/search-manga.html'); // Vérifie si l'URL correspond à la page "search-manga"
+  const isSearchMangaPage = (window.location.pathname === '/search.html'); // Vérifie si l'URL correspond à la page "search-manga"
 
   for (const result of results) {
     const mediaTitle = result.title.english || result.title.romaji || result.title.native;
@@ -265,7 +266,7 @@ function displayAllTimePopularAnime(results) {
     contentWrapper.appendChild(rankElement);
 
     const linkElement = document.createElement('a');
-    linkElement.href = 'singleid.html?id=' + result.id; // URL avec l'ID en tant que paramètre
+    linkElement.href = 'item.html?id=' + result.id; // URL avec l'ID en tant que paramètre
 
     const titleElement = document.createElement('p');
     titleElement.classList.add('titleOf');
@@ -382,7 +383,7 @@ function displayUpcomingAnime(results) {
     swiperSlide.dataset.mediaId = mediaId;
 
     const linkElement = document.createElement('a');
-    linkElement.href = 'singleid.html?id=' + mediaId; // URL avec l'ID en tant que paramètre
+    linkElement.href = 'item.html?id=' + mediaId; // URL avec l'ID en tant que paramètre
 
     const imageElement = document.createElement('img');
     imageElement.src = mediaImage;
@@ -410,6 +411,7 @@ function displayUpcomingAnime(results) {
       // Faites quelque chose avec l'ID du media
     }
   });
+
 }
 
 // Appel de la fonction pour récupérer les données des animes à venir
@@ -466,7 +468,7 @@ function displayPopularAnime(results) {
     swiperSlide.dataset.mediaId = mediaId;
 
     const linkElement = document.createElement('a');
-    linkElement.href = 'singleid.html?id=' + mediaId; // URL avec l'ID en tant que paramètre
+    linkElement.href = 'item.html?id=' + mediaId; // URL avec l'ID en tant que paramètre
 
     const imageElement = document.createElement('img');
     imageElement.src = mediaImage;
@@ -549,7 +551,7 @@ function displayPopularManga(results) {
     swiperSlide.dataset.mediaId = mediaId;
 
     const linkElement = document.createElement('a');
-    linkElement.href = 'singleid.html?id=' + mediaId; // URL avec l'ID en tant que paramètre
+    linkElement.href = 'item.html?id=' + mediaId; // URL avec l'ID en tant que paramètre
 
     const imageElement = document.createElement('img');
     imageElement.src = mediaImage;
@@ -629,7 +631,7 @@ function displayMovieAnime(results) {
     swiperSlide.dataset.mediaId = mediaId;
 
     const linkElement = document.createElement('a');
-    linkElement.href = 'singleid.html?id=' + mediaId; // URL with the ID as a parameter
+    linkElement.href = 'item.html?id=' + mediaId; // URL with the ID as a parameter
 
     const imageElement = document.createElement('img');
     imageElement.src = mediaImage;
@@ -711,7 +713,7 @@ function displayOneShotManga(results) {
     swiperSlide.dataset.mediaId = mediaId;
 
     const linkElement = document.createElement('a');
-    linkElement.href = 'singleid.html?id=' + mediaId; // URL with the ID as a parameter
+    linkElement.href = 'item.html?id=' + mediaId; // URL with the ID as a parameter
 
     const imageElement = document.createElement('img');
     imageElement.src = mediaImage;
@@ -791,7 +793,7 @@ function displayPopularEcchiManga(results) {
     swiperSlide.dataset.mediaId = mediaId;
 
     const linkElement = document.createElement('a');
-    linkElement.href = 'singleid.html?id=' + mediaId; // URL with the ID as a parameter
+    linkElement.href = 'item.html?id=' + mediaId; // URL with the ID as a parameter
 
     const imageElement = document.createElement('img');
     imageElement.src = mediaImage;
@@ -870,7 +872,7 @@ function displaySportAnime(results) {
     swiperSlide.dataset.mediaId = mediaId;
 
     const linkElement = document.createElement('a');
-    linkElement.href = 'singleid.html?id=' + mediaId; // URL with the ID as a parameter
+    linkElement.href = 'item.html?id=' + mediaId; // URL with the ID as a parameter
 
     const imageElement = document.createElement('img');
     imageElement.src = mediaImage;
@@ -948,7 +950,7 @@ function displayKoreanManga(results) {
     swiperSlide.dataset.mediaId = mediaId;
 
     const linkElement = document.createElement('a');
-    linkElement.href = 'singleid.html?id=' + mediaId; // URL with the ID as a parameter
+    linkElement.href = 'item.html?id=' + mediaId; // URL with the ID as a parameter
 
     const imageElement = document.createElement('img');
     imageElement.src = mediaImage;
@@ -1026,7 +1028,7 @@ function displayThrillerAnime(results) {
     swiperSlide.dataset.mediaId = mediaId;
 
     const linkElement = document.createElement('a');
-    linkElement.href = 'singleid.html?id=' + mediaId; // URL with the ID as a parameter
+    linkElement.href = 'item.html?id=' + mediaId; // URL with the ID as a parameter
 
     const imageElement = document.createElement('img');
     imageElement.src = mediaImage;
@@ -1106,7 +1108,7 @@ function displayTrendingManga(results) {
     swiperSlide.dataset.mediaId = mediaId;
 
     const linkElement = document.createElement('a');
-    linkElement.href = 'singleid.html?id=' + mediaId; // URL with the ID as a parameter
+    linkElement.href = 'item.html?id=' + mediaId; // URL with the ID as a parameter
 
     const imageElement = document.createElement('img');
     imageElement.src = mediaImage;
@@ -1183,7 +1185,7 @@ function displayTrendingAnime(results) {
     swiperSlide.dataset.mediaId = mediaId;
 
     const linkElement = document.createElement('a');
-    linkElement.href = 'singleid.html?id=' + mediaId; // URL with the ID as a parameter
+    linkElement.href = 'item.html?id=' + mediaId; // URL with the ID as a parameter
 
     const imageElement = document.createElement('img');
     imageElement.src = mediaImage;
@@ -1261,7 +1263,7 @@ function displayTrendingMusic(results) {
     swiperSlide.dataset.mediaId = mediaId;
 
     const linkElement = document.createElement('a');
-    linkElement.href = 'singleid.html?id=' + mediaId; // URL with the ID as a parameter
+    linkElement.href = 'item.html?id=' + mediaId; // URL with the ID as a parameter
 
     const imageElement = document.createElement('img');
     imageElement.src = mediaImage;

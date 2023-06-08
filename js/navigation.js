@@ -32,3 +32,17 @@ if (currentScrollPosition > lastScrollPosition && currentScrollPosition > 110) {
 
 lastScrollPosition = currentScrollPosition;
 });
+
+
+const toggleBtn = document.querySelector('.nav-toggle');
+const toggleBtnIcon = document.querySelector('.nav-toggle i');
+const dropMenu = document.querySelector('.dropMenu');
+
+toggleBtn.onclick = function(){
+  const isOpen = dropMenu.classList.contains('menuOpen')
+  
+  toggleBtnIcon.classList = isOpen
+  ? 'fas fa-bars fa-xl'
+  : 'fas fa-xmark fa-xl'
+  dropMenu.classList.toggle('menuOpen')
+}

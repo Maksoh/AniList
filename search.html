@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/style.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
     <script src="https://kit.fontawesome.com/6253f87885.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
     <title>AniList</title>
 </head>
 <body>
@@ -16,12 +17,20 @@
         <!-- NAVIGATION -->
         <nav class="navigation">
             <div class="nav--logo">
-              <img src="img/logo.png" alt="Logo">
+              <a href="index.html" style="text-decoration: none;"><img src="img/logo.png" alt="Logo"></a>
             </div>
             <ul class="nav--links">
-                <li><a href="index.html" id="style-2" >HOME</a></li>
-                <li><a href="search-manga.html" >SEARCH</a></li>
-                <li><a href="mylist.html" >MyLIST</a></li>
+                <li><a href="index.html" id="style-2" data-replace="HOME">HOME</a></li>
+                <li><a href="search.html">SEARCH</a></li>
+                <li><a href="mylist.html">MyLIST</a></li>
+            </ul>
+            <div class="nav-toggle">
+                <i class="fas fa-bars fa-xl"></i>
+              </div>
+            <ul class="nav--links dropMenu ">
+                <li><a href="index.html" id="style-2" data-replace="HOME">HOME</a></li>
+                <li><a href="search.html">SEARCH</a></li>
+                <li><a href="mylist.html">MyLIST</a></li>
             </ul>
         </nav>
 <!-- SEARCH BLOCK -->

@@ -54,7 +54,27 @@ nav {
     filter: drop-shadow(2px 4px 6px black); 
 
 }
-
+.dropMenu{
+    display: none;
+    height: 0;
+    padding: 0;
+    transition: .3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    a {
+        color: #fff;
+        text-decoration: none;
+        // padding: 5px;
+        transition: .3s all ease-in-out;
+        display: none;
+    }
+}
+.menuOpen{
+    height: 150px;
+    padding: 0 20px 20px 20px;
+    a{
+        display: block;
+        padding: 5px;
+    }
+}
 .nav-toggle{
     color: white;
     display: none;
@@ -69,21 +89,26 @@ nav {
     .nav-toggle{
         display: block;
     }
-    // .nav--links{
-    //     display: none;
-    // }
     .nav--links{
+        display: none;
+    }
+    .nav--links .dropMenu{
+        display: block!important;
+    }
+    .dropMenu{
         list-style: none;
         display: flex;
         flex-direction: column;
+        justify-content: center;
+        align-items: center;
         position: fixed;
-        right: 60px;
+        right: 25px;
         top: 0px;
         margin-top: 54px;
         background-color: var(--blackColor);
         border-radius: 0 0 15px 15px;
         gap: var(--mainGap);
-        padding: 20px;
+        // padding: 20px;
         font-size: 14px;
     
     }

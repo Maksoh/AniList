@@ -31,6 +31,11 @@ header{
     margin-left: 10px;
 }
 
+.headerBlock--top  h2:hover {
+    filter: drop-shadow(2px 4px 6px black);
+    cursor: pointer;
+}
+
 .headerBlock--top__element:hover .headerBlock--top__elmentTxt p{
     color: var(--mainColor);
 
