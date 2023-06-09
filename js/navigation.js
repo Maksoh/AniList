@@ -46,3 +46,5 @@ toggleBtn.onclick = function(){
   : 'fas fa-xmark fa-xl'
   dropMenu.classList.toggle('menuOpen')
 }
+
+

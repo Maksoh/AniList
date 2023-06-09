@@ -68,12 +68,14 @@
 .popularBlock--single__card:hover p {
     text-overflow: inherit;
     overflow: visible;
-    animation: marquee 6s linear infinite;
     width: max-content;  
     color: var(--mainColor);
 }
 
-  
+.popularBlock--single__card:hover .marquee{
+    animation: marquee 6s linear infinite;
+  }
+
 @keyframes marquee {
 0% {
     transform: translateX(0%);

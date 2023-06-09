@@ -222,6 +222,10 @@ media.relations.edges.forEach((relation) => {
   relationTitleDiv.classList.add('titleOf');
   relationTitleDiv.appendChild(relationTitle);
   
+  if (relationTitle.textContent.length > 20) {
+    relationTitle.classList.add('marquee');
+  }
+  
   // Ajout de l'image et du titre à la carte de relation
   linkElement.appendChild(relationImage);
   linkElement.appendChild(relationTitleDiv);
@@ -280,6 +284,9 @@ function displayRecommendations(media) {
     recommendationTitleDiv.classList.add('titleOf');
     recommendationTitleDiv.appendChild(recommendationTitle);
 
+    if (recommendationTitle.textContent.length > 20) {
+      recommendationTitle.classList.add('marquee');
+    }
     // Ajout de l'image et du titre à la carte de recommandation
     linkElement.appendChild(recommendationImage);
     linkElement.appendChild(recommendationTitleDiv);

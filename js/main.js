@@ -46,6 +46,209 @@ var swiper = new Swiper(".popularBlock--slider", {
 
 // API -----
 
+// Fonction pour rechercher parmi tous les mangas et tous les animes
+async function searchMedia() {
+  const searchInput = document.getElementById('searchInputlight');
+  const principalSearchAnimeBlock = document.getElementById('principalSearchAnimeBlock');
+  const principalSearchMangaBlock = document.getElementById('principalSearchMangaBlock');
+  const resultSearchMangaBlock = document.querySelector('.resultSearchMangaBlock');
+  const querySearchMedia = `
+    query ($search: String) {
+      anime: Page(page: 1, perPage: 10) {
+        results: media(type: ANIME, search: $search) {
+          id
+          title {
+            romaji
+            english
+            native
+          }
+          coverImage {
+            extraLarge
+          }
+        }
+      }
+      manga: Page(page: 1, perPage: 10) {
+        results: media(type: MANGA, search: $search) {
+          id
+          title {
+            romaji
+            english
+            native
+          }
+          coverImage {
+            extraLarge
+          }
+        }
+      }
+    }
+  `;
+
+  const variables = {
+    search: searchInput.value.trim(),
+  };
+
+  try {
+    // Afficher le bloc resultSearchMangaBlock
+    resultSearchMangaBlock.style.display = 'block';
+
+    // Masquer les blocs principalSearchAnimeBlock et principalSearchMangaBlock
+    principalSearchAnimeBlock.style.display = 'none';
+    principalSearchMangaBlock.style.display = 'none';
+
+    const data = await fetchData(querySearchMedia, variables);
+    const animeResults = data.data.anime.results;
+    const mangaResults = data.data.manga.results;
+    displaySearchResults(animeResults, mangaResults);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+
+// Fonction spécifique pour afficher les résultats de recherche
+function displaySearchResults(animeResults, mangaResults) {
+  const resultSearchMangaBlock = document.getElementById('resultSearchMangaBlock');
+  resultSearchMangaBlock.innerHTML = '';
+
+  // Affichage des résultats pour les animes
+  for (const anime of animeResults) {
+    const mediaTitle = anime.title.english || anime.title.romaji || anime.title.native;
+    const mediaImage = anime.coverImage.extraLarge;
+    const mediaId = anime.id;
+
+    const resultItem = createResultItem(mediaTitle, mediaImage, mediaId);
+    resultSearchMangaBlock.appendChild(resultItem);
+  }
+
+  // Affichage des résultats pour les mangas
+  for (const manga of mangaResults) {
+    const mediaTitle = manga.title.english || manga.title.romaji || manga.title.native;
+    const mediaImage = manga.coverImage.extraLarge;
+    const mediaId = manga.id;
+
+    const resultItem = createResultItem(mediaTitle, mediaImage, mediaId);
+    resultSearchMangaBlock.appendChild(resultItem);
+  }
+}
+
+// Fonction utilitaire pour créer un élément de résultat de recherche
+function createResultItem(mediaTitle, mediaImage, mediaId) {
+  const resultItem = document.createElement('div');
+  resultItem.classList.add('popularBlock--single__card');
+
+  const linkElement = document.createElement('a');
+  linkElement.href = 'item.html?id=' + mediaId;
+
+  const imageElement = document.createElement('img');
+  imageElement.src = mediaImage;
+  imageElement.alt = mediaTitle;
+  imageElement.title = mediaTitle;
+
+  const titleElement = document.createElement('p');
+  titleElement.textContent = mediaTitle;
+
+  const slideText = document.createElement('div');
+  slideText.classList.add('titleOf');
+  slideText.appendChild(titleElement);
+                  // Vérification si le contenu du <p> dépasse 17 caractères
+                  if (titleElement.textContent.length > 20) {
+                    // Ajout de la classe .marquee
+                    titleElement.classList.add('marquee');
+                  }
+
+  linkElement.appendChild(imageElement);
+  linkElement.appendChild(slideText);
+  resultItem.appendChild(linkElement);
+
+  return resultItem;
+}
+
+// Ajout de l'événement de recherche lors de la saisie dans l'input
+const searchInput = document.getElementById('searchInputlight');
+searchInput.addEventListener('input', searchMedia);
+
+const searchInputResult = document.getElementById('searchInputlight');
+const resultSearchMangaBlock = document.querySelector('.resultSearchMangaBlock');
+const resultSearchMangaTitle = resultSearchMangaBlock.querySelector('h2');
+
+searchInputResult.addEventListener('input', function() {
+  resultSearchMangaTitle.textContent = this.value.trim() !== '' ? this.value.trim() : 'Result research';
+});
+
+
+
+
+// Fonction pour récupérer les détails d'un média à partir de son ID
+async function getMediaDetails(mediaId) {
+  const queryMediaDetails = `
+    query ($mediaId: Int) {
+      Media(id: $mediaId) {
+        title {
+          romaji
+          english
+          native
+        }
+       bannerImage
+      }
+    }
+  `;
+
+  const variables = {
+    mediaId: mediaId,
+  };
+
+  try {
+    const data = await fetchData(queryMediaDetails, variables);
+    const media = data.data.Media;
+    return media;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+// Fonction pour afficher les médias dans les diapositives
+async function displayMediaInSlide(mediaId, slideIndex) {
+  const swiperSlides = document.querySelectorAll('.swiper-slide');
+
+  if (slideIndex >= 0 && slideIndex < swiperSlides.length) {
+    const swiperSlide = swiperSlides[slideIndex];
+    const imageElement = swiperSlide.querySelector('img');
+    const titleElement = swiperSlide.querySelector('h1');
+    const discoverLink = swiperSlide.querySelector('.slider--btn');
+
+    // Récupérer les détails du média à partir de son ID
+    const media = await getMediaDetails(mediaId);
+
+    if (media) {
+      const mediaTitle = media.title.english || media.title.romaji || media.title.native;
+      const mediaImage = media.bannerImage;
+
+      // Modifier les attributs src, alt et title de l'image
+      imageElement.src = mediaImage;
+      imageElement.alt = mediaTitle;
+      imageElement.title = mediaTitle;
+
+      // Modifier le contenu du titre
+      titleElement.textContent = mediaTitle;
+
+      // Modifier l'URL du lien de découverte
+      discoverLink.href = `item.html?id=${mediaId}`;
+    }
+  }
+}
+
+// Appel de la fonction pour afficher les médias spécifiés dans les diapositives
+displayMediaInSlide(74347, 0); // Affiche le media 74347 dans la première diapositive
+displayMediaInSlide(87170, 1); // Affiche le media 87170 dans la deuxième diapositive
+displayMediaInSlide(30664, 2); // Affiche le media 30664 dans la troisième diapositive
+displayMediaInSlide(85316, 3); // Affiche le media 85316 dans la quatrième diapositive
+
+
+
+
+
+
 
 async function getAllTimePopularManga() {
   const queryAllTimePopularManga = `
@@ -397,6 +600,12 @@ function displayUpcomingAnime(results) {
     slideText.classList.add('titleOf');
     slideText.appendChild(titleElement);
 
+        // Vérification si le contenu du <p> dépasse 17 caractères
+        if (mediaTitle.length > 23) {
+          // Ajout de la classe .marquee
+          titleElement.classList.add('marquee');
+        }
+
     linkElement.appendChild(imageElement);
     linkElement.appendChild(slideText);
     swiperSlide.appendChild(linkElement);
@@ -482,6 +691,12 @@ function displayPopularAnime(results) {
     slideText.classList.add('titleOf');
     slideText.appendChild(titleElement);
 
+        // Vérification si le contenu du <p> dépasse 17 caractères
+        if (mediaTitle.length > 23) {
+          // Ajout de la classe .marquee
+          titleElement.classList.add('marquee');
+        }
+
     linkElement.appendChild(imageElement);
     linkElement.appendChild(slideText);
     swiperSlide.appendChild(linkElement);
@@ -565,6 +780,12 @@ function displayPopularManga(results) {
     slideText.classList.add('titleOf');
     slideText.appendChild(titleElement);
 
+            // Vérification si le contenu du <p> dépasse 17 caractères
+            if (mediaTitle.length > 23) {
+              // Ajout de la classe .marquee
+              titleElement.classList.add('marquee');
+            }
+
     linkElement.appendChild(imageElement);
     linkElement.appendChild(slideText);
     swiperSlide.appendChild(linkElement);
@@ -644,6 +865,12 @@ function displayMovieAnime(results) {
     const slideText = document.createElement('div');
     slideText.classList.add('titleOf');
     slideText.appendChild(titleElement);
+
+            // Vérification si le contenu du <p> dépasse 17 caractères
+            if (mediaTitle.length > 23) {
+              // Ajout de la classe .marquee
+              titleElement.classList.add('marquee');
+            }
 
     linkElement.appendChild(imageElement);
     linkElement.appendChild(slideText);
@@ -727,6 +954,12 @@ function displayOneShotManga(results) {
     slideText.classList.add('titleOf');
     slideText.appendChild(titleElement);
 
+            // Vérification si le contenu du <p> dépasse 17 caractères
+            if (mediaTitle.length > 23) {
+              // Ajout de la classe .marquee
+              titleElement.classList.add('marquee');
+            }
+
     linkElement.appendChild(imageElement);
     linkElement.appendChild(slideText);
     swiperSlide.appendChild(linkElement);
@@ -807,6 +1040,12 @@ function displayPopularEcchiManga(results) {
     slideText.classList.add('titleOf');
     slideText.appendChild(titleElement);
 
+            // Vérification si le contenu du <p> dépasse 17 caractères
+            if (mediaTitle.length > 23) {
+              // Ajout de la classe .marquee
+              titleElement.classList.add('marquee');
+            }
+
     linkElement.appendChild(imageElement);
     linkElement.appendChild(slideText);
     swiperSlide.appendChild(linkElement);
@@ -886,6 +1125,12 @@ function displaySportAnime(results) {
     slideText.classList.add('titleOf');
     slideText.appendChild(titleElement);
 
+            // Vérification si le contenu du <p> dépasse 17 caractères
+            if (mediaTitle.length > 23) {
+              // Ajout de la classe .marquee
+              titleElement.classList.add('marquee');
+            }
+
     linkElement.appendChild(imageElement);
     linkElement.appendChild(slideText);
     swiperSlide.appendChild(linkElement);
@@ -964,6 +1209,12 @@ function displayKoreanManga(results) {
     slideText.classList.add('titleOf');
     slideText.appendChild(titleElement);
 
+            // Vérification si le contenu du <p> dépasse 17 caractères
+            if (mediaTitle.length > 23) {
+              // Ajout de la classe .marquee
+              titleElement.classList.add('marquee');
+            }
+
     linkElement.appendChild(imageElement);
     linkElement.appendChild(slideText);
     swiperSlide.appendChild(linkElement);
@@ -1041,6 +1292,12 @@ function displayThrillerAnime(results) {
     const slideText = document.createElement('div');
     slideText.classList.add('titleOf');
     slideText.appendChild(titleElement);
+
+            // Vérification si le contenu du <p> dépasse 17 caractères
+            if (mediaTitle.length > 23) {
+              // Ajout de la classe .marquee
+              titleElement.classList.add('marquee');
+            }
 
     linkElement.appendChild(imageElement);
     linkElement.appendChild(slideText);
@@ -1122,6 +1379,12 @@ function displayTrendingManga(results) {
     slideText.classList.add('titleOf');
     slideText.appendChild(titleElement);
 
+            // Vérification si le contenu du <p> dépasse 17 caractères
+            if (mediaTitle.length > 23) {
+              // Ajout de la classe .marquee
+              titleElement.classList.add('marquee');
+            }
+
     linkElement.appendChild(imageElement);
     linkElement.appendChild(slideText);
     swiperSlide.appendChild(linkElement);
@@ -1198,6 +1461,12 @@ function displayTrendingAnime(results) {
     const slideText = document.createElement('div');
     slideText.classList.add('titleOf');
     slideText.appendChild(titleElement);
+
+            // Vérification si le contenu du <p> dépasse 17 caractères
+            if (mediaTitle.length > 23) {
+              // Ajout de la classe .marquee
+              titleElement.classList.add('marquee');
+            }
 
     linkElement.appendChild(imageElement);
     linkElement.appendChild(slideText);
@@ -1276,6 +1545,12 @@ function displayTrendingMusic(results) {
     const slideText = document.createElement('div');
     slideText.classList.add('titleOf');
     slideText.appendChild(titleElement);
+
+            // Vérification si le contenu du <p> dépasse 17 caractères
+            if (mediaTitle.length > 23) {
+              // Ajout de la classe .marquee
+              titleElement.classList.add('marquee');
+            }
 
     linkElement.appendChild(imageElement);
     linkElement.appendChild(slideText);

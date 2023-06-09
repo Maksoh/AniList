@@ -208,8 +208,26 @@ transition: .2s all ease-in-out;
 .relationsBlockSwiper .popularBlock--slider__card :hover p {
     text-overflow: inherit;
     overflow: visible;
-    animation: marquee 6s linear infinite;
+    // animation: marquee 6s linear infinite;
     width: max-content;
+  }
+
+  .relationsBlockSwiper  .popularBlock--single__card p{
+    margin-top: 5px;
+    margin-bottom: 0 !important;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.relationsBlockSwiper .popularBlock--single__card:hover p {
+    text-overflow: inherit;
+    overflow: visible;
+    width: max-content;  
+    color: var(--mainColor);
+}
+
+.popularBlock--single__card:hover .marquee{
+    animation: marquee 6s linear infinite;
   }
   
   @keyframes marquee {
@@ -481,11 +499,15 @@ transition: .2s all ease-in-out;
 }
 
 
+.overviewBlock--trailers a:hover{
+    filter: brightness(0.5);
+}
 .overviewBlock--trailers *{
     text-align: left;
     max-height: 400px!important;
     border-radius: var(--mainRadius);
     object-fit: cover;
+    transition: .3s all ease-in-out;
 
 }
 // 1085 PXIEL MEDIA SCREEN 

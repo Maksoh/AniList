@@ -201,6 +201,12 @@ function displayTopAnime100(results) {
 
     badgeElement.appendChild(badgeNumber);
 
+                // Vérification si le contenu du <p> dépasse 17 caractères
+                if (mediaTitle.length > 23) {
+                  // Ajout de la classe .marquee
+                  titleElement.classList.add('marquee');
+                }
+
     linkElement.appendChild(badgeElement);
     linkElement.appendChild(imageElement);
     linkElement.appendChild(slideText);
@@ -321,6 +327,12 @@ function displayTopManga100(results) {
 
     badgeElement.appendChild(badgeNumber);
 
+                // Vérification si le contenu du <p> dépasse 17 caractères
+                if (mediaTitle.length > 23) {
+                  // Ajout de la classe .marquee
+                  titleElement.classList.add('marquee');
+                }
+
     linkElement.appendChild(badgeElement);
     linkElement.appendChild(imageElement);
     linkElement.appendChild(slideText);
@@ -413,6 +425,11 @@ function displayPopularEchhiAll(results) {
     const slideText = document.createElement('div');
     slideText.classList.add('titleOf');
     slideText.appendChild(titleElement);
+                // Vérification si le contenu du <p> dépasse 17 caractères
+                if (mediaTitle.length > 23) {
+                  // Ajout de la classe .marquee
+                  titleElement.classList.add('marquee');
+                }
 
     linkElement.appendChild(imageElement);
     linkElement.appendChild(slideText);
@@ -504,6 +521,12 @@ function displayPopularThrillerAll(results) {
     slideText.classList.add('titleOf');
     slideText.appendChild(titleElement);
 
+                // Vérification si le contenu du <p> dépasse 17 caractères
+                if (mediaTitle.length > 23) {
+                  // Ajout de la classe .marquee
+                  titleElement.classList.add('marquee');
+                }
+
     linkElement.appendChild(imageElement);
     linkElement.appendChild(slideText);
     swiperSlide.appendChild(linkElement);
@@ -594,6 +617,12 @@ function displayPopularSportAll(results) {
     slideText.classList.add('titleOf');
     slideText.appendChild(titleElement);
 
+                // Vérification si le contenu du <p> dépasse 17 caractères
+                if (mediaTitle.length > 23) {
+                  // Ajout de la classe .marquee
+                  titleElement.classList.add('marquee');
+                }
+
     linkElement.appendChild(imageElement);
     linkElement.appendChild(slideText);
     swiperSlide.appendChild(linkElement);
@@ -683,6 +712,12 @@ function displayPopularMusicAll(results) {
     const slideText = document.createElement('div');
     slideText.classList.add('titleOf');
     slideText.appendChild(titleElement);
+
+                // Vérification si le contenu du <p> dépasse 17 caractères
+                if (mediaTitle.length > 23) {
+                  // Ajout de la classe .marquee
+                  titleElement.classList.add('marquee');
+                }
 
     linkElement.appendChild(imageElement);
     linkElement.appendChild(slideText);
@@ -775,6 +810,12 @@ function displayPopularOneShotAll(results) {
     slideText.classList.add('titleOf');
     slideText.appendChild(titleElement);
 
+                // Vérification si le contenu du <p> dépasse 17 caractères
+                if (mediaTitle.length > 23) {
+                  // Ajout de la classe .marquee
+                  titleElement.classList.add('marquee');
+                }
+
     linkElement.appendChild(imageElement);
     linkElement.appendChild(slideText);
     swiperSlide.appendChild(linkElement);
@@ -865,6 +906,12 @@ function displayPopularManhwaAll(results) {
     slideText.classList.add('titleOf');
     slideText.appendChild(titleElement);
 
+                // Vérification si le contenu du <p> dépasse 17 caractères
+                if (mediaTitle.length > 23) {
+                  // Ajout de la classe .marquee
+                  titleElement.classList.add('marquee');
+                }
+
     linkElement.appendChild(imageElement);
     linkElement.appendChild(slideText);
     swiperSlide.appendChild(linkElement);
@@ -953,6 +1000,12 @@ function displayPopularMoviesAll(results) {
     const slideText = document.createElement('div');
     slideText.classList.add('titleOf');
     slideText.appendChild(titleElement);
+
+                // Vérification si le contenu du <p> dépasse 17 caractères
+                if (mediaTitle.length > 23) {
+                  // Ajout de la classe .marquee
+                  titleElement.classList.add('marquee');
+                }
 
     linkElement.appendChild(imageElement);
     linkElement.appendChild(slideText);
@@ -1043,6 +1096,12 @@ function displayTrendingAnimeAll(results) {
     const slideText = document.createElement('div');
     slideText.classList.add('titleOf');
     slideText.appendChild(titleElement);
+
+                // Vérification si le contenu du <p> dépasse 17 caractères
+                if (mediaTitle.length > 23) {
+                  // Ajout de la classe .marquee
+                  titleElement.classList.add('marquee');
+                }
 
     linkElement.appendChild(imageElement);
     linkElement.appendChild(slideText);
@@ -1136,6 +1195,12 @@ function displayTrendingMangaAll(results) {
     slideText.classList.add('titleOf');
     slideText.appendChild(titleElement);
 
+                // Vérification si le contenu du <p> dépasse 17 caractères
+                if (mediaTitle.length > 23) {
+                  // Ajout de la classe .marquee
+                  titleElement.classList.add('marquee');
+                }
+
     linkElement.appendChild(imageElement);
     linkElement.appendChild(slideText);
     swiperSlide.appendChild(linkElement);
@@ -1225,6 +1290,12 @@ function displayPopularAnimeAll(results) {
     const slideText = document.createElement('div');
     slideText.classList.add('titleOf');
     slideText.appendChild(titleElement);
+
+                // Vérification si le contenu du <p> dépasse 17 caractères
+                if (mediaTitle.length > 23) {
+                  // Ajout de la classe .marquee
+                  titleElement.classList.add('marquee');
+                }
 
     linkElement.appendChild(imageElement);
     linkElement.appendChild(slideText);
@@ -1356,6 +1427,12 @@ function displayUpcomingAnimeAll(results) {
     slideText.classList.add('titleOf');
     slideText.appendChild(titleElement);
 
+                // Vérification si le contenu du <p> dépasse 17 caractères
+                if (mediaTitle.length > 23) {
+                  // Ajout de la classe .marquee
+                  titleElement.classList.add('marquee');
+                }
+
     linkElement.appendChild(imageElement);
     linkElement.appendChild(slideText);
     swiperSlide.appendChild(linkElement);
@@ -1403,6 +1480,12 @@ function displayPopularMangaAll(results) {
     const slideText = document.createElement('div');
     slideText.classList.add('titleOf');
     slideText.appendChild(titleElement);
+
+                // Vérification si le contenu du <p> dépasse 17 caractères
+                if (mediaTitle.length > 23) {
+                  // Ajout de la classe .marquee
+                  titleElement.classList.add('marquee');
+                }
 
     linkElement.appendChild(imageElement);
     linkElement.appendChild(slideText);

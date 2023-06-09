@@ -66,10 +66,12 @@
 .popularBlock--slider__card:hover p {
     text-overflow: inherit;
     overflow: visible;
-    animation: marquee 6s linear infinite;
     width: max-content;
   }
   
+  .popularBlock--slider__card:hover .marquee{
+    animation: marquee 6s linear infinite;
+  }
   @keyframes marquee {
     0% {
       transform: translateX(0); /* Départ à la position d'origine */
