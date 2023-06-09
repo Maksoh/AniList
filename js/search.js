@@ -97,3 +97,133 @@ window.addEventListener('scroll', handleZoomScroll);
 
 
 
+
+// Fonction pour rechercher parmi tous les mangas et tous les animes
+async function searchMedia() {
+  const searchInput = document.getElementById('searchInputlight');
+  const principalSearchAnimeBlock = document.getElementById('principalSearchAnimeBlock');
+  const principalSearchMangaBlock = document.getElementById('principalSearchMangaBlock');
+  const resultSearchMangaBlock = document.querySelector('.resultSearchMangaBlock');
+  const querySearchMedia = `
+    query ($search: String) {
+      anime: Page(page: 1, perPage: 10) {
+        results: media(type: ANIME, search: $search) {
+          id
+          title {
+            romaji
+            english
+            native
+          }
+          coverImage {
+            extraLarge
+          }
+        }
+      }
+      manga: Page(page: 1, perPage: 10) {
+        results: media(type: MANGA, search: $search) {
+          id
+          title {
+            romaji
+            english
+            native
+          }
+          coverImage {
+            extraLarge
+          }
+        }
+      }
+    }
+  `;
+
+  const variables = {
+    search: searchInput.value.trim(),
+  };
+
+  try {
+    // Afficher le bloc resultSearchMangaBlock
+    resultSearchMangaBlock.style.display = 'block';
+
+    // Masquer les blocs principalSearchAnimeBlock et principalSearchMangaBlock
+    principalSearchAnimeBlock.style.display = 'none';
+    principalSearchMangaBlock.style.display = 'none';
+
+    const data = await fetchData(querySearchMedia, variables);
+    const animeResults = data.data.anime.results;
+    const mangaResults = data.data.manga.results;
+    displaySearchResults(animeResults, mangaResults);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+
+// Fonction spécifique pour afficher les résultats de recherche
+function displaySearchResults(animeResults, mangaResults) {
+  const resultSearchMangaBlock = document.getElementById('resultSearchMangaBlock');
+  resultSearchMangaBlock.innerHTML = '';
+
+  // Affichage des résultats pour les animes
+  for (const anime of animeResults) {
+    const mediaTitle = anime.title.english || anime.title.romaji || anime.title.native;
+    const mediaImage = anime.coverImage.extraLarge;
+    const mediaId = anime.id;
+
+    const resultItem = createResultItem(mediaTitle, mediaImage, mediaId);
+    resultSearchMangaBlock.appendChild(resultItem);
+  }
+
+  // Affichage des résultats pour les mangas
+  for (const manga of mangaResults) {
+    const mediaTitle = manga.title.english || manga.title.romaji || manga.title.native;
+    const mediaImage = manga.coverImage.extraLarge;
+    const mediaId = manga.id;
+
+    const resultItem = createResultItem(mediaTitle, mediaImage, mediaId);
+    resultSearchMangaBlock.appendChild(resultItem);
+  }
+}
+
+// Fonction utilitaire pour créer un élément de résultat de recherche
+function createResultItem(mediaTitle, mediaImage, mediaId) {
+  const resultItem = document.createElement('div');
+  resultItem.classList.add('popularBlock--single__card');
+
+  const linkElement = document.createElement('a');
+  linkElement.href = 'item.html?id=' + mediaId;
+
+  const imageElement = document.createElement('img');
+  imageElement.src = mediaImage;
+  imageElement.alt = mediaTitle;
+  imageElement.title = mediaTitle;
+
+  const titleElement = document.createElement('p');
+  titleElement.textContent = mediaTitle;
+
+  const slideText = document.createElement('div');
+  slideText.classList.add('titleOf');
+  slideText.appendChild(titleElement);
+                  // Vérification si le contenu du <p> dépasse 17 caractères
+                  if (titleElement.textContent.length > 20) {
+                    // Ajout de la classe .marquee
+                    titleElement.classList.add('marquee');
+                  }
+
+  linkElement.appendChild(imageElement);
+  linkElement.appendChild(slideText);
+  resultItem.appendChild(linkElement);
+
+  return resultItem;
+}
+
+// Ajout de l'événement de recherche lors de la saisie dans l'input
+const searchInput = document.getElementById('searchInputlight');
+searchInput.addEventListener('input', searchMedia);
+
+const searchInputResult = document.getElementById('searchInputlight');
+const resultSearchMangaBlock = document.querySelector('.resultSearchMangaBlock');
+const resultSearchMangaTitle = resultSearchMangaBlock.querySelector('h2');
+
+searchInputResult.addEventListener('input', function() {
+  resultSearchMangaTitle.textContent = this.value.trim() !== '' ? this.value.trim() : 'Result research';
+});
+
