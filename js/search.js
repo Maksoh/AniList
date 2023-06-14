@@ -157,7 +157,7 @@ async function searchMedia() {
 }
 
 
-// Fonction spécifique pour afficher les résultats de recherche
+// Fonction pour afficher les résultats de recherche
 function displaySearchResults(animeResults, mangaResults) {
   const resultSearchMangaBlock = document.getElementById('resultSearchMangaBlock');
   resultSearchMangaBlock.innerHTML = '';
@@ -183,7 +183,7 @@ function displaySearchResults(animeResults, mangaResults) {
   }
 }
 
-// Fonction utilitaire pour créer un élément de résultat de recherche
+// Fonction pour créer un élément de résultat de recherche
 function createResultItem(mediaTitle, mediaImage, mediaId) {
   const resultItem = document.createElement('div');
   resultItem.classList.add('popularBlock--single__card');

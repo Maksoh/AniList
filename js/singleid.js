@@ -34,27 +34,6 @@ var swiper = new Swiper(".relationsBlockSwiper", {
 
 
 
-// // BOUTON LIST ADD 
-// // Récupérer les références des boutons
-// const addListBtn = document.querySelector('.addListbtn');
-// const removeListBtn = document.querySelector('.removeListbtn');
-
-// // Ajouter un écouteur d'événement pour le clic sur addListBtn
-// addListBtn.addEventListener('click', function() {
-//     addListBtn.style.display = 'none'; // Modifier le display en 'none'
-//     removeListBtn.style.display = 'block'; // Modifier le display en 'block'
-// });
-// removeListBtn.addEventListener('click', function() {
-//   addListBtn.style.display = 'block'; // Modifier le display en 'none'
-//   removeListBtn.style.display = 'none'; // Modifier le display en 'block'
-// });
-
-// Tableau pour stocker les IDs des médias ajoutés à la liste
-
-
-
-
-
 // ::::::::::: //
 
 // FUNCTION ACTIVE CLASS TITRE-----
@@ -81,8 +60,8 @@ titles.forEach(function(title) {
 });
 
 
-// BLOCK APPARITION
-// ScrollReveal().reveal('.personCard', { duration: 800, easing:'ease-in', interval: 150});
+// BLOCK APPARITION----------
+
 // OVERVIEW BLOCK ACTION 
 const overviewTitle = document.querySelector('.overviewTitle');
 const overviewBlock = document.querySelector('.relationsBlock');
@@ -148,16 +127,16 @@ reviewsTitle.addEventListener('click', function(event) {
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 
-// Récupérer la valeur de l'ID à partir des paramètres de l'URL
+// Récupérer valeur de l'ID à partir des paramètres de l'URL
 const mediaIdurl = urlParams.get('id');
 
-// Utiliser l'ID comme vous le souhaitez dans la nouvelle page
+
 console.log(mediaIdurl);
 
 // Fonction pour extraire l'ID de l'URL
 function getMediaIdFromURL() {
   const url = window.location.href;
-  const regex = /\/item\/(\d+)/; // Expression régulière pour extraire l'ID de l'URL
+  const regex = /\/item\/(\d+)/; // extraire l'ID de l'URL
   const match = url.match(regex);
   if (match && match[1]) {
     return parseInt(match[1]);
@@ -218,7 +197,7 @@ media.relations.edges.forEach((relation) => {
   const relationTitle = document.createElement('p');
   relationTitle.textContent = relationNode.title.english || relationNode.title.romaji || relationNode.title.native;
 
-  var relationTitleDiv = document.createElement('div'); // Créez un élément div pour le conteneur de texte
+  var relationTitleDiv = document.createElement('div'); 
   relationTitleDiv.classList.add('titleOf');
   relationTitleDiv.appendChild(relationTitle);
   
@@ -255,7 +234,7 @@ function hideRelationsBlockIfEmpty() {
 // RECOMMENDATIONS FUNCTION -------------
 
 function displayRecommendations(media) {
-  // Sélection de l'élément HTML
+  
   const relationsSwiper = document.getElementById('recommendationsSwiper');
 
   // Parcours des recommandations et création des éléments HTML correspondants
@@ -269,7 +248,7 @@ function displayRecommendations(media) {
     recommendationCard.title= recommendationNode.mediaRecommendation.title.english || recommendationNode.mediaRecommendation.title.romaji|| recommendationNode.mediaRecommendation.title.native;
 
     const linkElement = document.createElement('a');
-    linkElement.href = 'item.html?id=' + recommendationId; // URL with the ID as a parameter
+    linkElement.href = 'item.html?id=' + recommendationId; 
 
     // Création de l'image de la recommandation
     const recommendationImage = document.createElement('img');
@@ -280,7 +259,7 @@ function displayRecommendations(media) {
     const recommendationTitle = document.createElement('p');
     recommendationTitle.textContent = recommendationNode.mediaRecommendation.title.english || recommendationNode.mediaRecommendation.title.romaji || recommendationNode.mediaRecommendation.title.native;
 
-    var recommendationTitleDiv = document.createElement('div'); // Créez un élément div pour le conteneur de texte
+    var recommendationTitleDiv = document.createElement('div'); 
     recommendationTitleDiv.classList.add('titleOf');
     recommendationTitleDiv.appendChild(recommendationTitle);
 
@@ -313,7 +292,7 @@ function hideRecommendationsBlockIfEmpty() {
 // CHARACTERES FUNCTION -------------
 // Fonction pour afficher les personnages
 function displayCharacters(media) {
-  // Sélection de l'élément HTML
+  
   const characterContainer = document.querySelector('.overviewBlockCharacteres ');
 
   // Parcours des personnages et création des cartes correspondantes
@@ -341,7 +320,7 @@ function hideCharacterBlockIfEmpty() {
 
 // Fonction pour afficher tous les personnages
 function displayAllCharacters(media) {
-  // Sélection de l'élément HTML
+  
   const characterContainer = document.querySelector('.characteresBlock .cardBlock');
 
   // Parcours des personnages et création des cartes correspondantes
@@ -376,9 +355,9 @@ function createCharacterCard(character, characterRolee) {
   const characterRole = document.createElement('span');
   characterRole.textContent = characterRolee;
 
-  characterName.appendChild(characterRole); // Ajout du rôle dans le paragraphe
+  characterName.appendChild(characterRole); // Ajout du rôle 
 
-  // Ajout des éléments à la carte de personnage
+  // Ajout des éléments à la carte  personnage
   characterImageLink.appendChild(characterImage);
   characterInfo.appendChild(characterName);
 
@@ -392,7 +371,7 @@ function createCharacterCard(character, characterRolee) {
 
 // Fonction pour afficher les membres du staff (5 premiers)
 function displayStaff(media) {
-  // Sélection de l'élément HTML
+  
   const staffContainer = document.querySelector('.overviewBlockStaff');
 
   // Parcours des membres du staff et création des cartes correspondantes (5 premiers)
@@ -418,7 +397,7 @@ function hideStaffBlockIfEmpty() {
 
 // Fonction pour afficher tous les membres du staff
 function displayAllStaff(media) {
-  // Sélection de l'élément HTML
+  
   const staffContainer = document.querySelector('.staffBlock .cardBlock');
 
   // Parcours des membres du staff et création des cartes correspondantes
@@ -452,7 +431,7 @@ function createStaffCard(staffMember, staffRole) {
   const staffPosition = document.createElement('span');
   staffPosition.textContent = staffRole;
 
-  staffName.appendChild(staffPosition); // Ajout du poste dans le paragraphe
+  staffName.appendChild(staffPosition); // Ajout du poste dans paragraphe
 
   // Ajout des éléments à la carte du membre du staff
   staffImageLink.appendChild(staffImage);
@@ -506,7 +485,7 @@ function createReviewCard(review) {
 
 // SOCIALS FUNCTION -------------
 function displaySocials(media) {
-  // Sélection de l'élément HTML
+  
   const socialsContainer = document.querySelector('.overviewBlock--socials');
 
   // Parcours des liens sociaux et création des éléments HTML correspondants
@@ -532,30 +511,29 @@ function hideSocialsBlockIfEmpty() {
 
 // TRAILER FUNCTION -------------
 function displayTrailer(media) {
-  // Sélection de l'élément HTML
+  
   const trailerContainer = document.querySelector('.overviewBlock--trailers');
   const overviewBlockTrailer = document.querySelector('.overviewBlockTrailer');
 
-  // Vérification de la présence du trailer
+  // Vérification  présence du trailer
   if (media.trailer) {
     const trailerThumbnail = media.trailer.thumbnail;
     const trailerSite = media.trailer.site;
 
-    // Création de l'élément <img> avec le thumbnail et le site en tant que titre
     const trailerImage = document.createElement('img');
     trailerImage.src = trailerThumbnail;
     trailerImage.alt = 'Thumbnail';
     trailerImage.title = trailerSite;
 
-    // Création de l'élément <a>
-    const trailerLink = document.createElement('a');
-    trailerLink.href = 'https://www.youtube.com/@CrunchyrollCollection'; // Ajoutez l'URL du trailer ici
-    trailerLink.appendChild(trailerImage); // Ajoutez l'image à l'élément <a>
 
-    // Ajout de l'élément <a> à la section des trailers
+    const trailerLink = document.createElement('a');
+    trailerLink.href = 'https://www.youtube.com/@CrunchyrollCollection';
+    trailerLink.appendChild(trailerImage);
+
+  
     trailerContainer.appendChild(trailerLink);
   } else {
-    // Si le média n'a pas de trailer, masquer le bloc "overviewBlockTrailer"
+    // Si média n'a pas de trailer = masquer le bloc "overviewBlockTrailer"
     overviewBlockTrailer.style.display = 'none';
   }
 }
@@ -564,14 +542,14 @@ function displayTrailer(media) {
 
 // FORMAT FUNCTION -------------
 function displayFormat(media) {
-  // Sélection de l'élément HTML
+
   const formatElement = document.querySelector('.formatQuery p span');
   // Mise à jour du format
   formatElement.textContent = media.format;
 }
 // STATUS FUNCTION -------------
 function displayStatus(media) {
-  // Sélection de l'élément HTML
+
   const statusElement = document.querySelector('.statusQuery p span');
   // Mise à jour du format
   statusElement.textContent = media.status ;
@@ -592,7 +570,7 @@ function displayStartDate(media) {
     "Nov",
     "Dec",
   ];
-  // Sélection de l'élément HTML
+
   const startElement = document.querySelector('.startQuery p span');
   // Mise à jour du format
   startElement.textContent = moisEcrits[media.startDate.month - 1]  + ' ' + media.startDate.day  + ','+ ' ' +media.startDate.year ;
@@ -614,7 +592,7 @@ function displayEndDate(media) {
     "Nov",
     "Dec",
   ];
-  // Sélection de l'élément HTML
+  
 const endElement = document.querySelector('.endQuery p span');
 
 if (media.endDate.month !== undefined && media.endDate.day !== null && media.endDate.year !== null) {
@@ -630,7 +608,7 @@ if (media.endDate.month !== undefined && media.endDate.day !== null && media.end
 
 // STUDIO OR SOURCE  FUNCTION -------------
 function displaySourceOrStudio(media) {
-  // Sélection de l'élément HTML
+  
   const sourceOrStudioElement = document.querySelector('.studioQuery p span');
   const pElement = document.querySelector('.studioQuery p');
   
@@ -644,7 +622,7 @@ function displaySourceOrStudio(media) {
 
 // GENRES FUNCTION -------------
 function displayGenres(media) {
-  // Sélection de l'élément HTML parent
+  
   const pElement = document.querySelector('.genresQuery p');
 
   if (media.genres.length > 0) {
@@ -667,7 +645,7 @@ function displayGenres(media) {
 // CHAPTERS FUNCTION -------------
 function displayChapters(media) {
 
-    // Sélection de l'élément HTML
+    
     const chaptersElement = document.querySelector('.chaptersQuery p span');
     // Mise à jour du format
     chaptersElement.textContent = media.chapters ;
@@ -676,23 +654,15 @@ function displayChapters(media) {
 // VOLUMES FUNCTION -------------
 function displayVolumes(media) {
 
-    // Sélection de l'élément HTML
     const volumesElement = document.querySelector('.volummesQuery p span');
     // Mise à jour du format
    volumesElement.textContent = media.volumes ;
 }
   
-// // EPISODES FUNCTION -------------
-// function displayEpisodes(media) {
 
-//     // Sélection de l'élément HTML
-//     const episodesElement = document.querySelector('.episodesQuery p span');
-//     // Mise à jour du format
-//     episodesElement.textContent = media.episodes ;
-// }
 
 function displayEpisodes(media) {
-  // Sélection de l'élément HTML
+  
   const episodesElement = document.querySelector('.episodesQuery p span');
   const pElement = document.querySelector('.episodesQuery p');
 
@@ -707,13 +677,13 @@ function displayEpisodes(media) {
 
 // DURATION FUNCTION -------------
 function displayDuration(media) {
-  // Sélection de l'élément span
+
   const spanElement = document.querySelector('.durationQuery p span');
   
-  // Sélection de la div parent
+
   const durationQueryDiv = document.querySelector('.durationQuery');
 
-  // Vérifier si la durée est null ou inférieure à 60 minutes
+  // Vérifie si la durée est null ou inférieure à 60 minutes
   if (media.duration === null || media.duration < 60) {
     spanElement.textContent = media.duration + ' min';
   } else {
@@ -721,7 +691,7 @@ function displayDuration(media) {
     const hours = Math.floor(media.duration / 60);
     const minutes = media.duration % 60;
 
-    // Construire la chaîne de format "h min"
+    // transformation en "h min"
     let durationString = '';
     if (hours > 0) {
       durationString += hours + 'h ';
@@ -746,7 +716,7 @@ function displayDuration(media) {
 
 // SCORE FUNCTION -------------
 function displayScore(media) {
-  // Sélection de l'élément HTML
+  
   const scoreElement = document.querySelector('.scoreQuery p span');
   // Mise à jour du format
   scoreElement.textContent = media.averageScore + '%'+ ' ' +'❤';
@@ -755,7 +725,6 @@ function displayScore(media) {
 // ROMAJI TITLE FUNCTION -------------
 function displayRomaji(media) {
 
-  // Sélection de l'élément HTML
   const romajiElement = document.querySelector('.romajiQuery p span');
   // Mise à jour du format
   romajiElement.textContent = media.title.romaji ;
@@ -764,7 +733,7 @@ function displayRomaji(media) {
 // NATIVE TITLE FUNCTION -------------
 function displayNative(media) {
 
-  // Sélection de l'élément HTML
+  
   const scoreElement = document.querySelector('.nativeQuery p span');
   // Mise à jour du format
   scoreElement.textContent = media.title.native ;
@@ -772,15 +741,15 @@ function displayNative(media) {
 
 
 function hideEmptyInformationBlocks() {
-  // Sélection de tous les divs "infoItemQuery" dans "itemInfosWrapper"
+  // Sélection de toutes les divs "infoItemQuery" dans "itemInfosWrapper"
   const infoItemQueries = document.querySelectorAll('.itemInfosWrapper .infoItemQuery');
 
   // Parcours de chaque div
   infoItemQueries.forEach((infoItemQuery) => {
-    // Sélection du span à l'intérieur du div
+    // Sélection span à l'intérieur de la div
     const spanElement = infoItemQuery.querySelector('span');
 
-    // Vérification si le span est vide ou contient "NULL MIN"
+    // Vérifie si le span est vide ou contient "NULL MIN"
     if (!spanElement.textContent.trim()) {
       // Masquage du div parent
       infoItemQuery.style.display = 'none';
@@ -800,7 +769,7 @@ function hideEmptyInformationBlocks() {
 const mediaId = mediaIdurl;
 
 if (mediaId) {
-  // Construction de la query avec la variable
+
   const query = `
     query ($mediaId: Int) {
       Media(id: $mediaId) {
@@ -974,13 +943,13 @@ if (mediaId) {
       hideEmptyInformationBlocks();
       hideCharacterBlockIfEmpty();
       hideStaffBlockIfEmpty();
-      console.log(media); // Affichage des données du média
+      console.log(media); 
     } catch (error) {
       console.log(error);
     }
   }
 
-  // Fonction générique pour effectuer une requête GraphQL
+  // Fonction pour effectuer une requête GraphQL
   async function fetchData(query, variables) {
     const url = 'https://graphql.anilist.co';
     const options = {
@@ -1021,7 +990,7 @@ let mediaList = [];
 
 // Fonction appelée lors du clic sur le bouton "Add"
 function addToMediaList() {
-  // Récupérer l'ID du média (supposons que vous l'ayez déjà stocké dans la variable "mediaId")
+  // Récupérer l'ID du média (si déjà stocké dans "mediaId")
   if (mediaId) {
     // Vérifier si le média n'est pas déjà dans la liste
     if (!mediaList.includes(mediaId)) {
@@ -1053,7 +1022,7 @@ function removeFromMediaList() {
   if (index > -1) {
     mediaList.splice(index, 1);
 
-    // Mettre à jour le stockage local avec la nouvelle liste
+    // Mettre à jour le local storage avec la nouvelle liste
     localStorage.setItem('mediaList', JSON.stringify(mediaList));
 
     // Masquer le bouton "Remove" et afficher le bouton "Add"
@@ -1074,14 +1043,14 @@ document.querySelector('.removeListbtn').addEventListener('click', removeFromMed
 
 
 
-// Récupérer les données du stockage local lors du chargement de la page
+// Récupérer les données du local storage lors du chargement de la page
 window.addEventListener('load', function() {
   const storedMediaList = localStorage.getItem('mediaList');
 
   if (storedMediaList) {
     mediaList = JSON.parse(storedMediaList);
 
-    // Mettre à jour l'affichage des boutons en fonction de mediaList
+    // Mets à jour l'affichage des boutons en fonction de mediaList
     if (mediaList.includes(mediaId)) {
       document.querySelector('.addListbtn').style.display = 'none';
       document.querySelector('.removeListbtn').style.display = '';

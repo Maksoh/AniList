@@ -1,27 +1,11 @@
-// SWIPER JS 
-
-// var swiper = new Swiper(".relationsBlockSwiper", {
-//   slidesPerView: 6,
-//   spaceBetween: 20,
-//   freeMode: true,
-
-// });
-
-
-
-// // SCROLL REVEAL
-// ScrollReveal().reveal('.popularBlock--single__card', { duration: 800, easing:'ease-in', interval: 150});
-
-
-
 
 //------------- API ----------
 
 
-// Fonction spécifique pour afficher les résultats de la recherche de mangas
+// Fonction pour afficher les résultats de la recherche de mangas
 function displaySearchAllManga(results) {
   const searchWrapper = document.getElementById('resultSearchMangaBlock');
-  searchWrapper.innerHTML = ''; // Effacer les résultats précédents
+  searchWrapper.innerHTML = ''; // Efface les résultats précédents
 
   for (const result of results) {
     const mediaTitle = result.title.english || result.title.romaji || result.title.native;
@@ -34,7 +18,7 @@ function displaySearchAllManga(results) {
     resultItem.dataset.mediaId = mediaId;
 
     const linkElement = document.createElement('a');
-    linkElement.href = 'item.html?id=' + mediaId; // URL avec l'ID en tant que paramètre
+    linkElement.href = 'item.html?id=' + mediaId; 
 
     const imageElement = document.createElement('img');
     imageElement.src = mediaImage;
@@ -59,14 +43,14 @@ function displaySearchAllManga(results) {
     if (clickedElement) {
       const mediaId = clickedElement.dataset.mediaId;
       console.log(mediaId);
-      // Faites quelque chose avec l'ID du media
+
     }
   });
   // SCROLL REVEAL
   ScrollReveal().reveal('.searchResultItem', { duration: 800, easing: 'ease-in', interval: 150 });
 }
 
-// Requête GraphQL pour rechercher des mangas en fonction de l'entrée utilisateur
+// Requête GraphQL pour rechercher des mangas en fonction de l'entrée dans l'input
 async function getSearchAllManga(searchQuery) {
   const querySearchManga = `
     query ($search: String) {
@@ -104,7 +88,7 @@ async function getSearchAllManga(searchQuery) {
 
 
 
-// Fonction pour récupérer les données des 100 meilleurs animes
+// Fonction pour récupérer les 100 meilleurs animes
 async function getTopAnime100() {
   const queryTopAnime100 = `
     query ($page: Int) {
@@ -149,7 +133,7 @@ async function getTopAnime100() {
   }
 }
 
-// Fonction spécifique pour afficher les résultats des 100 meilleurs animes
+// Fonction pour afficher les 100 meilleurs animes
 function displayTopAnime100(results) {
   const swiperWrapper = document.getElementById('topAnimeAll');
 
@@ -165,7 +149,7 @@ function displayTopAnime100(results) {
     swiperSlide.dataset.mediaId = mediaId;
 
     const linkElement = document.createElement('a');
-    linkElement.href = 'item.html?id=' + mediaId; // URL avec l'ID en tant que paramètre
+    linkElement.href = 'item.html?id=' + mediaId; 
 
     const imageElement = document.createElement('img');
     imageElement.src = mediaImage;
@@ -219,7 +203,7 @@ function displayTopAnime100(results) {
     if (clickedElement) {
       const mediaId = clickedElement.dataset.mediaId;
       console.log(mediaId);
-      // Faites quelque chose avec l'ID du media
+      
     }
   });
 
@@ -228,7 +212,7 @@ function displayTopAnime100(results) {
 }
 
 
-// Fonction pour récupérer les données des 100 meilleurs mangas
+// Fonction pour récupérer les 100 meilleurs mangas
 async function getTopManga100() {
   const queryTopManga100 = `
     query ($page: Int) {
@@ -275,7 +259,7 @@ async function getTopManga100() {
 }
 
 
-// Fonction spécifique pour afficher les résultats des 100 meilleurs mangas
+// Fonction pour afficher les 100 meilleurs mangas
 function displayTopManga100(results) {
   const swiperWrapper = document.getElementById('topMangaAll');
 
@@ -291,7 +275,7 @@ function displayTopManga100(results) {
     swiperSlide.dataset.mediaId = mediaId;
 
     const linkElement = document.createElement('a');
-    linkElement.href = 'item.html?id=' + mediaId; // URL avec l'ID en tant que paramètre
+    linkElement.href = 'item.html?id=' + mediaId; 
 
     const imageElement = document.createElement('img');
     imageElement.src = mediaImage;
@@ -345,7 +329,7 @@ function displayTopManga100(results) {
     if (clickedElement) {
       const mediaId = clickedElement.dataset.mediaId;
       console.log(mediaId);
-      // Faites quelque chose avec l'ID du media
+      
     }
   });
   // SCROLL REVEAL
@@ -355,7 +339,7 @@ function displayTopManga100(results) {
 
 
 
-// Fonction pour récupérer les données des animes populaires
+// Fonction pour récupérer les des animes populaires
 async function getPopularEchhiAll() {
   const queryPopularEchhi = `
     query ($page: Int) {
@@ -397,7 +381,7 @@ async function getPopularEchhiAll() {
   }
 }
 
-// Fonction spécifique pour afficher les résultats des animes populaires
+// Fonction pour afficher les animes populaires
 function displayPopularEchhiAll(results) {
   const swiperWrapper = document.getElementById('popularEchhiAll');
 
@@ -412,7 +396,7 @@ function displayPopularEchhiAll(results) {
     swiperSlide.dataset.mediaId = mediaId;
 
     const linkElement = document.createElement('a');
-    linkElement.href = 'item.html?id=' + mediaId; // URL avec l'ID en tant que paramètre
+    linkElement.href = 'item.html?id=' + mediaId; 
 
     const imageElement = document.createElement('img');
     imageElement.src = mediaImage;
@@ -442,7 +426,7 @@ function displayPopularEchhiAll(results) {
     if (clickedElement) {
       const mediaId = clickedElement.dataset.mediaId;
       console.log(mediaId);
-      // Faites quelque chose avec l'ID du media
+      
     }
   });
   // SCROLL REVEAL
@@ -450,7 +434,7 @@ function displayPopularEchhiAll(results) {
 }
 
 
-// Fonction pour récupérer les données des animes populaires
+// Fonction pour récupérer les animes populaires
 async function getPopularThrillerAll() {
   const queryPopularThriller = `
     query ($page: Int) {
@@ -492,7 +476,7 @@ async function getPopularThrillerAll() {
   }
 }
 
-// Fonction spécifique pour afficher les résultats des animes populaires
+// Fonction pour afficher les animes populaires
 function displayPopularThrillerAll(results) {
   const swiperWrapper = document.getElementById('popularThrillerAll');
 
@@ -507,7 +491,7 @@ function displayPopularThrillerAll(results) {
     swiperSlide.dataset.mediaId = mediaId;
 
     const linkElement = document.createElement('a');
-    linkElement.href = 'item.html?id=' + mediaId; // URL avec l'ID en tant que paramètre
+    linkElement.href = 'item.html?id=' + mediaId; 
 
     const imageElement = document.createElement('img');
     imageElement.src = mediaImage;
@@ -538,7 +522,7 @@ function displayPopularThrillerAll(results) {
     if (clickedElement) {
       const mediaId = clickedElement.dataset.mediaId;
       console.log(mediaId);
-      // Faites quelque chose avec l'ID du media
+      
     }
   });
   // SCROLL REVEAL
@@ -588,7 +572,7 @@ async function getPopularSportAll() {
   }
 }
 
-// Fonction spécifique pour afficher les résultats des animes populaires
+// Fonction pour afficher les animes populaires
 function displayPopularSportAll(results) {
   const swiperWrapper = document.getElementById('popularSportAll');
 
@@ -603,7 +587,7 @@ function displayPopularSportAll(results) {
     swiperSlide.dataset.mediaId = mediaId;
 
     const linkElement = document.createElement('a');
-    linkElement.href = 'item.html?id=' + mediaId; // URL avec l'ID en tant que paramètre
+    linkElement.href = 'item.html?id=' + mediaId; 
 
     const imageElement = document.createElement('img');
     imageElement.src = mediaImage;
@@ -634,7 +618,7 @@ function displayPopularSportAll(results) {
     if (clickedElement) {
       const mediaId = clickedElement.dataset.mediaId;
       console.log(mediaId);
-      // Faites quelque chose avec l'ID du media
+      
     }
   });
   // SCROLL REVEAL
@@ -642,7 +626,7 @@ function displayPopularSportAll(results) {
 }
 
 
-// Fonction pour récupérer les données des animes populaires
+// Fonction pour récupérer les animes populaires
 async function getPopularMusicAll() {
   const queryPopularMusic = `
     query ($page: Int) {
@@ -684,7 +668,7 @@ async function getPopularMusicAll() {
   }
 }
 
-// Fonction spécifique pour afficher les résultats des animes populaires
+// Fonction pour afficher les animes populaires
 function displayPopularMusicAll(results) {
   const swiperWrapper = document.getElementById('popularMusicAll');
 
@@ -699,7 +683,7 @@ function displayPopularMusicAll(results) {
     swiperSlide.dataset.mediaId = mediaId;
 
     const linkElement = document.createElement('a');
-    linkElement.href = 'item.html?id=' + mediaId; // URL avec l'ID en tant que paramètre
+    linkElement.href = 'item.html?id=' + mediaId; 
 
     const imageElement = document.createElement('img');
     imageElement.src = mediaImage;
@@ -730,7 +714,7 @@ function displayPopularMusicAll(results) {
     if (clickedElement) {
       const mediaId = clickedElement.dataset.mediaId;
       console.log(mediaId);
-      // Faites quelque chose avec l'ID du media
+      
     }
   });
   // SCROLL REVEAL
@@ -739,7 +723,7 @@ function displayPopularMusicAll(results) {
 
 
 
-// Fonction pour récupérer les données des animes populaires
+// Fonction pour récupérer les animes populaires
 async function getPopularOneShotAll() {
   const queryPopularOneShot = `
     query ($page: Int) {
@@ -781,7 +765,7 @@ async function getPopularOneShotAll() {
   }
 }
 
-// Fonction spécifique pour afficher les résultats des animes populaires
+// Fonction pour afficher les animes populaires
 function displayPopularOneShotAll(results) {
   const swiperWrapper = document.getElementById('popularOneShotAll');
 
@@ -796,7 +780,7 @@ function displayPopularOneShotAll(results) {
     swiperSlide.dataset.mediaId = mediaId;
 
     const linkElement = document.createElement('a');
-    linkElement.href = 'item.html?id=' + mediaId; // URL avec l'ID en tant que paramètre
+    linkElement.href = 'item.html?id=' + mediaId; 
 
     const imageElement = document.createElement('img');
     imageElement.src = mediaImage;
@@ -827,7 +811,7 @@ function displayPopularOneShotAll(results) {
     if (clickedElement) {
       const mediaId = clickedElement.dataset.mediaId;
       console.log(mediaId);
-      // Faites quelque chose avec l'ID du media
+      
     }
   });
   // SCROLL REVEAL
@@ -835,7 +819,7 @@ function displayPopularOneShotAll(results) {
 }
 
 
-// Fonction pour récupérer les données des animes populaires
+// Fonction pour récupérer les animes populaires
 async function getPopularManhwaAll() {
   const queryPopularManhwa = `
     query ($page: Int) {
@@ -877,7 +861,7 @@ async function getPopularManhwaAll() {
   }
 }
 
-// Fonction spécifique pour afficher les résultats des animes populaires
+// Fonction pour afficher les animes populaires
 function displayPopularManhwaAll(results) {
   const swiperWrapper = document.getElementById('popularManhwaAll');
 
@@ -892,7 +876,7 @@ function displayPopularManhwaAll(results) {
     swiperSlide.dataset.mediaId = mediaId;
 
     const linkElement = document.createElement('a');
-    linkElement.href = 'item.html?id=' + mediaId; // URL avec l'ID en tant que paramètre
+    linkElement.href = 'item.html?id=' + mediaId; 
 
     const imageElement = document.createElement('img');
     imageElement.src = mediaImage;
@@ -923,14 +907,14 @@ function displayPopularManhwaAll(results) {
     if (clickedElement) {
       const mediaId = clickedElement.dataset.mediaId;
       console.log(mediaId);
-      // Faites quelque chose avec l'ID du media
+
     }
   });
   // SCROLL REVEAL
   ScrollReveal().reveal('.popularBlock--single__card', { duration: 800, easing:'ease-in', interval: 150});
 }
 
-// Fonction pour récupérer les données des animes populaires
+// Fonction pour récupérer les animes populaires
 async function getPopularMoviesAll() {
   const queryPopularMovies = `
     query ($page: Int) {
@@ -972,7 +956,7 @@ async function getPopularMoviesAll() {
   }
 }
 
-// Fonction spécifique pour afficher les résultats des animes populaires
+// Fonction pour afficher les animes populaires
 function displayPopularMoviesAll(results) {
   const swiperWrapper = document.getElementById('popularMoviesAll');
 
@@ -987,7 +971,7 @@ function displayPopularMoviesAll(results) {
     swiperSlide.dataset.mediaId = mediaId;
 
     const linkElement = document.createElement('a');
-    linkElement.href = 'item.html?id=' + mediaId; // URL avec l'ID en tant que paramètre
+    linkElement.href = 'item.html?id=' + mediaId; 
 
     const imageElement = document.createElement('img');
     imageElement.src = mediaImage;
@@ -1018,7 +1002,7 @@ function displayPopularMoviesAll(results) {
     if (clickedElement) {
       const mediaId = clickedElement.dataset.mediaId;
       console.log(mediaId);
-      // Faites quelque chose avec l'ID du media
+
     }
   });
   // SCROLL REVEAL
@@ -1026,7 +1010,7 @@ function displayPopularMoviesAll(results) {
 }
 
 
-// Fonction pour récupérer les données des animes populaires
+// Fonction pour récupérer les animes populaires
 async function getPopularAnimeAll() {
   const queryPopularAnime = `
     query ($page: Int) {
@@ -1068,7 +1052,7 @@ async function getPopularAnimeAll() {
   }
 }
 
-// Fonction spécifique pour afficher les résultats des animes populaires
+// Fonction pour afficher les animes populaires
 function displayTrendingAnimeAll(results) {
   const swiperWrapper = document.getElementById('trendingAnimeAll');
 
@@ -1083,7 +1067,7 @@ function displayTrendingAnimeAll(results) {
     swiperSlide.dataset.mediaId = mediaId;
 
     const linkElement = document.createElement('a');
-    linkElement.href = 'item.html?id=' + mediaId; // URL avec l'ID en tant que paramètre
+    linkElement.href = 'item.html?id=' + mediaId; 
 
     const imageElement = document.createElement('img');
     imageElement.src = mediaImage;
@@ -1114,7 +1098,7 @@ function displayTrendingAnimeAll(results) {
     if (clickedElement) {
       const mediaId = clickedElement.dataset.mediaId;
       console.log(mediaId);
-      // Faites quelque chose avec l'ID du media
+
     }
   });
   // SCROLL REVEAL
@@ -1166,7 +1150,7 @@ async function getTrendingAnimeAll() {
 }
 
 
-// Fonction spécifique pour afficher les résultats des animes populaires
+// Fonction pour afficher les animes populaires
 function displayTrendingMangaAll(results) {
   const swiperWrapper = document.getElementById('trendingMangaAll');
 
@@ -1181,7 +1165,7 @@ function displayTrendingMangaAll(results) {
     swiperSlide.dataset.mediaId = mediaId;
 
     const linkElement = document.createElement('a');
-    linkElement.href = 'item.html?id=' + mediaId; // URL avec l'ID en tant que paramètre
+    linkElement.href = 'item.html?id=' + mediaId; 
 
     const imageElement = document.createElement('img');
     imageElement.src = mediaImage;
@@ -1212,7 +1196,7 @@ function displayTrendingMangaAll(results) {
     if (clickedElement) {
       const mediaId = clickedElement.dataset.mediaId;
       console.log(mediaId);
-      // Faites quelque chose avec l'ID du media
+
     }
   });
   // SCROLL REVEAL
@@ -1262,7 +1246,7 @@ async function getTrendingMangaAll() {
 }
 
 
-// Fonction spécifique pour afficher les résultats des animes populaires
+// Fonction pour afficher les animes populaires
 function displayPopularAnimeAll(results) {
   const swiperWrapper = document.getElementById('popularAnimeAll');
 
@@ -1277,7 +1261,7 @@ function displayPopularAnimeAll(results) {
     swiperSlide.dataset.mediaId = mediaId;
 
     const linkElement = document.createElement('a');
-    linkElement.href = 'item.html?id=' + mediaId; // URL avec l'ID en tant que paramètre
+    linkElement.href = 'item.html?id=' + mediaId; 
 
     const imageElement = document.createElement('img');
     imageElement.src = mediaImage;
@@ -1308,7 +1292,7 @@ function displayPopularAnimeAll(results) {
     if (clickedElement) {
       const mediaId = clickedElement.dataset.mediaId;
       console.log(mediaId);
-      // Faites quelque chose avec l'ID du media
+      
     }
   });
   // SCROLL REVEAL
@@ -1399,7 +1383,7 @@ async function getPopularMangaAll() {
 }
 
 
-// Fonction spécifique pour afficher les résultats des animes à venir
+// Fonction pour afficher les animes à venir
 function displayUpcomingAnimeAll(results) {
   const swiperWrapper = document.getElementById('upcomingAnimeAll');
   for (const result of results) {
@@ -1413,7 +1397,7 @@ function displayUpcomingAnimeAll(results) {
     swiperSlide.dataset.mediaId = mediaId;
 
     const linkElement = document.createElement('a');
-    linkElement.href = 'item.html?id=' + mediaId; // URL avec l'ID en tant que paramètre
+    linkElement.href = 'item.html?id=' + mediaId; 
 
     const imageElement = document.createElement('img');
     imageElement.src = mediaImage;
@@ -1444,7 +1428,7 @@ function displayUpcomingAnimeAll(results) {
     if (clickedElement) {
       const mediaId = clickedElement.dataset.mediaId;
       console.log(mediaId);
-      // Faites quelque chose avec l'ID du media
+      
     }
   });
   // // SCROLL REVEAL
@@ -1452,7 +1436,7 @@ ScrollReveal().reveal('.popularBlock--single__card', { duration: 800, easing:'ea
 }
 
 
-// Fonction spécifique pour afficher les résultats des mangas tendances
+// Fonction pour afficher popular manga
 function displayPopularMangaAll(results) {
   const swiperWrapper = document.getElementById('popularMangaAll');
 
@@ -1467,7 +1451,7 @@ function displayPopularMangaAll(results) {
     swiperSlide.dataset.mediaId = mediaId;
 
     const linkElement = document.createElement('a');
-    linkElement.href = 'item.html?id=' + mediaId; // URL avec l'ID en tant que paramètre
+    linkElement.href = 'item.html?id=' + mediaId; 
 
     const imageElement = document.createElement('img');
     imageElement.src = mediaImage;
@@ -1498,7 +1482,7 @@ function displayPopularMangaAll(results) {
     if (clickedElement) {
       const mediaId = clickedElement.dataset.mediaId;
       console.log(mediaId);
-      // Faites quelque chose avec l'ID du media
+
     }
   });
   // // SCROLL REVEAL
@@ -1506,7 +1490,7 @@ ScrollReveal().reveal('.popularBlock--single__card', { duration: 800, easing:'ea
 }    
 
 
-// Fonction générique pour effectuer une requête GraphQL
+// Fonction pour effectuer une requête GraphQL
 async function fetchData(query, variables) {
   const url = 'https://graphql.anilist.co';
   const options = {
@@ -1530,11 +1514,6 @@ async function fetchData(query, variables) {
     throw new Error(data.errors[0].message);
   }
 }
-
-// // Appel de la fonction pour récupérer les données des animes populaires de tous les temps
-// getPopularMangaAll();
-// // Appel de la fonction pour récupérer les données des animes à venir
-// getUpcomingAnimeAll();
 
 
 const popularAnimeAllWrapper = document.getElementById('popularAnimeAll');
@@ -1614,7 +1593,7 @@ if (popularTopAnimeAllWrapper) {
 
 let mediaList = [];
 
-// Récupérer les données du stockage local lors du chargement de la page
+// Récupérer les données du local storage lors du chargement de la page
 window.addEventListener('load', function() {
   const storedMediaList = localStorage.getItem('mediaList');
   document.querySelector('.mangaList').addEventListener('click', function(event) {
@@ -1690,7 +1669,7 @@ function displayMedia(media) {
   swiperSlide.dataset.mediaId = media.id;
   
   const linkElement = document.createElement('a');
-  linkElement.href = 'item.html?id=' + media.id; // URL avec l'ID en tant que paramètre
+  linkElement.href = 'item.html?id=' + media.id; 
   
   const imageElement = document.createElement('img');
   imageElement.src = mediaImage;
@@ -1719,7 +1698,7 @@ function displayMedia(media) {
   console.log(media)
 }
 
-// Exemple d'action à appliquer aux éléments de mediaList
+
 async function performActionOnMedia(mediaId) {
   // Récupérer les détails du média en utilisant son ID
   const media = await getMediaDetails(mediaId);
@@ -1766,10 +1745,10 @@ searchLinks.forEach((link) => {
 
 
 function filterMediaByType(mediaType) {
-  // Récupérer tous les éléments de média dans #listResult
+  // Récupérer tous les éléments dans #listResult
   const mediaElements = document.querySelectorAll('#listResult .popularBlock--single__card');
 
-  // Parcourir les éléments de média et les afficher ou les masquer en fonction du type sélectionné
+  // Parcourir les éléments et les afficher ou les masquer en fonction du type sélectionné
   mediaElements.forEach(function(mediaElement) {
     const mediaId = mediaElement.dataset.mediaId;
     getMediaDetails(mediaId)
