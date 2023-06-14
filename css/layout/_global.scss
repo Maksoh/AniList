@@ -152,30 +152,32 @@ height: 100%;
 .popularBlock--single__card:hover #removeListbtn  {
     transition-delay: .4s all ease-in-out;
     transition: .4s all ease-in-out;
-    opacity: 1; /* Faire apparaître le bouton lors du survol de la classe popularBlock--single__card */
-  }
+    opacity: 1; 
+}
+
 #removeListbtn:hover + a img {
     filter: blur(1.5px);
     transition: .5s all ease-in-out;
     transition-delay: .4s all ease-in-out;
 
-  }
+}
 
-  .searchMyList{
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    gap: var(--mainGap);
-    a{
-        text-decoration: none;
-        text-transform: uppercase;
-        color: var(--white);
-        font-size: 16px;
-        letter-spacing: 1px;
-        transition: .3s all ease-in-out;
-    }
+.searchMyList{
+display: flex;
+justify-content: center;
+align-items: flex-end;
+gap: var(--mainGap);
+a{
+    text-decoration: none;
+    text-transform: uppercase;
+    color: var(--white);
+    font-size: 16px;
+    letter-spacing: 1px;
+    transition: .3s all ease-in-out;
+}
 
-  }
+}
+
   .searchMyList a:hover{
     color: var(--mainColor);
     filter: drop-shadow(2px 4px 6px black);

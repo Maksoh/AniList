@@ -44,9 +44,6 @@
 .resultSearchMangaBlock{
     display: none;
 }
-// .scrolled {
-//     transform: scale(1.1);
-//   }
 
 .searchBlock--txt{
     width: 100%;
@@ -70,7 +67,6 @@
     background-color: transparent;
 }
 .searchBlock--txt__icons a i{
-    // box-shadow: rgb(255, 255, 255) -1px 22px 62px 0px, rgb(133, 129, 128) -1px 22px 62px 0px;
     transition: .4s all ease-in-out;
     cursor: pointer;
     outline: none;
@@ -154,7 +150,6 @@
     }
 }
 
-
 #searchInput:focus{
     outline: none;
 }
@@ -163,12 +158,6 @@
     color:rgba(0, 0, 0, 0.564);
     
 }
-
-// .infosPageSearch{
-//     align-items: center;
-//     justify-content: space-between;
-// }
-
 
 .activeSearchBtn{
     i{

@@ -49,11 +49,13 @@ nav {
     color: var(--mainColor);    
     filter: drop-shadow(2px 4px 6px black);
 }
+
 .nav--links li a:active {
     color: var(--mainColor);   
     filter: drop-shadow(2px 4px 6px black); 
 
 }
+
 .dropMenu{
     display: none;
     height: 0;
@@ -67,6 +69,7 @@ nav {
         display: none;
     }
 }
+
 .menuOpen{
     height: 150px;
     padding: 0 20px 20px 20px;
@@ -75,11 +78,13 @@ nav {
         padding: 5px;
     }
 }
+
 .nav-toggle{
     color: white;
     display: none;
     transition: .2s all ease-in-out;
 }
+
 .nav-toggle:hover{
     color: var(--mainColor)!important;   
     filter: drop-shadow(2px 4px 6px black); 

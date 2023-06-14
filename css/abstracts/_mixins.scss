@@ -1,3 +1,4 @@
 @mixin transition ($secondes : .3s, $effet : ease-in-out){
     transition: $secondes all $effet;
+    
 }
